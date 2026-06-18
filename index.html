@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briunka Light — Be Light</title>
+    <meta name="description" content="Your gateway to Briunka Light — AI films, casting roles, digital products, healing frequencies & more. Light Works Entertainment.">
+    <meta property="og:title" content="Briunka Light — Be Light">
+    <meta property="og:description" content="Pay to join the cast. Shop digital products. Light Works Entertainment.">
+    <meta property="og:image" content="assets/images/briunka-belight.png">
+    <meta name="theme-color" content="#0b0b0d">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/briunka-link.css">
+</head>
+<body>
+
+    <div class="art-hero" id="art-hero"></div>
+    <div class="hero-vignette"></div>
+    <div class="cosmic-glow"></div>
+    <div class="grain"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="page">
+
+        <header class="profile-header">
+            <div class="avatar-orbit">
+                <div class="avatar-ring">
+                    <div class="avatar-inner">
+                        <img id="avatar-img" src="assets/images/briunka-halo.png" alt="Briunka Light">
+                        <div class="avatar-fallback" id="avatar-fallback" style="display:none">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="brand-name serif" id="brand-name">Briunka Light</h1>
+            <p class="brand-tagline" id="brand-tagline">Light Works Entertainment</p>
+            <p class="brand-bio" id="brand-bio">Creative Director • Hitmaker • AI Films & cinematic sound. Pay to be part of the universe. Be light.</p>
+        </header>
+
+        <div class="art-dots" id="art-dots"></div>
+
+        <!-- Social -->
+        <section class="delay-1" style="animation: fadeUp 0.6s ease 0.15s forwards; opacity:0">
+            <p class="section-label">Connect</p>
+            <div class="social-bar" id="social-bar"></div>
+        </section>
+
+        <!-- Email capture -->
+        <section class="email-capture delay-2" style="animation: fadeUp 0.6s ease 0.2s forwards; opacity:0">
+            <p class="section-label">Join the LIGHT List</p>
+            <form id="email-form" class="email-form" onsubmit="handleEmailSignup(event)">
+                <input id="email-name-input" class="field-input email-input" type="text" placeholder="Your name">
+                <input id="email-input" class="field-input email-input" type="email" placeholder="your@email.com" required>
+                <button type="submit" class="email-submit">
+                    <i class="fa-solid fa-envelope"></i> Subscribe
+                </button>
+            </form>
+        </section>
+
+        <div class="gold-divider"></div>
+
+        <section id="featured-section"></section>
+        <section id="links-container"></section>
+
+        <!-- AI Movie Casting -->
+        <section id="casting-section" class="delay-3" style="animation: fadeUp 0.6s ease 0.3s forwards; opacity:0">
+            <p class="section-label">AI Movie Casting</p>
+            <p class="casting-intro">Pay to join Briunka's AI films. Upload your reference photo, pick your position, and become part of the Light Works Universe.</p>
+            <div class="casting-grid" id="casting-grid"></div>
+        </section>
+
+        <!-- Shop -->
+        <section id="shop-section" class="delay-4" style="animation: fadeUp 0.6s ease 0.4s forwards; opacity:0">
+            <p class="section-label">Digital Shop</p>
+            <div class="product-grid" id="product-grid"></div>
+        </section>
+
+        <footer class="footer delay-5" style="animation: fadeUp 0.6s ease 0.5s forwards; opacity:0">
+            <a href="../hitmaker-vault/index.html">
+                <i class="fa-solid fa-infinity"></i> HITMAKER VAULT
+            </a>
+            <p class="footer-copy">© Light Works Entertainment</p>
+        </footer>
+    </div>
+
+    <button class="studio-fab" onclick="toggleStudio()" title="Creator Studio">
+        <i class="fa-solid fa-pen"></i>
+    </button>
+
+    <!-- Creator Studio -->
+    <div class="studio-overlay" id="studio-overlay" onclick="if(event.target===this)toggleStudio()">
+        <div class="studio-panel">
+            <div class="studio-header">
+                <h2 class="serif">Creator Studio</h2>
+                <button class="studio-close" onclick="toggleStudio()">×</button>
+            </div>
+
+            <div class="studio-tabs">
+                <button class="studio-tab active" data-tab="profile" onclick="switchTab('profile')">Profile</button>
+                <button class="studio-tab" data-tab="links" onclick="switchTab('links')">Links</button>
+                <button class="studio-tab" data-tab="socials" onclick="switchTab('socials')">Socials</button>
+                <button class="studio-tab" data-tab="casting" onclick="switchTab('casting')">AI Movies</button>
+                <button class="studio-tab" data-tab="products" onclick="switchTab('products')">Shop</button>
+            </div>
+
+            <div class="studio-body">
+                <div class="studio-tab-content active" id="tab-profile">
+                    <label class="field-label">Display Name</label>
+                    <input id="edit-name" class="field-input" type="text">
+                    <label class="field-label">Tagline</label>
+                    <input id="edit-tagline" class="field-input" type="text">
+                    <label class="field-label">Short Bio</label>
+                    <textarea id="edit-bio" class="field-input" rows="3"></textarea>
+                    <label class="field-label">Profile Photo</label>
+                    <label class="upload-zone">
+                        <i class="fa-solid fa-camera"></i>
+                        <p>Upload your photo</p>
+                        <input type="file" accept="image/*" onchange="uploadAvatar(this)">
+                    </label>
+                </div>
+
+                <div class="studio-tab-content" id="tab-links">
+                    <p class="studio-hint">Edit existing links or add your own.</p>
+                    <div id="edit-links-list"></div>
+                    <button class="add-btn" onclick="addCustomLink()"><i class="fa-solid fa-plus"></i> Add New Link</button>
+                </div>
+
+                <div class="studio-tab-content" id="tab-socials">
+                    <p class="studio-hint">Your TikTok accounts are pre-loaded. Toggle visibility and add more platforms anytime.</p>
+                    <div id="edit-socials-list"></div>
+                    <button class="add-btn" onclick="addSocial()"><i class="fa-solid fa-plus"></i> Add Social</button>
+                </div>
+
+                <div class="studio-tab-content" id="tab-casting">
+                    <p class="studio-hint">Create AI movie casting positions. Upload cover images and scene gallery previews for each role.</p>
+                    <div id="edit-casting-list"></div>
+                    <button class="add-btn" onclick="addCastingRole()"><i class="fa-solid fa-plus"></i> Add Casting Position</button>
+                </div>
+
+                <div class="studio-tab-content" id="tab-products">
+                    <p class="studio-hint">Sell digital downloads and physical products with images.</p>
+                    <div id="edit-products-list"></div>
+                    <button class="add-btn" onclick="addProduct()"><i class="fa-solid fa-plus"></i> Add Product</button>
+                </div>
+            </div>
+
+            <div class="studio-footer">
+                <button class="btn-reset" onclick="resetDefaults()">Reset</button>
+                <button class="btn-save" onclick="saveStudio()">Save & Publish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout -->
+    <div class="checkout-overlay" id="checkout-overlay" onclick="if(event.target===this)closeCheckout()">
+        <div class="checkout-modal checkout-modal-wide">
+            <button class="checkout-close" onclick="closeCheckout()">×</button>
+            <img id="checkout-product-img" class="checkout-product-img" style="display:none" alt="">
+            <div class="checkout-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+            <h3 class="checkout-title serif" id="checkout-title">Product</h3>
+            <p class="checkout-desc" id="checkout-desc"></p>
+            <div id="casting-checkout-info" class="casting-checkout-info" style="display:none"></div>
+            <div class="checkout-price" id="checkout-price">$0</div>
+
+            <div class="checkout-form">
+                <input id="checkout-name" class="field-input" type="text" placeholder="Full name *" required>
+                <input id="checkout-email" class="field-input" type="email" placeholder="Email *" required>
+                <div id="casting-fields" style="display:none">
+                    <input id="checkout-phone" class="field-input" type="tel" placeholder="Phone (optional)">
+                    <input id="checkout-instagram" class="field-input" type="text" placeholder="Instagram handle (optional)">
+                    <textarea id="checkout-notes" class="field-input" rows="2" placeholder="Notes — scene preferences, etc."></textarea>
+                    <label class="field-label">Reference Photo * <span style="color:var(--muted);font-weight:400">(for AI likeness)</span></label>
+                    <label class="upload-zone upload-zone-compact">
+                        <i class="fa-solid fa-user"></i>
+                        <p>Upload your photo</p>
+                        <input id="checkout-ref-photo" type="file" accept="image/*" onchange="previewRefPhoto(this)">
+                    </label>
+                    <img id="ref-photo-preview" class="ref-photo-preview" style="display:none" alt="Reference">
+                </div>
+            </div>
+
+            <div class="checkout-actions" id="payment-buttons"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/payments.js"></script>
+    <script src="js/briunka-link.js"></script>
+</body>
+</html>
