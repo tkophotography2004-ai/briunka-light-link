@@ -1050,6 +1050,40 @@ body {
     pointer-events: none;
 }
 
+.link-card.skool-card {
+    border-color: rgba(255, 210, 74, 0.45);
+    background: linear-gradient(135deg, rgba(42, 32, 8, 0.92), rgba(11, 11, 13, 0.95));
+    box-shadow: 0 0 40px rgba(255, 210, 74, 0.08);
+}
+
+.link-card.skool-card .link-glow {
+    background: radial-gradient(circle, rgba(255, 210, 74, 0.22), transparent 70%);
+}
+
+.link-card.skool-card .link-icon {
+    background: rgba(255, 210, 74, 0.15);
+    border-color: rgba(255, 210, 74, 0.35);
+    color: #ffd24a;
+}
+
+.link-card.skool-card .link-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.125rem;
+    letter-spacing: 0.02em;
+}
+
+.link-card.skool-card .skool-arrow {
+    color: #ffd24a;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    font-size: 0.6875rem;
+}
+
+.link-card.skool-card:hover {
+    border-color: rgba(255, 210, 74, 0.65);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 210, 74, 0.12);
+}
+
 .link-inner {
     position: relative;
     display: flex;

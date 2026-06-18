@@ -43,14 +43,25 @@ const DEFAULT_CONFIG = {
     ],
     links: [
         {
+            id: 'skool',
+            title: 'Light Works Universe',
+            subtitle: 'Join the Skool community — casting, lives & exclusive access',
+            url: 'https://www.skool.com/light-works-universe-5888',
+            icon: 'fa-users',
+            featured: true,
+            visible: true,
+            group: 'featured',
+            style: 'skool'
+        },
+        {
             id: 'live-review',
             title: 'Submit for Live Review',
             subtitle: 'AI artists & creators — from $5 · Skip the line $10/$15',
             url: '#review-section',
             icon: 'fa-tower-broadcast',
-            featured: true,
+            featured: false,
             visible: true,
-            group: 'featured'
+            group: 'experiences'
         },
         {
             id: 'ats',
@@ -156,7 +167,7 @@ function loadConfig() {
                 ...DEFAULT_CONFIG,
                 ...parsed,
                 socials: mergeSocials(parsed.socials),
-                links: parsed.links || DEFAULT_CONFIG.links,
+                links: mergeLinks(parsed.links),
                 products: parsed.products || DEFAULT_CONFIG.products,
                 casting: mergeCasting(parsed.casting)
             };
@@ -165,6 +176,29 @@ function loadConfig() {
         config = structuredClone(DEFAULT_CONFIG);
     }
     artIndex = config.heroArt || 0;
+}
+
+const SKOOL_URL = 'https://www.skool.com/light-works-universe-5888';
+
+function mergeLinks(saved) {
+    const links = saved?.length ? [...saved] : [...DEFAULT_CONFIG.links];
+    const skoolDefault = DEFAULT_CONFIG.links.find(l => l.id === 'skool');
+    const hasSkool = links.some(l => l.id === 'skool');
+    if (!hasSkool && skoolDefault) {
+        links.unshift(skoolDefault);
+    } else {
+        const skool = links.find(l => l.id === 'skool');
+        if (skool) {
+            skool.url = SKOOL_URL;
+            skool.featured = true;
+            skool.visible = true;
+            skool.style = 'skool';
+        }
+        links.forEach(l => {
+            if (l.id === 'live-review') l.featured = false;
+        });
+    }
+    return links;
 }
 
 function mergeCasting(saved) {
@@ -354,10 +388,15 @@ function renderLinks() {
 }
 
 function buildLinkCard(link, isFeatured, delay) {
-    const cls = isFeatured ? 'link-card featured delay-' + delay : 'link-card delay-' + delay;
+    const skoolCls = link.style === 'skool' ? ' skool-card' : '';
+    const cls = isFeatured
+        ? 'link-card featured' + skoolCls + ' delay-' + delay
+        : 'link-card delay-' + delay;
     const glow = isFeatured ? '<div class="link-glow"></div>' : '';
     const arrow = isFeatured
-        ? '<span class="link-arrow">ENTER <i class="fa-solid fa-arrow-right"></i></span>'
+        ? (link.style === 'skool'
+            ? '<span class="link-arrow skool-arrow">JOIN <i class="fa-solid fa-arrow-right"></i></span>'
+            : '<span class="link-arrow">ENTER <i class="fa-solid fa-arrow-right"></i></span>')
         : '<i class="fa-solid fa-chevron-right link-arrow"></i>';
     const isHash = link.url.startsWith('#');
     const external = link.url.startsWith('http') ? 'target="_blank" rel="noopener"' : '';
