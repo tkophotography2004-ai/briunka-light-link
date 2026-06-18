@@ -19,10 +19,21 @@ async function subscribeEmail(email, name, source = 'bio-page') {
 }
 
 async function submitCastingApplication(payload) {
+    const body = {
+        email: payload.email,
+        name: payload.name,
+        phone: payload.phone || '',
+        instagram: payload.instagram || '',
+        notes: payload.notes || '',
+        referencePhoto: payload.referencePhoto || (payload.referencePhotos && payload.referencePhotos[0]) || '',
+        referencePhotos: payload.referencePhotos || [],
+        product: payload.product,
+        paymentProvider: payload.paymentProvider || 'pending'
+    };
     const res = await fetch('/api/casting/apply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(body)
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Application failed');

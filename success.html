@@ -13,6 +13,10 @@
         p { color:var(--muted); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem; }
         a { display:inline-block; padding:0.875rem 2rem; border-radius:9999px; background:var(--gold); color:var(--ink); text-decoration:none; font-weight:600; font-size:0.8125rem; letter-spacing:0.08em; }
         a:hover { background:var(--gold-light); }
+        .queue-position-box { background:var(--ink); border:1px solid rgba(191,161,90,0.35); border-radius:1rem; padding:1.25rem; margin-bottom:1.25rem; }
+        .queue-position-num { font-family:'Cormorant Garamond',serif; font-size:3rem; color:var(--gold); font-weight:600; line-height:1; }
+        .queue-position-label { font-size:0.6875rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:0.25rem; }
+        .queue-up-next { color:#2ecc71; font-weight:600; font-size:0.875rem; margin-top:0.75rem; }
     </style>
 </head>
 <body>
@@ -20,11 +24,60 @@
         <div class="success-icon">✦</div>
         <h1 class="serif">You're In</h1>
         <p id="msg">Your purchase is confirmed. Check your email for next steps — welcome to the LIGHT.</p>
-        <a href="index.html">Back to Bio</a>
+        <div id="queue-position" class="queue-position-box" style="display:none"></div>
+        <a href="index.html#review-section" id="back-link">Back to Bio</a>
     </div>
     <script>
         const params = new URLSearchParams(location.search);
-        if (params.get('product')?.startsWith('cast')) {
+
+        function showReviewSuccess(d, submissionId) {
+            document.getElementById('msg').textContent = d.message || 'You\'re in the live review queue!';
+            const box = document.getElementById('queue-position');
+            if (d.position) {
+                box.style.display = 'block';
+                box.innerHTML = d.up_next
+                    ? '<div class="queue-position-num">UP NEXT</div><div class="queue-up-next">Join the live now!</div>'
+                    : `<div class="queue-position-num">#${d.position}</div><div class="queue-position-label">of ${d.total_in_queue || d.position} in line</div><div class="queue-up-next" style="color:var(--muted);font-weight:400">We'll email & text you when you're up next</div>`;
+                localStorage.setItem('activeReviewSubmission', JSON.stringify({
+                    submissionId, email: d.email, savedAt: Date.now()
+                }));
+            }
+            document.getElementById('back-link').href = 'index.html#review-section';
+        }
+
+        async function confirmReviewQueue(submissionId, provider) {
+            const res = await fetch('/api/review/confirm/' + submissionId, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ paymentProvider: provider })
+            });
+            const d = await res.json();
+            if (!res.ok) throw new Error(d.error || 'Confirm failed');
+            showReviewSuccess(d, submissionId);
+        }
+
+        if (params.get('type') === 'review' && params.get('submission')) {
+            const submissionId = params.get('submission');
+            const provider = params.get('provider') || 'stripe';
+            const paypalToken = params.get('token');
+
+            if (provider === 'paypal' && paypalToken) {
+                fetch('/api/checkout/paypal/capture', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orderId: paypalToken })
+                })
+                    .then(r => r.json())
+                    .then(() => confirmReviewQueue(submissionId, 'paypal'))
+                    .catch(() => {
+                        document.getElementById('msg').textContent = 'Payment received — you\'re in the review queue!';
+                    });
+            } else {
+                confirmReviewQueue(submissionId, provider).catch(() => {
+                    document.getElementById('msg').textContent = 'Payment received — you\'re in the review queue!';
+                });
+            }
+        } else if (params.get('product')?.startsWith('cast')) {
             document.getElementById('msg').textContent =
                 'Your casting application is confirmed! Briunka will reach out with production details. Be light.';
         }

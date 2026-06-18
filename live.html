@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Review Queue — Briunka Light</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/briunka-link.css">
+    <link rel="stylesheet" href="css/live-dashboard.css">
+</head>
+<body class="live-body">
+
+    <div id="pin-gate" class="pin-gate">
+        <div class="pin-card">
+            <div class="checkout-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+            <h1 class="serif">Live Review Dashboard</h1>
+            <p class="studio-hint">Enter your host PIN to manage the queue during streams.</p>
+            <input id="pin-input" class="field-input" type="password" placeholder="Host PIN" autofocus>
+            <button class="btn-save" style="width:100%;margin-top:0.75rem" onclick="unlockDashboard()">Go Live</button>
+            <p class="pin-default-hint">Default PIN: lightworks (change in .env)</p>
+        </div>
+    </div>
+
+    <div id="dashboard" class="dashboard hidden">
+        <header class="dash-header">
+            <div>
+                <h1 class="serif">Live Review Queue</h1>
+                <p class="dash-sub">AI artist & creator submissions — sorted by priority</p>
+            </div>
+            <div class="dash-actions">
+                <button class="btn-refresh" onclick="loadQueue()"><i class="fa-solid fa-rotate"></i></button>
+                <a href="index.html" class="btn-outline-sm">Bio Page</a>
+            </div>
+        </header>
+
+        <div class="dash-stats" id="dash-stats"></div>
+
+        <section class="dash-section">
+            <h2 class="section-label">Up Next</h2>
+            <div id="queue-now" class="queue-now"></div>
+        </section>
+
+        <section class="dash-section">
+            <h2 class="section-label">Queue <span id="queue-count"></span></h2>
+            <div id="queue-list" class="queue-list"></div>
+        </section>
+
+        <section class="dash-section">
+            <h2 class="section-label">Recently Reviewed</h2>
+            <div id="reviewed-list" class="queue-list reviewed-list"></div>
+        </section>
+    </div>
+
+    <script src="js/live-dashboard.js"></script>
+</body>
+</html>

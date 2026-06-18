@@ -1,4 +1,19 @@
-const STORAGE_KEY = 'briunkaLightLinkConfig';
+const STORAGE_KEY = 'briunkaLightLinkConfig_v2';
+
+const CAST_CATEGORIES = [
+    { id: 'cast', label: 'Cast & Character Packages' },
+    { id: 'addon', label: 'Add-On Experiences' },
+    { id: 'music', label: 'Music Artist Opportunities' },
+    { id: 'business', label: 'Business & Brand Packages' },
+    { id: 'support', label: 'Support the Movement' }
+];
+
+const PACKAGE_INCLUDES = [
+    'Historic Certificate of participation',
+    'Digital Character Card (personalized)',
+    'Community Recognition in credits & posts',
+    'Behind-the-Scenes access & production insights'
+];
 
 const ARTWORK = [
     { src: 'assets/images/briunka-belight.png', label: 'Be Light' },
@@ -11,10 +26,12 @@ const ARTWORK = [
 
 const DEFAULT_CONFIG = {
     name: 'Briunka Light',
-    tagline: 'Light Works Entertainment',
-    bio: 'Creative Director • Hitmaker • AI Films & cinematic sound. Pay to be part of the universe. Be light.',
+    tagline: 'Across the Stars · Light Works Entertainment',
+    bio: 'The First Community Powered AI Cinematic Universe. Be part of history. Build the future. Leave a legacy.',
     avatar: 'assets/images/briunka-halo.png',
     heroArt: 0,
+    priceSheet: 'assets/images/across-the-stars-price-sheet.jpg',
+    contactEmail: 'acrossthestars2026@gmail.com',
     socials: [
         { id: 'tt-main', icon: 'fa-tiktok', url: 'https://www.tiktok.com/@briunkalightofficial', label: 'TikTok Main', shortLabel: '@briunkalightofficial', visible: true },
         { id: 'tt-backup', icon: 'fa-tiktok', url: 'https://www.tiktok.com/@briunkalightbackup', label: 'TikTok Backup', shortLabel: '@briunkalightbackup', visible: true },
@@ -26,21 +43,39 @@ const DEFAULT_CONFIG = {
     ],
     links: [
         {
-            id: 'vault',
-            title: 'Shop The Vault',
-            subtitle: 'Beats, scores & healing frequencies',
-            url: '../hitmaker-vault/index.html?mode=shop',
-            icon: 'fa-store',
+            id: 'live-review',
+            title: 'Submit for Live Review',
+            subtitle: 'AI artists & creators — from $5 · Skip the line $10/$15',
+            url: '#review-section',
+            icon: 'fa-tower-broadcast',
             featured: true,
             visible: true,
             group: 'featured'
         },
         {
-            id: 'films',
-            title: 'Light Works Universe Films',
-            subtitle: 'AI movies — pay to join the cast',
+            id: 'ats',
+            title: 'Across the Stars — Join the Cast',
+            subtitle: 'Cameo from $75 · Be part of the AI cinematic universe',
             url: '#casting-section',
-            icon: 'fa-film',
+            icon: 'fa-star',
+            visible: true,
+            group: 'experiences'
+        },
+        {
+            id: 'pricesheet',
+            title: 'Full Price List',
+            subtitle: 'View all packages, music & business opportunities',
+            url: '#price-sheet-section',
+            icon: 'fa-list',
+            visible: true,
+            group: 'experiences'
+        },
+        {
+            id: 'vault',
+            title: 'Shop The Vault',
+            subtitle: 'Beats, scores & healing frequencies',
+            url: '../hitmaker-vault/index.html?mode=shop',
+            icon: 'fa-store',
             visible: true,
             group: 'experiences'
         },
@@ -72,95 +107,32 @@ const DEFAULT_CONFIG = {
             group: 'tools'
         }
     ],
-    products: [
-        {
-            id: 'p1',
-            name: 'LIGHT Halo Gown Digital Lookbook',
-            price: 29,
-            type: 'digital',
-            url: '../canva-product-studio/lookbooks/index.html',
-            image: '',
-            description: 'Full digital lookbook with styling guide.',
-            visible: true
-        },
-        {
-            id: 'p2',
-            name: 'Healing Frequency Bundle — 528Hz',
-            price: 19,
-            type: 'digital',
-            url: '../healing-frequency-portal/index.html',
-            image: '',
-            description: 'Instant download — Solfeggio healing tones.',
-            visible: true
-        },
-        {
-            id: 'p3',
-            name: 'Artist Rollout Kit — 30 Day Campaign',
-            price: 49,
-            type: 'digital',
-            url: '../hitmaker-vault/index.html?mode=shop&filter=rollout',
-            image: '',
-            description: 'Complete release campaign templates.',
-            visible: true
-        }
-    ],
+    products: [],
     casting: [
-        {
-            id: 'cast-lead',
-            name: 'Lead Supporting Role',
-            movie: 'Divine Talks Universe',
-            position: 'Lead Supporting Character',
-            description: 'Be featured as a lead character in the next AI cinematic episode. Your likeness will be crafted into the film.',
-            price: 250,
-            spots: 2,
-            spotsLeft: 2,
-            type: 'casting',
-            image: 'assets/images/briunka-belight.png',
-            gallery: [],
-            visible: true
-        },
-        {
-            id: 'cast-cameo',
-            name: 'Cameo Appearance',
-            movie: 'Light Works Universe',
-            position: 'Featured Cameo',
-            description: 'A memorable cameo in an upcoming AI film. Perfect for fans who want to be part of the story.',
-            price: 99,
-            spots: 5,
-            spotsLeft: 5,
-            type: 'casting',
-            image: 'assets/images/briunka-city.png',
-            gallery: [],
-            visible: true
-        },
-        {
-            id: 'cast-bg',
-            name: 'Background Ensemble',
-            movie: 'Light Works Universe',
-            position: 'Background / Ensemble',
-            description: 'Join the ensemble cast in crowd scenes and atmospheric shots across the Light Works film series.',
-            price: 49,
-            spots: 10,
-            spotsLeft: 10,
-            type: 'casting',
-            image: 'assets/images/briunka-halo.png',
-            gallery: [],
-            visible: true
-        },
-        {
-            id: 'cast-voice',
-            name: 'Voice & Narration Role',
-            movie: 'Divine Talks Universe',
-            position: 'Narrator / Voice Role',
-            description: 'Lend your voice to narration, inner monologue, or character dialogue in an AI-produced film.',
-            price: 75,
-            spots: 3,
-            spotsLeft: 3,
-            type: 'casting',
-            image: 'assets/images/briunka-cross.png',
-            gallery: [],
-            visible: true
-        }
+        { id: 'ats-cameo', name: 'Cameo Spot', movie: 'Across the Stars', position: 'Cameo · 5–10 sec appearance', description: 'Appear in a future episode for 5–10 seconds. Upload your photos — we craft your AI likeness.', price: 75, category: 'cast', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/briunka-belight.png', visible: true },
+        { id: 'ats-featured', name: 'Featured Character', movie: 'Across the Stars', position: 'Speaking Role', description: 'Speaking role with custom character design. Be seen. Be remembered.', price: 150, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/across-the-stars-price-sheet.jpg', visible: true },
+        { id: 'ats-villain', name: 'Villain Package', movie: 'Across the Stars', position: 'Legendary Villain', description: 'Become a legendary villain. We\'ll create you. We\'ll defeat you. You\'ll be unforgettable.', price: 250, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-city.png', visible: true },
+        { id: 'ats-royal', name: 'Royal Family Package', movie: 'Across the Stars', position: 'Royal Family', description: 'Join the Royal Family — Kings, Queens, Princes, Princesses. Legacy is yours.', price: 300, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-halo.png', visible: true },
+        { id: 'ats-exec', name: 'Executive Producer', movie: 'Across the Stars', position: 'Executive Producer Credit', description: 'Executive Producer credit, VIP access, early previews, and exclusive behind-the-scenes.', price: 500, category: 'cast', requiresPhotos: false, type: 'casting', image: 'assets/images/across-the-stars-price-sheet.jpg', visible: true },
+        { id: 'ats-recurring', name: 'Recurring Character', movie: 'Across the Stars', position: 'Multi-Episode Role', description: 'Become a recurring character across multiple episodes. Your story. Your legacy.', price: 750, priceLabel: '$750+', category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-stairs.png', visible: true },
+
+        { id: 'ats-char-build', name: '1-on-1 Character Building', movie: 'Across the Stars', position: 'With Briunka Light', description: 'Private session to build your character with Briunka Light.', price: 100, category: 'addon', requiresPhotos: true, type: 'casting', image: '', visible: true },
+        { id: 'ats-scene', name: 'Custom Scene Upgrade', movie: 'Across the Stars', position: 'Enhanced Visuals', description: 'Custom scenes with enhanced visuals for your character.', price: 150, priceLabel: '$150+', category: 'addon', requiresPhotos: true, type: 'casting', image: '', visible: true },
+        { id: 'ats-poster', name: 'Signed Digital Poster', movie: 'Across the Stars', position: 'Limited Edition', description: 'Limited edition digital poster signed by Briunka Light.', price: 50, category: 'addon', requiresPhotos: false, type: 'casting', image: '', visible: true },
+
+        { id: 'ats-song-review', name: 'Song Review', movie: 'Across the Stars', position: 'Music · Serious inquiries', description: 'Professional song review. Serious inquiries only — quality control applies.', price: 25, category: 'music', requiresPhotos: false, promoVideo: true, type: 'casting', image: '', visible: true },
+        { id: 'ats-song-place', name: 'Song Placement', movie: 'Across the Stars', position: 'In an Episode', description: 'Your song placed in an Across the Stars episode.', price: 100, category: 'music', requiresPhotos: false, promoVideo: true, type: 'casting', image: '', visible: true },
+        { id: 'ats-artist-spot', name: 'Featured Artist Spotlight', movie: 'Across the Stars', position: 'Artist Feature', description: 'Featured artist spotlight in the universe — AI music promo included.', price: 200, category: 'music', requiresPhotos: true, promoVideo: true, type: 'casting', image: '', visible: true },
+        { id: 'ats-soundtrack', name: 'Official Soundtrack Partner', movie: 'Across the Stars', position: 'Soundtrack Partner', description: 'Multiple placements plus exclusive promotion across the series.', price: 500, category: 'music', requiresPhotos: false, promoVideo: true, type: 'casting', image: '', visible: true },
+
+        { id: 'ats-biz-promo', name: 'Cinematic Business Promo', movie: 'Across the Stars', position: '15–30 sec luxury video', description: 'Luxury cinematic promo video for your business — AI-produced.', price: 150, category: 'business', requiresPhotos: true, type: 'casting', image: '', visible: true },
+        { id: 'ats-biz-universe', name: 'Business in the Universe', movie: 'Across the Stars', position: 'In-Story Placement', description: 'Your business appears inside the Across the Stars story.', price: 300, category: 'business', requiresPhotos: false, type: 'casting', image: '', visible: true },
+        { id: 'ats-grand-open', name: 'Grand Opening Package', movie: 'Across the Stars', position: 'Launch Package', description: 'Announcement video, social teaser, and custom visuals for your launch.', price: 500, category: 'business', requiresPhotos: false, type: 'casting', image: '', visible: true },
+        { id: 'ats-brand', name: 'Brand Partnership', movie: 'Across the Stars', position: 'Integrated Placement', description: 'Integrated brand placement across multiple episodes.', price: 1000, priceLabel: '$1,000+', category: 'business', requiresPhotos: false, type: 'casting', image: '', visible: true },
+
+        { id: 'ats-founding', name: 'Founding Supporter', movie: 'Across the Stars', position: 'Support the Movement', description: 'Support the movement and be part of something unforgettable.', price: 10, category: 'support', requiresPhotos: false, type: 'casting', image: '', visible: true },
+        { id: 'ats-vip', name: 'VIP Insider Membership', movie: 'Across the Stars', position: 'Monthly Membership', description: 'Monthly access to exclusive content, votes, and VIP perks.', price: 9.99, priceLabel: '$9.99/mo', subscription: true, category: 'support', requiresPhotos: false, type: 'casting', image: '', visible: true },
+        { id: 'ats-team', name: 'Support Team Member', movie: 'Across the Stars', position: 'Apply to Join', description: 'Join the Across the Stars support team. Apply to be part of the movement.', price: 0, category: 'support', applyOnly: true, requiresPhotos: false, type: 'casting', image: '', visible: true }
     ]
 };
 
@@ -186,7 +158,7 @@ function loadConfig() {
                 socials: mergeSocials(parsed.socials),
                 links: parsed.links || DEFAULT_CONFIG.links,
                 products: parsed.products || DEFAULT_CONFIG.products,
-                casting: parsed.casting || DEFAULT_CONFIG.casting
+                casting: mergeCasting(parsed.casting)
             };
         }
     } catch {
@@ -195,14 +167,40 @@ function loadConfig() {
     artIndex = config.heroArt || 0;
 }
 
+function mergeCasting(saved) {
+    if (!saved || !saved.length) return DEFAULT_CONFIG.casting;
+    if (saved.length < 10 || saved.some(c => c.id === 'cast-costar')) return DEFAULT_CONFIG.casting;
+    return saved;
+}
+
+function formatPrice(c) {
+    if (c.priceLabel) return `<span class="price-sale">${esc(c.priceLabel)}</span>`;
+    if (c.applyOnly) return `<span class="price-sale">Apply</span>`;
+    if (c.onSale && c.originalPrice && c.originalPrice > c.price) {
+        return `<span class="price-original">$${c.originalPrice}</span><span class="price-sale">$${c.price}</span>`;
+    }
+    if (c.subscription) return `<span class="price-sale">$${c.price}/mo</span>`;
+    return `<span class="price-sale">$${c.price}</span>`;
+}
+
+function buyButtonLabel(c) {
+    if (c.applyOnly) return 'Apply Now';
+    if (c.subscription) return 'Subscribe';
+    if (c.category === 'cast' || c.requiresPhotos) return 'Join — ' + (c.priceLabel || '$' + c.price);
+    return 'Get It — ' + (c.priceLabel || '$' + c.price);
+}
+
 function mergeSocials(saved) {
     if (!saved) return DEFAULT_CONFIG.socials;
     const defaults = DEFAULT_CONFIG.socials;
+    const cleaned = saved.filter(s => s.id !== 'tt');
     const merged = defaults.map(d => {
-        const s = saved.find(x => x.id === d.id);
-        return s ? { ...d, ...s, url: s.url || d.url } : d;
+        const s = cleaned.find(x => x.id === d.id);
+        if (!s) return d;
+        const url = s.url && !s.url.endsWith('tiktok.com') ? s.url : d.url;
+        return { ...d, ...s, url };
     });
-    saved.filter(s => !defaults.find(d => d.id === s.id)).forEach(s => merged.push(s));
+    cleaned.filter(s => !defaults.find(d => d.id === s.id)).forEach(s => merged.push(s));
     return merged;
 }
 
@@ -295,6 +293,17 @@ function render() {
     renderLinks();
     renderCasting();
     renderProducts();
+    renderFooter();
+}
+
+function renderFooter() {
+    const email = config.contactEmail || 'acrossthestars2026@gmail.com';
+    const el = document.getElementById('footer-contact');
+    if (el) {
+        el.innerHTML = `
+            <a href="mailto:${email}">${email}</a>
+            <span class="footer-hashtag">#ACROSSTHESTARS</span>`;
+    }
 }
 
 function renderSocials() {
@@ -367,10 +376,21 @@ function buildLinkCard(link, isFeatured, delay) {
         </a>`;
 }
 
+function renderPriceSheet() {
+    const section = document.getElementById('price-sheet-section');
+    const img = document.getElementById('price-sheet-img');
+    if (!section || !config.priceSheet) return;
+    img.src = config.priceSheet;
+    img.alt = 'Across the Stars Price List';
+    section.style.display = 'block';
+}
+
 function renderCasting() {
     const section = document.getElementById('casting-section');
     const grid = document.getElementById('casting-grid');
     const roles = (config.casting || []).filter(c => c.visible);
+
+    renderPriceSheet();
 
     if (!roles.length) {
         section.style.display = 'none';
@@ -378,34 +398,70 @@ function renderCasting() {
     }
     section.style.display = 'block';
 
-    grid.innerHTML = roles.map((c, i) => {
-        const img = c.image
-            ? `<img src="${c.image}" alt="${esc(c.name)}">`
-            : `<div class="casting-img-placeholder"><i class="fa-solid fa-film"></i></div>`;
-        const galleryCount = (c.gallery || []).length;
-        const spotsText = c.spotsLeft > 0 ? `${c.spotsLeft} spot${c.spotsLeft !== 1 ? 's' : ''} left` : 'SOLD OUT';
-        const soldOut = c.spotsLeft <= 0;
+    const includesEl = document.getElementById('package-includes');
+    if (includesEl) {
+        includesEl.innerHTML = PACKAGE_INCLUDES.map(i =>
+            `<li><i class="fa-solid fa-star"></i> ${esc(i)}</li>`
+        ).join('');
+    }
 
-        return `
-            <div class="casting-card delay-${(i % 3) + 2}">
-                <div class="casting-img">${img}
-                    <span class="casting-movie">${esc(c.movie)}</span>
-                    ${galleryCount ? `<span class="casting-gallery-count"><i class="fa-solid fa-images"></i> ${galleryCount}</span>` : ''}
-                </div>
-                <div class="casting-body">
-                    <div class="casting-position">${esc(c.position)}</div>
-                    <div class="casting-name serif">${esc(c.name)}</div>
-                    <p class="casting-desc">${esc(c.description)}</p>
-                    <div class="casting-meta">
-                        <span class="casting-price">$${c.price}</span>
-                        <span class="casting-spots${soldOut ? ' sold-out' : ''}">${spotsText}</span>
-                    </div>
-                    <button class="buy-btn casting-btn" ${soldOut ? 'disabled' : ''} onclick="openCheckout('${c.id}', true)">
-                        ${soldOut ? 'Sold Out' : 'Join the Cast'}
-                    </button>
-                </div>
+    let html = '';
+    let delay = 0;
+
+    CAST_CATEGORIES.forEach(cat => {
+        const items = roles.filter(c => c.category === cat.id);
+        if (!items.length) return;
+
+        const featured = items.find(c => c.featured);
+        const rest = items.filter(c => !c.featured);
+
+        html += `<div class="casting-category"><p class="section-label">${cat.label}</p>`;
+        if (featured) html += buildCastingCard(featured, delay++, true);
+        html += `<div class="casting-list">${rest.map(c => buildCastingCard(c, delay++, false, true)).join('')}</div>`;
+        html += '</div>';
+    });
+
+    grid.innerHTML = html;
+}
+
+function buildCastingCard(c, i, isFeatured, compact) {
+    const img = c.image
+        ? `<img src="${c.image}" alt="${esc(c.name)}">`
+        : `<div class="casting-img-placeholder"><i class="fa-solid ${c.promoVideo ? 'fa-music' : c.category === 'business' ? 'fa-briefcase' : 'fa-film'}"></i></div>`;
+    const saleBadge = c.onSale ? '<span class="sale-badge">SALE</span>' : '';
+    const promoTag = c.promoVideo ? '<span class="promo-tag"><i class="fa-solid fa-music"></i> Music</span>' : '';
+    const cls = isFeatured ? 'casting-card casting-card-featured' : compact ? 'casting-card casting-card-compact' : 'casting-card';
+    const uploadHint = c.requiresPhotos
+        ? '<p class="casting-upload-hint"><i class="fa-solid fa-camera"></i> Upload your photos for AI likeness</p>' : '';
+    const imgBlock = compact ? '' : `<div class="casting-img">${img}
+                <span class="casting-movie">${esc(c.movie)}</span>
+                ${saleBadge}${promoTag}
             </div>`;
-    }).join('');
+
+    return `
+        <div class="${cls} delay-${(i % 3) + 2}">
+            ${imgBlock}
+            <div class="casting-body">
+                <div class="casting-position">${esc(c.position)}</div>
+                <div class="casting-name serif">${esc(c.name)}</div>
+                <p class="casting-desc">${esc(c.description)}</p>
+                ${uploadHint}
+                <div class="casting-meta">
+                    <div class="casting-price-wrap">${formatPrice(c)}</div>
+                </div>
+                <button class="buy-btn casting-btn" onclick="openCheckout('${c.id}', true)">
+                    ${buyButtonLabel(c)}
+                </button>
+            </div>
+        </div>`;
+}
+
+function openPriceSheetLightbox() {
+    document.getElementById('price-sheet-lightbox').classList.add('open');
+}
+
+function closePriceSheetLightbox() {
+    document.getElementById('price-sheet-lightbox').classList.remove('open');
 }
 
 function renderProducts() {
@@ -461,24 +517,34 @@ function openCheckout(productId, isCasting) {
     if (!checkoutProduct) return;
 
     document.getElementById('checkout-title').textContent = checkoutProduct.name;
-    document.getElementById('checkout-price').textContent = '$' + checkoutProduct.price;
+    document.getElementById('checkout-price').innerHTML = formatPrice(checkoutProduct);
 
     const castingFields = document.getElementById('casting-fields');
     const standardDesc = document.getElementById('checkout-desc');
     const castingInfo = document.getElementById('casting-checkout-info');
     const paymentBtns = document.getElementById('payment-buttons');
 
+    if (checkoutProduct.applyOnly) {
+        const email = config.contactEmail || 'acrossthestars2026@gmail.com';
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent('Across the Stars — ' + checkoutProduct.name)}&body=${encodeURIComponent('Hi Briunka,\n\nI would like to apply for: ' + checkoutProduct.name + '\n\nName:\nEmail:\nWhy I want to join:\n')}`;
+        return;
+    }
+
     if (isCasting) {
-        castingFields.style.display = 'block';
+        const needsPhotos = checkoutProduct.requiresPhotos;
+        castingFields.style.display = needsPhotos ? 'block' : 'none';
         standardDesc.style.display = 'none';
         castingInfo.style.display = 'block';
         castingInfo.innerHTML = `
-            <strong>${esc(checkoutProduct.movie)}</strong><br>
-            ${esc(checkoutProduct.position)}<br>
-            <span style="color:var(--muted);font-size:0.75rem">${esc(checkoutProduct.description)}</span>`;
+            <strong>${esc(checkoutProduct.movie)}</strong> · ${esc(checkoutProduct.position)}<br>
+            <span style="color:var(--muted);font-size:0.75rem">${esc(checkoutProduct.description)}</span>
+            ${checkoutProduct.promoVideo ? '<br><span class="promo-inline"><i class="fa-solid fa-music"></i> AI music artist promo option</span>' : ''}
+            ${checkoutProduct.subscription ? '<br><span class="promo-inline"><i class="fa-solid fa-crown"></i> Monthly VIP membership</span>' : ''}`;
         if (checkoutProduct.image) {
             document.getElementById('checkout-product-img').src = checkoutProduct.image;
             document.getElementById('checkout-product-img').style.display = 'block';
+        } else {
+            document.getElementById('checkout-product-img').style.display = 'none';
         }
     } else {
         castingFields.style.display = 'none';
@@ -496,7 +562,8 @@ function openCheckout(productId, isCasting) {
     document.getElementById('checkout-phone').value = '';
     document.getElementById('checkout-instagram').value = '';
     document.getElementById('checkout-notes').value = '';
-    document.getElementById('ref-photo-preview').style.display = 'none';
+    document.getElementById('ref-photos-grid').innerHTML = '';
+    window._refPhotos = [];
     document.getElementById('checkout-ref-photo').value = '';
 
     const hasPayments = paymentConfig.paymentsEnabled;
@@ -516,17 +583,40 @@ function closeCheckout() {
     checkoutIsCasting = false;
 }
 
+window._refPhotos = [];
+
 function previewRefPhoto(input) {
-    const file = input.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
-        const preview = document.getElementById('ref-photo-preview');
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-        preview.dataset.dataUrl = e.target.result;
-    };
-    reader.readAsDataURL(file);
+    const files = Array.from(input.files || []);
+    if (!files.length) return;
+    const grid = document.getElementById('ref-photos-grid');
+    const max = 5;
+
+    files.slice(0, max - window._refPhotos.length).forEach(file => {
+        if (file.size > 3 * 1024 * 1024) {
+            showToast('Each photo max 3MB');
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = e => {
+            window._refPhotos.push(e.target.result);
+            const idx = window._refPhotos.length - 1;
+            grid.innerHTML += `
+                <div class="ref-photo-item" data-idx="${idx}">
+                    <img src="${e.target.result}" alt="Your photo">
+                    <button type="button" class="ref-photo-remove" onclick="removeRefPhoto(${idx})">×</button>
+                </div>`;
+        };
+        reader.readAsDataURL(file);
+    });
+    input.value = '';
+}
+
+function removeRefPhoto(idx) {
+    window._refPhotos[idx] = null;
+    const grid = document.getElementById('ref-photos-grid');
+    grid.querySelectorAll('.ref-photo-item').forEach(el => {
+        if (parseInt(el.dataset.idx) === idx) el.remove();
+    });
 }
 
 async function completePurchase(provider) {
@@ -540,12 +630,11 @@ async function completePurchase(provider) {
         return;
     }
 
-    if (checkoutIsCasting) {
-        const preview = document.getElementById('ref-photo-preview');
-        if (!preview.dataset.dataUrl) {
-            showToast('Upload a reference photo for casting');
-            return;
-        }
+    const refPhotos = (window._refPhotos || []).filter(Boolean);
+
+    if (checkoutIsCasting && checkoutProduct.requiresPhotos && !refPhotos.length) {
+        showToast('Upload your photos for the AI film');
+        return;
     }
 
     const customer = {
@@ -554,7 +643,8 @@ async function completePurchase(provider) {
         phone: document.getElementById('checkout-phone').value.trim(),
         instagram: document.getElementById('checkout-instagram').value.trim(),
         notes: document.getElementById('checkout-notes').value.trim(),
-        referencePhoto: document.getElementById('ref-photo-preview').dataset.dataUrl || ''
+        referencePhoto: refPhotos[0] || '',
+        referencePhotos: refPhotos
     };
 
     const product = { ...checkoutProduct };
@@ -602,6 +692,47 @@ function populateStudio() {
     renderEditSocials();
     renderEditProducts();
     renderEditCasting();
+    loadPaymentStatus();
+}
+
+async function loadPaymentStatus() {
+    const box = document.getElementById('payment-status');
+    try {
+        const res = await fetch('/api/health');
+        const h = await res.json();
+        box.innerHTML = `
+            <div class="pay-status-row"><span>Stripe</span><span class="${h.stripe ? 'pay-on' : 'pay-off'}">${h.stripe ? '● Connected' : '○ Not configured'}</span></div>
+            <div class="pay-status-row"><span>PayPal</span><span class="${h.paypal ? 'pay-on' : 'pay-off'}">${h.paypal ? '● Connected' : '○ Not configured'}</span></div>`;
+        document.getElementById('pay-site-url').value = h.site_url || 'http://localhost:8847';
+    } catch {
+        box.innerHTML = '<p class="studio-hint">Start the server to configure payments.</p>';
+    }
+}
+
+async function savePaymentKeys() {
+    const payload = {
+        stripePublishableKey: document.getElementById('pay-stripe-pub').value.trim(),
+        stripeSecretKey: document.getElementById('pay-stripe-secret').value.trim(),
+        stripeWebhookSecret: document.getElementById('pay-stripe-webhook').value.trim(),
+        paypalClientId: document.getElementById('pay-paypal-id').value.trim(),
+        paypalClientSecret: document.getElementById('pay-paypal-secret').value.trim(),
+        paypalMode: document.getElementById('pay-paypal-mode').value,
+        siteUrl: document.getElementById('pay-site-url').value.trim()
+    };
+    try {
+        const res = await fetch('/api/admin/save-keys', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed');
+        showToast('Payment keys saved — restart server');
+        await loadPaymentConfig();
+        loadPaymentStatus();
+    } catch (err) {
+        showToast(err.message || 'Could not save keys');
+    }
 }
 
 function renderEditLinks() {
@@ -660,8 +791,22 @@ function renderEditCasting() {
             <input class="field-input" style="margin-bottom:0.5rem" data-cast-position="${i}" value="${esc(c.position)}" placeholder="Position (e.g. Lead, Cameo)">
             <textarea class="field-input" style="margin-bottom:0.5rem" data-cast-desc="${i}" rows="2" placeholder="Description">${esc(c.description)}</textarea>
             <div class="field-row">
-                <input class="field-input" data-cast-price="${i}" type="number" value="${c.price}" placeholder="Price">
-                <input class="field-input" data-cast-spots="${i}" type="number" value="${c.spotsLeft}" placeholder="Spots left">
+                <input class="field-input" data-cast-price="${i}" type="number" value="${c.price}" placeholder="Sale price">
+                <input class="field-input" data-cast-orig="${i}" type="number" value="${c.originalPrice || ''}" placeholder="Regular price">
+            </div>
+            <div class="field-row">
+                <select class="field-input" data-cast-cat="${i}">
+                    ${CAST_CATEGORIES.map(cat => `<option value="${cat.id}" ${c.category === cat.id ? 'selected' : ''}>${cat.label}</option>`).join('')}
+                </select>
+                <input class="field-input" data-cast-label="${i}" value="${esc(c.priceLabel || '')}" placeholder="Price label e.g. $750+">
+            </div>
+            <div class="field-row">
+                <label class="toggle-check" style="display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;color:var(--muted);padding:0.5rem">
+                    <input type="checkbox" data-cast-photos="${i}" ${c.requiresPhotos ? 'checked' : ''}> Requires Photo Upload
+                </label>
+                <label class="toggle-check" style="display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;color:var(--muted);padding:0.5rem">
+                    <input type="checkbox" data-cast-promo="${i}" ${c.promoVideo ? 'checked' : ''}> Music Promo
+                </label>
             </div>
             <label class="field-label" style="margin-top:0.5rem">Cover Image</label>
             <label class="upload-zone" style="padding:0.75rem;margin-bottom:0.5rem">
@@ -750,8 +895,8 @@ function removeProduct(idx) {
 
 function addCastingRole() {
     config.casting.push({
-        id: uid(), name: 'New Role', movie: 'Light Works Universe', position: 'New Position',
-        description: 'Describe this casting position.', price: 99, spots: 5, spotsLeft: 5,
+        id: uid(), name: 'New Role', movie: 'Across the Stars', position: 'New Position',
+        description: 'Describe this package.', price: 99, category: 'cast', requiresPhotos: true,
         type: 'casting', image: '', gallery: [], visible: true
     });
     renderEditCasting();
@@ -840,7 +985,11 @@ function saveStudio() {
     document.querySelectorAll('[data-cast-position]').forEach(inp => { config.casting[parseInt(inp.dataset.castPosition)].position = inp.value.trim(); });
     document.querySelectorAll('[data-cast-desc]').forEach(inp => { config.casting[parseInt(inp.dataset.castDesc)].description = inp.value.trim(); });
     document.querySelectorAll('[data-cast-price]').forEach(inp => { config.casting[parseInt(inp.dataset.castPrice)].price = parseFloat(inp.value) || 0; });
-    document.querySelectorAll('[data-cast-spots]').forEach(inp => { config.casting[parseInt(inp.dataset.castSpots)].spotsLeft = parseInt(inp.value) || 0; });
+    document.querySelectorAll('[data-cast-cat]').forEach(sel => { config.casting[parseInt(sel.dataset.castCat)].category = sel.value; });
+    document.querySelectorAll('[data-cast-label]').forEach(inp => { config.casting[parseInt(inp.dataset.castLabel)].priceLabel = inp.value.trim() || null; });
+    document.querySelectorAll('[data-cast-orig]').forEach(inp => { config.casting[parseInt(inp.dataset.castOrig)].originalPrice = parseFloat(inp.value) || null; });
+    document.querySelectorAll('[data-cast-photos]').forEach(cb => { config.casting[parseInt(cb.dataset.castPhotos)].requiresPhotos = cb.checked; });
+    document.querySelectorAll('[data-cast-promo]').forEach(cb => { config.casting[parseInt(cb.dataset.castPromo)].promoVideo = cb.checked; });
 
     saveConfig();
     render();

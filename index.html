@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Briunka Light — Be Light</title>
-    <meta name="description" content="Your gateway to Briunka Light — AI films, casting roles, digital products, healing frequencies & more. Light Works Entertainment.">
+    <title>Across the Stars — Briunka Light</title>
+    <meta name="description" content="Across the Stars — The First Community Powered AI Cinematic Universe. Join the cast from $75. Music, business packages & more.">
     <meta property="og:title" content="Briunka Light — Be Light">
     <meta property="og:description" content="Pay to join the cast. Shop digital products. Light Works Entertainment.">
     <meta property="og:image" content="assets/images/briunka-belight.png">
@@ -63,24 +63,93 @@
         <section id="featured-section"></section>
         <section id="links-container"></section>
 
-        <!-- AI Movie Casting -->
-        <section id="casting-section" class="delay-3" style="animation: fadeUp 0.6s ease 0.3s forwards; opacity:0">
-            <p class="section-label">AI Movie Casting</p>
-            <p class="casting-intro">Pay to join Briunka's AI films. Upload your reference photo, pick your position, and become part of the Light Works Universe.</p>
+        <!-- Live Review Submissions (Nero-style) -->
+        <section id="review-section" class="delay-2" style="animation: fadeUp 0.6s ease 0.25s forwards; opacity:0">
+            <p class="section-label">Live Review</p>
+            <p class="casting-intro">AI artists & creators — submit your video for review during Briunka's lives. Paste a link or upload your file.</p>
+
+            <div class="review-tiers" id="review-tiers"></div>
+
+            <form id="review-form" class="review-form">
+                <input id="review-name" class="field-input" type="text" placeholder="Your name *" required>
+                <input id="review-email" class="field-input" type="email" placeholder="Email *" required>
+                <input id="review-phone" class="field-input" type="tel" placeholder="Phone for SMS alerts (optional)">
+                <input id="review-artist" class="field-input" type="text" placeholder="Artist / Creator name *" required>
+                <input id="review-title" class="field-input" type="text" placeholder="Song or video title *" required>
+
+                <p class="field-label" style="margin-top:0.5rem">How are you submitting?</p>
+                <div class="content-type-toggle">
+                    <label class="type-option"><input type="radio" name="content-type" value="link" checked> <i class="fa-solid fa-link"></i> Paste a link</label>
+                    <label class="type-option"><input type="radio" name="content-type" value="video"> <i class="fa-solid fa-upload"></i> Upload video</label>
+                </div>
+
+                <div id="review-link-field">
+                    <input id="review-link" class="field-input" type="url" placeholder="TikTok, YouTube, Instagram, Google Drive link...">
+                </div>
+                <div id="review-video-field" style="display:none">
+                    <label class="upload-zone upload-zone-compact">
+                        <i class="fa-solid fa-film"></i>
+                        <p>Upload video (MP4, MOV, WebM — max 50MB)</p>
+                        <input id="review-video" type="file" accept="video/mp4,video/quicktime,video/webm,.mp4,.mov,.webm" onchange="previewReviewVideo(this)">
+                    </label>
+                    <p id="review-video-info" class="video-info"></p>
+                </div>
+
+                <textarea id="review-notes" class="field-input" rows="2" placeholder="Notes for Briunka (optional)"></textarea>
+
+                <div class="notify-options">
+                    <label class="notify-check"><input type="checkbox" id="review-notify-email" checked> Email me my queue position & when I'm up next</label>
+                    <label class="notify-check"><input type="checkbox" id="review-notify-sms" checked> Text me when I'm UP NEXT (requires phone)</label>
+                </div>
+
+                <button type="submit" class="email-submit" id="review-submit-btn">Submit & Pay $5</button>
+            </form>
+
+            <div id="queue-status-card" class="queue-status-card" style="display:none"></div>
+
+            <form id="check-queue-form" class="check-queue-form">
+                <p class="field-label">Already submitted? Check your place in line</p>
+                <div class="check-queue-row">
+                    <input id="check-queue-email" class="field-input" type="email" placeholder="your@email.com">
+                    <button type="submit" class="check-queue-btn"><i class="fa-solid fa-list-ol"></i></button>
+                </div>
+            </form>
+
+            <p class="review-host-link">Hosting a live? <a href="live.html">Open Live Review Dashboard →</a></p>
+        </section>
+
+        <div class="gold-divider"></div>
+
+        <!-- Price Sheet -->
+        <section id="price-sheet-section" class="delay-3" style="animation: fadeUp 0.6s ease 0.3s forwards; opacity:0">
+            <p class="section-label">Across the Stars</p>
+            <p class="casting-intro">The First Community Powered AI Cinematic Universe. <strong>Be part of history.</strong> Tap to view the full price list.</p>
+            <button class="price-sheet-btn" onclick="openPriceSheetLightbox()">
+                <img id="price-sheet-img" src="assets/images/across-the-stars-price-sheet.jpg" alt="Across the Stars Price List">
+                <span class="price-sheet-overlay"><i class="fa-solid fa-expand"></i> View Full Price List</span>
+            </button>
+        </section>
+
+        <!-- Packages -->
+        <section id="casting-section" class="delay-4" style="animation: fadeUp 0.6s ease 0.35s forwards; opacity:0">
+            <p class="section-label">Packages & Opportunities</p>
+            <p class="casting-intro">Choose your role. Cast members upload <strong>your photos</strong> — we craft your AI likeness into the universe.</p>
+            <ul id="package-includes" class="package-includes"></ul>
             <div class="casting-grid" id="casting-grid"></div>
         </section>
 
-        <!-- Shop -->
-        <section id="shop-section" class="delay-4" style="animation: fadeUp 0.6s ease 0.4s forwards; opacity:0">
-            <p class="section-label">Digital Shop</p>
+        <section id="shop-section" class="delay-4" style="display:none">
             <div class="product-grid" id="product-grid"></div>
         </section>
 
+        <p class="movement-tagline">This is more than a movie. This is a movement.<br>One universe. One community. Endless possibilities.</p>
+
         <footer class="footer delay-5" style="animation: fadeUp 0.6s ease 0.5s forwards; opacity:0">
+            <div id="footer-contact" class="footer-contact"></div>
             <a href="../hitmaker-vault/index.html">
                 <i class="fa-solid fa-infinity"></i> HITMAKER VAULT
             </a>
-            <p class="footer-copy">© Light Works Entertainment</p>
+            <p class="footer-copy">© Light Works Entertainment · Across the Stars</p>
         </footer>
     </div>
 
@@ -102,6 +171,8 @@
                 <button class="studio-tab" data-tab="socials" onclick="switchTab('socials')">Socials</button>
                 <button class="studio-tab" data-tab="casting" onclick="switchTab('casting')">AI Movies</button>
                 <button class="studio-tab" data-tab="products" onclick="switchTab('products')">Shop</button>
+                <button class="studio-tab" data-tab="payments" onclick="switchTab('payments')">Pay</button>
+                <button class="studio-tab" data-tab="livehost" onclick="switchTab('livehost')">Live</button>
             </div>
 
             <div class="studio-body">
@@ -133,7 +204,7 @@
                 </div>
 
                 <div class="studio-tab-content" id="tab-casting">
-                    <p class="studio-hint">Create AI movie casting positions. Upload cover images and scene gallery previews for each role.</p>
+                    <p class="studio-hint">Manage Across the Stars packages. Upload cover images for each role. Fans upload their own photos at checkout.</p>
                     <div id="edit-casting-list"></div>
                     <button class="add-btn" onclick="addCastingRole()"><i class="fa-solid fa-plus"></i> Add Casting Position</button>
                 </div>
@@ -142,6 +213,42 @@
                     <p class="studio-hint">Sell digital downloads and physical products with images.</p>
                     <div id="edit-products-list"></div>
                     <button class="add-btn" onclick="addProduct()"><i class="fa-solid fa-plus"></i> Add Product</button>
+                </div>
+
+                <div class="studio-tab-content" id="tab-payments">
+                    <div id="payment-status" class="payment-status-box"></div>
+                    <p class="studio-hint">Add your Stripe & PayPal keys below, then click Save Keys. Keys are stored securely in your local .env file.</p>
+                    <label class="field-label">Stripe Publishable Key</label>
+                    <input id="pay-stripe-pub" class="field-input" type="text" placeholder="pk_live_... or pk_test_...">
+                    <label class="field-label">Stripe Secret Key</label>
+                    <input id="pay-stripe-secret" class="field-input" type="password" placeholder="sk_live_... or sk_test_...">
+                    <label class="field-label">Stripe Webhook Secret</label>
+                    <input id="pay-stripe-webhook" class="field-input" type="password" placeholder="whsec_...">
+                    <label class="field-label">PayPal Client ID</label>
+                    <input id="pay-paypal-id" class="field-input" type="text" placeholder="PayPal Client ID">
+                    <label class="field-label">PayPal Client Secret</label>
+                    <input id="pay-paypal-secret" class="field-input" type="password" placeholder="PayPal Secret">
+                    <label class="field-label">PayPal Mode</label>
+                    <select id="pay-paypal-mode" class="field-input">
+                        <option value="sandbox">Sandbox (testing)</option>
+                        <option value="live">Live (real payments)</option>
+                    </select>
+                    <label class="field-label">Site URL (for payment redirects)</label>
+                    <input id="pay-site-url" class="field-input" type="text" placeholder="http://localhost:8847">
+                    <button class="add-btn" style="margin-top:0.75rem" onclick="savePaymentKeys()"><i class="fa-solid fa-key"></i> Save Payment Keys</button>
+                </div>
+
+                <div class="studio-tab-content" id="tab-livehost">
+                    <div class="payment-status-box">
+                        <p style="font-size:0.8125rem;color:var(--ivory);margin-bottom:0.5rem"><i class="fa-solid fa-tower-broadcast"></i> Live Review Dashboard</p>
+                        <p class="studio-hint">During streams, open the dashboard to see submissions sorted by priority — Super Skip first, then Skip, then Standard.</p>
+                    </div>
+                    <a href="live.html" class="email-submit" style="display:block;text-align:center;text-decoration:none;margin-top:0.75rem">
+                        Open Live Dashboard
+                    </a>
+                    <p class="studio-hint" style="margin-top:1rem">Default host PIN: <code style="color:var(--gold)">lightworks</code><br>Change LIVE_ADMIN_PIN in your .env file.</p>
+                    <p class="studio-hint">Submission tiers: Standard $5 · Skip $10 · Super Skip $15</p>
+                    <p class="studio-hint">Creators get email + SMS when UP NEXT. Configure SMTP & Twilio in .env</p>
                 </div>
             </div>
 
@@ -169,14 +276,14 @@
                 <div id="casting-fields" style="display:none">
                     <input id="checkout-phone" class="field-input" type="tel" placeholder="Phone (optional)">
                     <input id="checkout-instagram" class="field-input" type="text" placeholder="Instagram handle (optional)">
-                    <textarea id="checkout-notes" class="field-input" rows="2" placeholder="Notes — scene preferences, etc."></textarea>
-                    <label class="field-label">Reference Photo * <span style="color:var(--muted);font-weight:400">(for AI likeness)</span></label>
+                    <textarea id="checkout-notes" class="field-input" rows="2" placeholder="Notes — scene preferences, promo video style, etc."></textarea>
+                    <label class="field-label">Your Photos * <span class="field-hint">(upload up to 5 — used for your AI film & music promo likeness)</span></label>
                     <label class="upload-zone upload-zone-compact">
-                        <i class="fa-solid fa-user"></i>
-                        <p>Upload your photo</p>
-                        <input id="checkout-ref-photo" type="file" accept="image/*" onchange="previewRefPhoto(this)">
+                        <i class="fa-solid fa-images"></i>
+                        <p>Upload your photos for the AI film</p>
+                        <input id="checkout-ref-photo" type="file" accept="image/*" multiple onchange="previewRefPhoto(this)">
                     </label>
-                    <img id="ref-photo-preview" class="ref-photo-preview" style="display:none" alt="Reference">
+                    <div id="ref-photos-grid" class="ref-photos-grid"></div>
                 </div>
             </div>
 
@@ -184,9 +291,29 @@
         </div>
     </div>
 
+    <!-- Price sheet lightbox -->
+    <div class="price-sheet-lightbox" id="price-sheet-lightbox" onclick="if(event.target===this)closePriceSheetLightbox()">
+        <button class="lightbox-close" onclick="closePriceSheetLightbox()">×</button>
+        <img src="assets/images/across-the-stars-price-sheet.jpg" alt="Across the Stars Full Price List">
+    </div>
+
+    <!-- Review payment modal -->
+    <div class="checkout-overlay" id="review-pay-overlay" onclick="if(event.target===this)closeReviewPayment()">
+        <div class="checkout-modal checkout-modal-wide">
+            <button class="checkout-close" onclick="closeReviewPayment()">×</button>
+            <div class="checkout-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+            <h3 class="checkout-title serif" id="review-pay-title">Live Review</h3>
+            <p class="checkout-desc" id="review-pay-desc"></p>
+            <div class="checkout-price" id="review-pay-price">$5</div>
+            <div class="checkout-actions" id="review-pay-buttons"></div>
+        </div>
+    </div>
+
     <div class="toast" id="toast"></div>
 
     <script src="js/payments.js"></script>
     <script src="js/briunka-link.js"></script>
+    <script src="js/notifications-ui.js"></script>
+    <script src="js/live-review.js"></script>
 </body>
 </html>

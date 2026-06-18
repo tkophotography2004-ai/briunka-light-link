@@ -1,0 +1,168 @@
+.live-body {
+    background: var(--ink);
+    min-height: 100dvh;
+    padding: 1.25rem;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.hidden { display: none !important; }
+
+.pin-gate {
+    min-height: 80dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pin-card {
+    width: 100%;
+    max-width: 22rem;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.25rem;
+    padding: 2rem 1.5rem;
+}
+
+.pin-card h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+
+.pin-default-hint {
+    font-size: 0.625rem;
+    color: rgba(184, 178, 170, 0.4);
+    margin-top: 1rem;
+}
+
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+}
+
+.dash-header h1 { font-size: 1.75rem; line-height: 1.1; }
+
+.dash-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+
+.dash-actions { display: flex; gap: 0.5rem; align-items: center; }
+
+.btn-refresh {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--surface);
+    color: var(--gold);
+    cursor: pointer;
+}
+
+.btn-outline-sm {
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--gold);
+    border-radius: 9999px;
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.dash-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-pill {
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.875rem;
+}
+
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); font-weight: 600; }
+.stat-lbl { font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.15rem; }
+
+.dash-section { margin-bottom: 2rem; }
+
+.queue-now {
+    background: linear-gradient(135deg, rgba(26, 22, 18, 0.95), rgba(11, 11, 13, 1));
+    border: 1px solid rgba(191, 161, 90, 0.35);
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+}
+
+.queue-list { display: flex; flex-direction: column; gap: 0.625rem; }
+
+.queue-item {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 1rem;
+    transition: border-color 0.2s;
+}
+
+.queue-item.tier-super_skip { border-left: 3px solid #e74c3c; }
+.queue-item.tier-skip { border-left: 3px solid var(--gold); }
+.queue-item.tier-standard { border-left: 3px solid var(--muted); }
+
+.queue-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.queue-artist { font-weight: 600; font-size: 0.9375rem; }
+.queue-title { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+
+.tier-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 9999px;
+    background: rgba(191, 161, 90, 0.15);
+    color: var(--gold);
+    white-space: nowrap;
+}
+
+.tier-chip.super { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+
+.queue-meta { font-size: 0.6875rem; color: var(--muted); margin-bottom: 0.75rem; }
+
+.queue-btns { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.queue-btn {
+    padding: 0.45rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--glass-border);
+    background: var(--ink);
+    color: var(--ivory);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.queue-btn:hover { border-color: var(--gold); color: var(--gold); }
+.queue-btn.done { border-color: #2ecc71; color: #2ecc71; }
+.queue-btn.play { border-color: var(--gold); color: var(--gold); }
+
+.reviewed-list .queue-item { opacity: 0.55; }
+
+.empty-queue {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.8125rem;
+}

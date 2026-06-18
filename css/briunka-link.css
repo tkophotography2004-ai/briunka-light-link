@@ -330,10 +330,367 @@ body {
     font-weight: 300;
 }
 
+/* ── Live Review ── */
+.review-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.review-tier-card {
+    position: relative;
+    padding: 0.875rem 0.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    color: inherit;
+    font-family: inherit;
+}
+
+.review-tier-card.active {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(26, 22, 18, 0.9), rgba(11, 11, 13, 0.95));
+    box-shadow: 0 0 24px var(--gold-glow);
+}
+
+.review-tier-card:hover { border-color: rgba(191, 161, 90, 0.5); }
+
+.tier-icon { font-size: 1.125rem; color: var(--gold); margin-bottom: 0.35rem; display: block; }
+.tier-label { font-size: 0.5625rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.tier-price { font-family: 'Cormorant Garamond', serif; font-size: 1.375rem; font-weight: 600; color: var(--gold); margin: 0.15rem 0; }
+.tier-desc { font-size: 0.5625rem; color: var(--muted); line-height: 1.3; }
+
+.tier-badge {
+    position: absolute;
+    top: -0.35rem;
+    right: 0.35rem;
+    font-size: 0.4375rem;
+    letter-spacing: 0.1em;
+    padding: 0.15rem 0.35rem;
+    border-radius: 9999px;
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.review-form { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.content-type-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.type-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.625rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--glass-border);
+    font-size: 0.6875rem;
+    cursor: pointer;
+    background: var(--ink);
+    color: var(--muted);
+}
+
+.type-option:has(input:checked) {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.type-option input { display: none; }
+
+.video-info { font-size: 0.6875rem; color: var(--gold); margin-bottom: 0.5rem; }
+
+.review-host-link {
+    text-align: center;
+    font-size: 0.6875rem;
+    color: var(--muted);
+    margin-top: 1rem;
+}
+
+.review-host-link a { color: var(--gold); text-decoration: none; }
+
+.notify-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.notify-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.6875rem;
+    color: var(--muted);
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.notify-check input { accent-color: var(--gold); margin-top: 0.15rem; flex-shrink: 0; }
+
+.queue-status-card {
+    margin-top: 1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease;
+}
+
+.queue-status-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.125rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    position: relative;
+}
+
+.queue-status-inner.up-next {
+    border-color: #2ecc71;
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.12), rgba(11, 11, 13, 0.9));
+    box-shadow: 0 0 30px rgba(46, 204, 113, 0.15);
+}
+
+.queue-status-inner.almost { border-color: var(--gold); }
+
+.queue-position-badge {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: rgba(191, 161, 90, 0.15);
+    border: 1px solid rgba(191, 161, 90, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--gold);
+    flex-shrink: 0;
+}
+
+.queue-status-inner.up-next .queue-position-badge {
+    background: rgba(46, 204, 113, 0.2);
+    border-color: #2ecc71;
+    color: #2ecc71;
+    font-size: 0.625rem;
+    letter-spacing: 0.05em;
+}
+
+.queue-status-text { flex: 1; min-width: 0; }
+.queue-status-title { font-size: 0.8125rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.queue-status-msg { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+.queue-status-msg strong { color: var(--ivory); }
+.queue-status-inner.up-next .queue-status-msg strong { color: #2ecc71; }
+.queue-status-tier { font-size: 0.5625rem; color: var(--gold); margin-top: 0.15rem; letter-spacing: 0.08em; }
+
+.queue-status-dismiss {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.125rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.check-queue-form { margin-top: 1.25rem; }
+
+.check-queue-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.check-queue-row .field-input { margin-bottom: 0; flex: 1; }
+
+.check-queue-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    border: none;
+    border-radius: 0.75rem;
+    background: var(--gold);
+    color: var(--ink);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ── Price sheet ── */
+.price-sheet-btn {
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    overflow: hidden;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    transition: all 0.35s;
+}
+
+.price-sheet-btn img {
+    width: 100%;
+    display: block;
+    border-radius: 1rem;
+}
+
+.price-sheet-btn:hover {
+    border-color: var(--gold);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px var(--gold-glow);
+}
+
+.price-sheet-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(11, 11, 13, 0.55);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.price-sheet-btn:hover .price-sheet-overlay { opacity: 1; }
+
+.price-sheet-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.price-sheet-lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.price-sheet-lightbox img {
+    max-width: 100%;
+    max-height: 92dvh;
+    border-radius: 0.5rem;
+    border: 1px solid var(--glass-border);
+}
+
+.lightbox-close {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+    color: var(--ivory);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 201;
+}
+
+.package-includes {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    font-size: 0.6875rem;
+    color: var(--muted);
+}
+
+.package-includes li {
+    padding: 0.3rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.package-includes li i {
+    color: var(--gold);
+    font-size: 0.5rem;
+    margin-top: 0.35rem;
+}
+
+.casting-category { margin-bottom: 1.75rem; }
+
+.casting-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.casting-card-compact {
+    display: flex;
+    border-radius: 1rem;
+}
+
+.casting-card-compact .casting-body {
+    flex: 1;
+    padding: 0.875rem 1rem;
+}
+
+.casting-card-compact .casting-name { font-size: 1.1rem; }
+.casting-card-compact .casting-desc { font-size: 0.6875rem; margin-bottom: 0.5rem; }
+.casting-card-compact .casting-upload-hint { display: none; }
+
+.movement-tagline {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 2rem 0;
+    font-style: italic;
+}
+
+.footer-contact {
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: center;
+}
+
+.footer-contact a {
+    font-size: 0.6875rem;
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.footer-hashtag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+}
+
 .casting-grid {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .casting-card {
@@ -436,12 +793,138 @@ body {
     margin-bottom: 0.75rem;
 }
 
+.casting-price-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.price-original {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--muted);
+    text-decoration: line-through;
+}
+
+.price-sale {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
 .casting-price {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--gold);
 }
+
+.sale-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    background: #c0392b;
+    color: white;
+    font-weight: 600;
+}
+
+.promo-tag {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    background: rgba(107, 76, 127, 0.85);
+    color: var(--ivory);
+    border: 1px solid rgba(191, 161, 90, 0.3);
+}
+
+.promo-inline {
+    font-size: 0.75rem;
+    color: var(--purple);
+    display: inline-block;
+    margin-top: 0.35rem;
+}
+
+.casting-upload-hint {
+    font-size: 0.6875rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+}
+
+.casting-card-featured {
+    border-color: rgba(191, 161, 90, 0.35);
+    box-shadow: 0 0 40px rgba(191, 161, 90, 0.08);
+}
+
+.field-hint {
+    color: var(--muted);
+    font-weight: 400;
+    font-size: 0.625rem;
+}
+
+.ref-photos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.ref-photo-item {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+}
+
+.ref-photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: 1px solid var(--gold);
+}
+
+.ref-photo-remove {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 50%;
+    border: none;
+    background: #e74c3c;
+    color: white;
+    font-size: 0.75rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.payment-status-box {
+    background: var(--ink);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.875rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.pay-status-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    padding: 0.35rem 0;
+}
+
+.pay-on { color: #2ecc71; }
+.pay-off { color: var(--muted); }
 
 .casting-spots {
     font-family: 'IBM Plex Mono', monospace;
