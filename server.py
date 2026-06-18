@@ -88,6 +88,18 @@ def _now():
     return datetime.now(timezone.utc).isoformat()
 
 
+def _effective_site_url():
+    """Use request host when SITE_URL is still localhost (tunnel / preview deploys)."""
+    base = SITE_URL.rstrip("/")
+    if "localhost" not in base and "127.0.0.1" not in base:
+        return base
+    host = request.headers.get("X-Forwarded-Host") or request.host
+    proto = request.headers.get("X-Forwarded-Proto", request.scheme)
+    if host and "localhost" not in host and "127.0.0.1" not in host:
+        return f"{proto}://{host}".rstrip("/")
+    return base
+
+
 @app.after_request
 def cors(resp):
     resp.headers["Access-Control-Allow-Origin"] = "*"
@@ -126,7 +138,7 @@ def health():
         "ok": True,
         "stripe": STRIPE_READY,
         "paypal": PAYPAL_READY,
-        "site_url": SITE_URL,
+        "site_url": _effective_site_url(),
     })
 
 
@@ -203,9 +215,10 @@ def stripe_checkout():
     if product_type == "review":
         metadata["submission_id"] = product.get("submissionId", "")
 
-    success_url = f"{SITE_URL}/success.html?session_id={{CHECKOUT_SESSION_ID}}&product={product_id}"
+    site = _effective_site_url()
+    success_url = f"{site}/success.html?session_id={{CHECKOUT_SESSION_ID}}&product={product_id}"
     if product_type == "review" and product.get("submissionId"):
-        success_url = f"{SITE_URL}/success.html?type=review&submission={product['submissionId']}&product={product_id}"
+        success_url = f"{site}/success.html?type=review&submission={product['submissionId']}&product={product_id}"
 
     try:
         session = stripe.checkout.Session.create(
@@ -225,7 +238,7 @@ def stripe_checkout():
             }],
             metadata=metadata,
             success_url=success_url,
-            cancel_url=f"{SITE_URL}/?cancelled=1#review-section",
+            cancel_url=f"{site}/?cancelled=1#review-section",
         )
         return jsonify({"url": session.url, "sessionId": session.id})
     except Exception as e:
@@ -278,11 +291,11 @@ def paypal_create():
             }],
             "application_context": {
                 "return_url": (
-                    f"{SITE_URL}/success.html?type=review&submission={product['submissionId']}&provider=paypal&product={product.get('id', '')}"
+                    f"{_effective_site_url()}/success.html?type=review&submission={product['submissionId']}&provider=paypal&product={product.get('id', '')}"
                     if product.get("type") == "review" and product.get("submissionId")
-                    else f"{SITE_URL}/success.html?provider=paypal&product={product.get('id', '')}"
+                    else f"{_effective_site_url()}/success.html?provider=paypal&product={product.get('id', '')}"
                 ),
-                "cancel_url": f"{SITE_URL}/?cancelled=1",
+                "cancel_url": f"{_effective_site_url()}/?cancelled=1",
                 "brand_name": "Briunka Light",
                 "shipping_preference": "NO_SHIPPING",
             },
