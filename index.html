@@ -62,7 +62,34 @@
             </form>
         </section>
 
+        <nav class="bio-jump" aria-label="On this page">
+            <a href="#direct-section">Direct</a>
+            <a href="#clips-section">Clips</a>
+            <a href="#apps-section">Apps</a>
+            <a href="#shop-section">Shop</a>
+            <a href="#casting-section">Be in the film</a>
+            <a href="#links-container">Links</a>
+        </nav>
+
         <div class="gold-divider"></div>
+
+        <section id="direct-section" class="delay-2" style="animation: fadeUp 0.6s ease 0.22s forwards; opacity:0">
+            <p class="section-label">Direct · what I can’t post everywhere</p>
+            <p class="casting-intro">When a platform cuts the caption, the real note lives here. This is the page I mean when I say “link in bio.”</p>
+            <div id="direct-board" class="direct-board"></div>
+        </section>
+
+        <section id="clips-section" class="delay-2" style="animation: fadeUp 0.6s ease 0.24s forwards; opacity:0">
+            <p class="section-label">Featured clips</p>
+            <p class="casting-intro">Trailers, teasers, and drops. Upload from Creator Studio or paste a TikTok / YouTube link.</p>
+            <div id="clips-rail" class="clips-rail"></div>
+        </section>
+
+        <section id="apps-section" class="delay-2" style="animation: fadeUp 0.6s ease 0.26s forwards; opacity:0">
+            <p class="section-label">Apps I built</p>
+            <p class="casting-intro">Tools and studios for fans, clients, and collaborators.</p>
+            <div id="apps-grid" class="app-grid"></div>
+        </section>
 
         <section id="links-container"></section>
 
@@ -142,6 +169,8 @@
         </section>
 
         <section id="shop-section" class="delay-4" style="display:none">
+            <p class="section-label">Shop</p>
+            <p class="casting-intro">Drops, digital goods, and merch. Checkout with Stripe or PayPal when keys are on.</p>
             <div class="product-grid" id="product-grid"></div>
         </section>
 
@@ -170,9 +199,12 @@
 
             <div class="studio-tabs">
                 <button class="studio-tab active" data-tab="profile" onclick="switchTab('profile')">Profile</button>
+                <button class="studio-tab" data-tab="direct" onclick="switchTab('direct')">Direct</button>
+                <button class="studio-tab" data-tab="clips" onclick="switchTab('clips')">Clips</button>
                 <button class="studio-tab" data-tab="links" onclick="switchTab('links')">Links</button>
                 <button class="studio-tab" data-tab="socials" onclick="switchTab('socials')">Socials</button>
-                <button class="studio-tab" data-tab="casting" onclick="switchTab('casting')">AI Movies</button>
+                <button class="studio-tab" data-tab="apps" onclick="switchTab('apps')">Apps</button>
+                <button class="studio-tab" data-tab="casting" onclick="switchTab('casting')">Be in film</button>
                 <button class="studio-tab" data-tab="products" onclick="switchTab('products')">Shop</button>
                 <button class="studio-tab" data-tab="payments" onclick="switchTab('payments')">Pay</button>
                 <button class="studio-tab" data-tab="livehost" onclick="switchTab('livehost')">Live</button>
@@ -192,6 +224,24 @@
                         <p>Upload your photo</p>
                         <input type="file" accept="image/*" onchange="uploadAvatar(this)">
                     </label>
+                </div>
+
+                <div class="studio-tab-content" id="tab-direct">
+                    <p class="studio-hint">Notes fans should see when you can’t say it on TikTok, IG, or YouTube. Pin the important one.</p>
+                    <div id="edit-direct-list"></div>
+                    <button class="add-btn" onclick="addDirectNote()"><i class="fa-solid fa-plus"></i> Add note</button>
+                </div>
+
+                <div class="studio-tab-content" id="tab-clips">
+                    <p class="studio-hint">Upload MP4 / MOV / WebM (max 50MB) or paste a YouTube / TikTok / Drive link.</p>
+                    <div id="edit-clips-list"></div>
+                    <button class="add-btn" onclick="addClip()"><i class="fa-solid fa-plus"></i> Add clip slot</button>
+                </div>
+
+                <div class="studio-tab-content" id="tab-apps">
+                    <p class="studio-hint">Showcase apps and studios you built. Price label can be Free, $__, or Coming soon.</p>
+                    <div id="edit-apps-list"></div>
+                    <button class="add-btn" onclick="addApp()"><i class="fa-solid fa-plus"></i> Add app</button>
                 </div>
 
                 <div class="studio-tab-content" id="tab-links">

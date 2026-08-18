@@ -46,7 +46,7 @@ const DEFAULT_CONFIG = {
             id: 'skool',
             title: 'Light Works Universe',
             subtitle: 'Join the Skool community — casting, lives & exclusive access',
-            url: 'https://www.skool.com/light-works-universe-5888',
+            url: 'join-skool.html',
             icon: 'fa-users',
             featured: true,
             visible: true,
@@ -118,7 +118,73 @@ const DEFAULT_CONFIG = {
             group: 'tools'
         }
     ],
-    products: [],
+    direct: [
+        {
+            id: 'direct-pin',
+            title: 'Read this here',
+            body: 'If a platform took the caption down, the real details live on this page — drops, casting windows, app links, and how to get in the films. This is what I mean when I say go to the link in my bio.',
+            pinned: true,
+            visible: true
+        },
+        {
+            id: 'direct-cast',
+            title: 'Be in the videos',
+            body: 'Fans can buy a cameo or featured role in Across the Stars. Upload your photos at checkout. We build your AI likeness into the episode. Cameo starts at $75.',
+            pinned: false,
+            visible: true
+        }
+    ],
+    clips: [],
+    apps: [
+        {
+            id: 'app-onyx',
+            name: 'ONYX',
+            blurb: 'Midjourney-style costume close-ups for Black aesthetics.',
+            url: 'http://127.0.0.1:8788',
+            badge: 'Studio',
+            priceLabel: 'Open',
+            visible: true
+        },
+        {
+            id: 'app-healing',
+            name: 'Healing Frequency Portal',
+            blurb: 'Meditations, Solfeggio tones, and sound baths.',
+            url: '../healing-frequency-portal/index.html',
+            badge: 'Sound',
+            priceLabel: 'Enter',
+            visible: true
+        },
+        {
+            id: 'app-canva',
+            name: 'Canva Product Studio',
+            blurb: 'Lookbooks, wardrobe, and digital product jobs.',
+            url: '../canva-product-studio/index.html',
+            badge: 'Maker',
+            priceLabel: 'Open',
+            visible: true
+        },
+        {
+            id: 'app-hitmaker',
+            name: 'Hitmaker Vault',
+            blurb: 'Beats, scores, Surprise Me, and Hook Maker.',
+            url: '../hitmaker-vault/index.html',
+            badge: 'Music',
+            priceLabel: 'Enter',
+            visible: true
+        }
+    ],
+    products: [
+        {
+            id: 'prod-drop-1',
+            name: 'Light Works Digital Drop',
+            price: 25,
+            type: 'digital',
+            url: '',
+            image: 'assets/images/briunka-belight.png',
+            description: 'Starter digital drop — rename this in Creator Studio and set your real file or checkout.',
+            visible: true
+        }
+    ],
     casting: [
         { id: 'ats-cameo', name: 'Cameo Spot', movie: 'Across the Stars', position: 'Cameo · 5–10 sec appearance', description: 'Appear in a future episode for 5–10 seconds. Upload your photos — we craft your AI likeness.', price: 75, category: 'cast', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/briunka-belight.png', visible: true },
         { id: 'ats-featured', name: 'Featured Character', movie: 'Across the Stars', position: 'Speaking Role', description: 'Speaking role with custom character design. Be seen. Be remembered.', price: 150, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/across-the-stars-price-sheet.jpg', visible: true },
@@ -168,8 +234,11 @@ function loadConfig() {
                 ...parsed,
                 socials: mergeSocials(parsed.socials),
                 links: mergeLinks(parsed.links),
-                products: parsed.products || DEFAULT_CONFIG.products,
-                casting: mergeCasting(parsed.casting)
+                products: (parsed.products && parsed.products.length) ? parsed.products : DEFAULT_CONFIG.products,
+                casting: mergeCasting(parsed.casting),
+                direct: parsed.direct || DEFAULT_CONFIG.direct,
+                clips: parsed.clips || DEFAULT_CONFIG.clips,
+                apps: parsed.apps || DEFAULT_CONFIG.apps
             };
         }
     } catch {
@@ -178,7 +247,8 @@ function loadConfig() {
     artIndex = config.heroArt || 0;
 }
 
-const SKOOL_URL = 'https://www.skool.com/light-works-universe-5888';
+const SKOOL_URL = 'join-skool.html';
+const SKOOL_DIRECT = 'https://www.skool.com/light-works-universe-5888';
 
 function mergeLinks(saved) {
     const links = saved?.length ? [...saved] : [...DEFAULT_CONFIG.links];
@@ -189,7 +259,7 @@ function mergeLinks(saved) {
     } else {
         const skool = links.find(l => l.id === 'skool');
         if (skool) {
-            skool.url = SKOOL_URL;
+            if (!skool.url || skool.url.includes('skool.com')) skool.url = SKOOL_URL;
             skool.featured = true;
             skool.visible = true;
             skool.style = 'skool';
@@ -324,6 +394,9 @@ function render() {
     }
 
     renderSocials();
+    renderDirect();
+    renderClips();
+    renderApps();
     renderLinks();
     renderCasting();
     renderProducts();
@@ -338,6 +411,86 @@ function renderFooter() {
             <a href="mailto:${email}">${email}</a>
             <span class="footer-hashtag">#ACROSSTHESTARS</span>`;
     }
+}
+
+function renderDirect() {
+    const board = document.getElementById('direct-board');
+    const section = document.getElementById('direct-section');
+    if (!board || !section) return;
+    const notes = (config.direct || []).filter(n => n.visible);
+    if (!notes.length) {
+        section.style.display = 'none';
+        return;
+    }
+    section.style.display = 'block';
+    const ordered = [...notes.filter(n => n.pinned), ...notes.filter(n => !n.pinned)];
+    board.innerHTML = ordered.map(n => `
+        <article class="direct-card ${n.pinned ? 'is-pinned' : ''}">
+            ${n.pinned ? '<span class="direct-pin">Pinned</span>' : ''}
+            <h3 class="serif">${esc(n.title)}</h3>
+            <p>${esc(n.body)}</p>
+        </article>
+    `).join('');
+}
+
+function youtubeId(url) {
+    const m = String(url || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{6,})/);
+    return m ? m[1] : '';
+}
+
+function renderClips() {
+    const rail = document.getElementById('clips-rail');
+    const section = document.getElementById('clips-section');
+    if (!rail || !section) return;
+    const clips = (config.clips || []).filter(c => c.visible && (c.src || c.url));
+    if (!clips.length) {
+        section.style.display = 'none';
+        return;
+    }
+    section.style.display = 'block';
+    rail.innerHTML = clips.map(c => {
+        const src = c.src || '';
+        const url = c.url || '';
+        const yt = youtubeId(url);
+        let media = '';
+        if (src) {
+            media = `<video src="${src}" ${c.poster ? `poster="${c.poster}"` : ''} controls playsinline preload="metadata"></video>`;
+        } else if (yt) {
+            media = `<iframe src="https://www.youtube.com/embed/${yt}" title="${esc(c.title || 'Clip')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        } else if (url) {
+            media = `<a class="clip-fallback" href="${url}" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i><span>Open clip</span></a>`;
+        }
+        return `
+            <figure class="clip-card">
+                <div class="clip-frame">${media}</div>
+                <figcaption>
+                    <strong>${esc(c.title || 'Clip')}</strong>
+                    ${c.caption ? `<span>${esc(c.caption)}</span>` : ''}
+                </figcaption>
+            </figure>`;
+    }).join('');
+}
+
+function renderApps() {
+    const grid = document.getElementById('apps-grid');
+    const section = document.getElementById('apps-section');
+    if (!grid || !section) return;
+    const apps = (config.apps || []).filter(a => a.visible);
+    if (!apps.length) {
+        section.style.display = 'none';
+        return;
+    }
+    section.style.display = 'block';
+    grid.innerHTML = apps.map(a => `
+        <a class="app-card" href="${a.url || '#'}" ${String(a.url || '').startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>
+            <div class="app-card-top">
+                <span class="app-badge">${esc(a.badge || 'App')}</span>
+                <span class="app-price">${esc(a.priceLabel || 'Open')}</span>
+            </div>
+            <h3 class="serif">${esc(a.name)}</h3>
+            <p>${esc(a.blurb || '')}</p>
+        </a>
+    `).join('');
 }
 
 function renderSocials() {
@@ -727,6 +880,9 @@ function populateStudio() {
     document.getElementById('edit-name').value = config.name;
     document.getElementById('edit-tagline').value = config.tagline;
     document.getElementById('edit-bio').value = config.bio;
+    renderEditDirect();
+    renderEditClips();
+    renderEditApps();
     renderEditLinks();
     renderEditSocials();
     renderEditProducts();
@@ -771,6 +927,138 @@ async function savePaymentKeys() {
         loadPaymentStatus();
     } catch (err) {
         showToast(err.message || 'Could not save keys');
+    }
+}
+
+function renderEditDirect() {
+    const el = document.getElementById('edit-direct-list');
+    if (!el) return;
+    el.innerHTML = (config.direct || []).map((n, i) => `
+        <div class="edit-item">
+            <div class="edit-item-header">
+                <span class="edit-item-title">${esc(n.title || 'Note')}</span>
+                <div class="edit-item-actions">
+                    <label class="toggle-check" style="font-size:0.625rem;color:var(--muted)">
+                        <input type="checkbox" data-direct-vis="${i}" ${n.visible ? 'checked' : ''}> Show
+                    </label>
+                    <label class="toggle-check" style="font-size:0.625rem;color:var(--muted)">
+                        <input type="checkbox" data-direct-pin="${i}" ${n.pinned ? 'checked' : ''}> Pin
+                    </label>
+                    <button class="icon-btn" onclick="removeDirectNote(${i})"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <input class="field-input" style="margin-bottom:0.5rem" data-direct-title="${i}" value="${esc(n.title || '')}" placeholder="Title">
+            <textarea class="field-input" data-direct-body="${i}" rows="4" placeholder="What you want them to know">${esc(n.body || '')}</textarea>
+        </div>
+    `).join('');
+}
+
+function renderEditClips() {
+    const el = document.getElementById('edit-clips-list');
+    if (!el) return;
+    el.innerHTML = (config.clips || []).map((c, i) => `
+        <div class="edit-item">
+            <div class="edit-item-header">
+                <span class="edit-item-title">${esc(c.title || 'Clip')}</span>
+                <div class="edit-item-actions">
+                    <label class="toggle-check" style="font-size:0.625rem;color:var(--muted)">
+                        <input type="checkbox" data-clip-vis="${i}" ${c.visible ? 'checked' : ''}> Show
+                    </label>
+                    <button class="icon-btn" onclick="removeClip(${i})"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <input class="field-input" style="margin-bottom:0.5rem" data-clip-title="${i}" value="${esc(c.title || '')}" placeholder="Title">
+            <input class="field-input" style="margin-bottom:0.5rem" data-clip-caption="${i}" value="${esc(c.caption || '')}" placeholder="Caption">
+            <input class="field-input" style="margin-bottom:0.5rem" data-clip-url="${i}" value="${esc(c.url || '')}" placeholder="YouTube / TikTok / Drive link">
+            <label class="upload-zone" style="padding:0.75rem;margin-bottom:0">
+                <i class="fa-solid fa-film" style="font-size:1rem;margin-bottom:0.25rem"></i>
+                <p style="font-size:0.6875rem">${c.src ? 'Replace uploaded clip' : 'Upload clip (MP4, MOV, WebM — 50MB)'}</p>
+                <input type="file" accept="video/mp4,video/quicktime,video/webm,.mp4,.mov,.webm" onchange="uploadClipFile(${i}, this)">
+            </label>
+            ${c.src ? `<p class="studio-hint" style="margin-top:0.4rem">Uploaded: ${esc(c.src)}</p>` : ''}
+        </div>
+    `).join('');
+}
+
+function renderEditApps() {
+    const el = document.getElementById('edit-apps-list');
+    if (!el) return;
+    el.innerHTML = (config.apps || []).map((a, i) => `
+        <div class="edit-item">
+            <div class="edit-item-header">
+                <span class="edit-item-title">${esc(a.name || 'App')}</span>
+                <div class="edit-item-actions">
+                    <label class="toggle-check" style="font-size:0.625rem;color:var(--muted)">
+                        <input type="checkbox" data-app-vis="${i}" ${a.visible ? 'checked' : ''}> Show
+                    </label>
+                    <button class="icon-btn" onclick="removeApp(${i})"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <input class="field-input" style="margin-bottom:0.5rem" data-app-name="${i}" value="${esc(a.name || '')}" placeholder="App name">
+            <textarea class="field-input" style="margin-bottom:0.5rem" data-app-blurb="${i}" rows="2" placeholder="What it is">${esc(a.blurb || '')}</textarea>
+            <input class="field-input" style="margin-bottom:0.5rem" data-app-url="${i}" value="${esc(a.url || '')}" placeholder="URL">
+            <div class="field-row">
+                <input class="field-input" data-app-badge="${i}" value="${esc(a.badge || '')}" placeholder="Badge (Studio, Music)">
+                <input class="field-input" data-app-price="${i}" value="${esc(a.priceLabel || '')}" placeholder="Open / $12 / Soon">
+            </div>
+        </div>
+    `).join('');
+}
+
+function addDirectNote() {
+    if (!config.direct) config.direct = [];
+    config.direct.push({ id: uid(), title: 'New note', body: '', pinned: false, visible: true });
+    renderEditDirect();
+}
+
+function removeDirectNote(idx) {
+    config.direct.splice(idx, 1);
+    renderEditDirect();
+}
+
+function addClip() {
+    if (!config.clips) config.clips = [];
+    config.clips.push({ id: uid(), title: 'New clip', caption: '', src: '', url: '', visible: true });
+    renderEditClips();
+}
+
+function removeClip(idx) {
+    config.clips.splice(idx, 1);
+    renderEditClips();
+}
+
+function addApp() {
+    if (!config.apps) config.apps = [];
+    config.apps.push({ id: uid(), name: 'New app', blurb: '', url: 'https://', badge: 'App', priceLabel: 'Open', visible: true });
+    renderEditApps();
+}
+
+function removeApp(idx) {
+    config.apps.splice(idx, 1);
+    renderEditApps();
+}
+
+async function uploadClipFile(idx, input) {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    if (file.size > 50 * 1024 * 1024) {
+        showToast('Clip too large — max 50MB. Use a link instead.');
+        return;
+    }
+    const form = new FormData();
+    form.append('file', file);
+    try {
+        const res = await fetch('/api/upload/clip', { method: 'POST', body: form });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Upload failed');
+        config.clips[idx].src = data.url;
+        if (!config.clips[idx].title || config.clips[idx].title === 'New clip') {
+            config.clips[idx].title = file.name.replace(/\.[^.]+$/, '');
+        }
+        renderEditClips();
+        showToast('Clip uploaded');
+    } catch (err) {
+        showToast(err.message || 'Start the bio server to upload clips');
     }
 }
 
@@ -1011,6 +1299,28 @@ function saveStudio() {
         if (!config.socials[i].shortLabel) config.socials[i].shortLabel = config.socials[i].label;
     });
 
+    if (!config.direct) config.direct = [];
+    if (!config.clips) config.clips = [];
+    if (!config.apps) config.apps = [];
+    if (!config.products) config.products = [];
+
+    document.querySelectorAll('[data-direct-vis]').forEach(cb => { config.direct[parseInt(cb.dataset.directVis)].visible = cb.checked; });
+    document.querySelectorAll('[data-direct-pin]').forEach(cb => { config.direct[parseInt(cb.dataset.directPin)].pinned = cb.checked; });
+    document.querySelectorAll('[data-direct-title]').forEach(inp => { config.direct[parseInt(inp.dataset.directTitle)].title = inp.value.trim(); });
+    document.querySelectorAll('[data-direct-body]').forEach(inp => { config.direct[parseInt(inp.dataset.directBody)].body = inp.value.trim(); });
+
+    document.querySelectorAll('[data-clip-vis]').forEach(cb => { config.clips[parseInt(cb.dataset.clipVis)].visible = cb.checked; });
+    document.querySelectorAll('[data-clip-title]').forEach(inp => { config.clips[parseInt(inp.dataset.clipTitle)].title = inp.value.trim(); });
+    document.querySelectorAll('[data-clip-caption]').forEach(inp => { config.clips[parseInt(inp.dataset.clipCaption)].caption = inp.value.trim(); });
+    document.querySelectorAll('[data-clip-url]').forEach(inp => { config.clips[parseInt(inp.dataset.clipUrl)].url = inp.value.trim(); });
+
+    document.querySelectorAll('[data-app-vis]').forEach(cb => { config.apps[parseInt(cb.dataset.appVis)].visible = cb.checked; });
+    document.querySelectorAll('[data-app-name]').forEach(inp => { config.apps[parseInt(inp.dataset.appName)].name = inp.value.trim(); });
+    document.querySelectorAll('[data-app-blurb]').forEach(inp => { config.apps[parseInt(inp.dataset.appBlurb)].blurb = inp.value.trim(); });
+    document.querySelectorAll('[data-app-url]').forEach(inp => { config.apps[parseInt(inp.dataset.appUrl)].url = inp.value.trim(); });
+    document.querySelectorAll('[data-app-badge]').forEach(inp => { config.apps[parseInt(inp.dataset.appBadge)].badge = inp.value.trim(); });
+    document.querySelectorAll('[data-app-price]').forEach(inp => { config.apps[parseInt(inp.dataset.appPrice)].priceLabel = inp.value.trim(); });
+
     document.querySelectorAll('[data-prod-vis]').forEach(cb => { config.products[parseInt(cb.dataset.prodVis)].visible = cb.checked; });
     document.querySelectorAll('[data-prod-name]').forEach(inp => { config.products[parseInt(inp.dataset.prodName)].name = inp.value.trim(); });
     document.querySelectorAll('[data-prod-price]').forEach(inp => { config.products[parseInt(inp.dataset.prodPrice)].price = parseFloat(inp.value) || 0; });
@@ -1031,9 +1341,40 @@ function saveStudio() {
     document.querySelectorAll('[data-cast-promo]').forEach(cb => { config.casting[parseInt(cb.dataset.castPromo)].promoVideo = cb.checked; });
 
     saveConfig();
+    persistSiteContent();
     render();
     toggleStudio();
     showToast('Your link page is live');
+}
+
+async function persistSiteContent() {
+    try {
+        await fetch('/api/site-content', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                direct: config.direct,
+                clips: config.clips,
+                apps: config.apps,
+                products: config.products,
+                links: config.links
+            })
+        });
+    } catch { /* local-only is fine */ }
+}
+
+async function hydrateFromServer() {
+    try {
+        const res = await fetch('/api/site-content');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.direct) config.direct = data.direct;
+        if (data.clips) config.clips = data.clips;
+        if (data.apps) config.apps = data.apps;
+        if (data.products && data.products.length) config.products = data.products;
+        saveConfig();
+        render();
+    } catch { /* stay on localStorage */ }
 }
 
 function resetDefaults() {
@@ -1052,6 +1393,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initParticles();
     initArtHero();
     await loadPaymentConfig();
+    await hydrateFromServer();
     render();
 
     if (new URLSearchParams(location.search).get('cancelled')) {

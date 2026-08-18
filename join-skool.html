@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Light Works Universe — Skool</title>
+    <meta name="referrer" content="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/briunka-link.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100dvh;
+            padding: 1.5rem;
+        }
+        .join-card {
+            text-align: center;
+            max-width: 22rem;
+            width: 100%;
+            padding: 2rem 1.5rem;
+            background: var(--surface);
+            border: 1px solid rgba(255, 210, 74, 0.35);
+            border-radius: 1.25rem;
+            box-shadow: 0 0 40px rgba(255, 210, 74, 0.08);
+        }
+        .join-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background: rgba(255, 210, 74, 0.15);
+            border: 1px solid rgba(255, 210, 74, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: #ffd24a;
+            font-size: 1.5rem;
+        }
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        p { color: var(--muted); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.25rem; }
+        .join-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #ffd24a, #c9a227);
+            color: var(--ink);
+            font-weight: 700;
+            font-size: 0.8125rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+        }
+        .join-btn:hover { filter: brightness(1.05); }
+        .back-link {
+            display: inline-block;
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-decoration: none;
+        }
+        .back-link:hover { color: var(--gold); }
+        .in-app-tip {
+            display: none;
+            margin-top: 1.25rem;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            background: rgba(255, 210, 74, 0.08);
+            border: 1px solid rgba(255, 210, 74, 0.25);
+            text-align: left;
+            font-size: 0.75rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+        .in-app-tip strong { color: #ffd24a; display: block; margin-bottom: 0.35rem; }
+        .copy-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        .copy-row input {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--glass-border);
+            background: var(--ink);
+            color: var(--ivory);
+            font-size: 0.6875rem;
+        }
+        .copy-btn {
+            padding: 0.5rem 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: var(--gold);
+            color: var(--ink);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="join-card">
+        <div class="join-icon"><i class="fa-solid fa-users"></i></div>
+        <h1 class="serif">Light Works Universe</h1>
+        <p>Join Briunka's Skool community — private lives, casting access & exclusive creator discussions.</p>
+        <button type="button" class="join-btn" id="join-btn">Continue to Skool</button>
+        <a href="index.html" class="back-link">← Back to Bio</a>
+
+        <div class="in-app-tip" id="in-app-tip">
+            <strong>Seeing a 403 error?</strong>
+            You're in an in-app browser (TikTok, Instagram, etc.). Skool blocks these.
+            Tap <strong>⋯</strong> or <strong>•••</strong> → <strong>Open in Browser</strong>, then try again.
+            <div class="copy-row">
+                <input id="skool-url" readonly value="https://www.skool.com/light-works-universe-5888">
+                <button type="button" class="copy-btn" id="copy-btn">Copy</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SKOOL = 'https://www.skool.com/light-works-universe-5888';
+
+        function isInAppBrowser() {
+            const ua = navigator.userAgent || '';
+            return /FBAN|FBAV|Instagram|TikTok|Twitter|Line\/|MicroMessenger|Snapchat/i.test(ua)
+                || (ua.includes('Mobile') && !/Chrome|Safari|Firefox/i.test(ua) && /AppleWebKit/i.test(ua));
+        }
+
+        function goSkool() {
+            const a = document.createElement('a');
+            a.href = SKOOL;
+            a.rel = 'noopener noreferrer';
+            a.referrerPolicy = 'no-referrer';
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => { window.location.href = SKOOL; }, 300);
+        }
+
+        document.getElementById('join-btn').addEventListener('click', goSkool);
+
+        if (isInAppBrowser()) {
+            document.getElementById('in-app-tip').style.display = 'block';
+        }
+
+        document.getElementById('copy-btn').addEventListener('click', () => {
+            navigator.clipboard.writeText(SKOOL).then(() => {
+                document.getElementById('copy-btn').textContent = 'Copied!';
+                setTimeout(() => { document.getElementById('copy-btn').textContent = 'Copy'; }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

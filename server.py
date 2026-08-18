@@ -14,9 +14,12 @@ from werkzeug.utils import secure_filename
 
 load_dotenv()
 
-BASE_DIR = Path(__file__).parent
-DATA_DIR = BASE_DIR / "data"
-DATA_DIR.mkdir(exist_ok=True)
+BASE_DIR = Path(__file__).resolve().parent
+if os.environ.get("VERCEL"):
+    DATA_DIR = Path("/tmp/briunka-data")
+else:
+    DATA_DIR = BASE_DIR / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 SUBSCRIBERS_FILE = DATA_DIR / "subscribers.json"
 ORDERS_FILE = DATA_DIR / "orders.json"
@@ -45,6 +48,9 @@ TWILIO_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "")
 TWILIO_FROM = os.getenv("TWILIO_PHONE_NUMBER", "")
 
 NOTIFY_LOG = DATA_DIR / "notification-log.json"
+SITE_CONTENT_FILE = DATA_DIR / "site-content.json"
+CLIPS_DIR = UPLOADS_DIR / "clips"
+CLIPS_DIR.mkdir(exist_ok=True)
 
 def _is_real_key(val):
     if not val or len(val) < 8:
@@ -119,9 +125,18 @@ def _check_admin_pin():
     return pin == LIVE_ADMIN_PIN
 
 
+SKOOL_COMMUNITY_URL = "https://www.skool.com/light-works-universe-5888"
+
+
 @app.route("/")
 def index():
     return send_from_directory(BASE_DIR, "index.html")
+
+
+@app.route("/go/skool")
+def go_skool():
+    from flask import redirect
+    return redirect(SKOOL_COMMUNITY_URL, code=302)
 
 
 @app.route("/<path:path>")
@@ -844,6 +859,53 @@ def save_keys():
         })
     except OSError as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/site-content", methods=["GET", "POST", "OPTIONS"])
+def site_content():
+    if request.method == "OPTIONS":
+        return "", 204
+    if request.method == "GET":
+        return jsonify(_read_json(SITE_CONTENT_FILE, {}))
+    body = request.get_json(silent=True) or {}
+    allowed = ("direct", "clips", "apps", "products", "links")
+    current = _read_json(SITE_CONTENT_FILE, {})
+    for key in allowed:
+        if key in body and isinstance(body[key], list):
+            current[key] = body[key]
+    current["updated_at"] = _now()
+    _write_json(SITE_CONTENT_FILE, current)
+    return jsonify({"ok": True})
+
+
+@app.route("/api/upload/clip", methods=["POST", "OPTIONS"])
+def upload_clip():
+    if request.method == "OPTIONS":
+        return "", 204
+    video = request.files.get("file")
+    if not video or not video.filename:
+        return jsonify({"error": "No video file"}), 400
+    ext = Path(video.filename).suffix.lower()
+    if ext not in ALLOWED_VIDEO_EXT:
+        return jsonify({"error": f"Use {', '.join(sorted(ALLOWED_VIDEO_EXT))}"}), 400
+    video.seek(0, 2)
+    size = video.tell()
+    video.seek(0)
+    if size > MAX_VIDEO_BYTES:
+        return jsonify({"error": "Video too large (max 50MB). Paste a link instead."}), 400
+    safe = secure_filename(video.filename) or f"clip{ext}"
+    fname = f"{uuid.uuid4().hex[:10]}_{safe}"
+    dest = CLIPS_DIR / fname
+    video.save(dest)
+    return jsonify({"ok": True, "url": f"/media/clips/{fname}", "name": fname})
+
+
+@app.route("/media/clips/<path:name>")
+def serve_clip(name):
+    path = (CLIPS_DIR / Path(name).name).resolve()
+    if not str(path).startswith(str(CLIPS_DIR.resolve())) or not path.is_file():
+        return jsonify({"error": "Not found"}), 404
+    return send_from_directory(CLIPS_DIR, path.name)
 
 
 @app.route("/api/webhook/stripe", methods=["POST"])

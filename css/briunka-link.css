@@ -1387,13 +1387,15 @@ body {
 .studio-close:hover { color: var(--ivory); }
 
 .studio-tabs {
+    flex-wrap: wrap;
     display: flex;
     border-bottom: 1px solid var(--glass-border);
     overflow-x: auto;
 }
 
 .studio-tab {
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 4.5rem;
     padding: 0.75rem 0.5rem;
     background: none;
     border: none;
@@ -1811,3 +1813,144 @@ body {
 .studio-body::-webkit-scrollbar { width: 4px; }
 .studio-body::-webkit-scrollbar-track { background: transparent; }
 .studio-body::-webkit-scrollbar-thumb { background: rgba(191, 161, 90, 0.3); border-radius: 4px; }
+
+/* ── Bio jump + Direct + Clips + Apps ── */
+.bio-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    margin: 0.25rem 0 0.5rem;
+}
+.bio-jump a {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--glass-border);
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+}
+.bio-jump a:hover { color: var(--gold); border-color: var(--gold); }
+
+.direct-board { display: flex; flex-direction: column; gap: 0.75rem; }
+.direct-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 1rem 1.1rem 1.1rem;
+    backdrop-filter: blur(16px);
+}
+.direct-card.is-pinned { border-color: rgba(191, 161, 90, 0.45); }
+.direct-pin {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.35rem;
+}
+.direct-card h3 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+}
+.direct-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+}
+
+.clips-rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(220px, 78%);
+    gap: 0.85rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scroll-snap-type: x mandatory;
+}
+.clip-card { margin: 0; scroll-snap-align: start; }
+.clip-frame {
+    aspect-ratio: 9/16;
+    background: #0a0a0c;
+    border: 1px solid var(--glass-border);
+    border-radius: 0.9rem;
+    overflow: hidden;
+}
+.clip-frame video, .clip-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+    display: block;
+}
+.clip-fallback {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    gap: 0.4rem;
+    color: var(--gold);
+    text-decoration: none;
+    background: var(--surface);
+}
+.clip-card figcaption {
+    padding: 0.55rem 0.15rem 0;
+}
+.clip-card figcaption strong {
+    display: block;
+    font-size: 0.88rem;
+}
+.clip-card figcaption span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-top: 0.15rem;
+}
+
+.app-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+.app-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 0.9rem;
+    min-height: 8.5rem;
+}
+.app-card:hover { border-color: rgba(191, 161, 90, 0.45); }
+.app-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.app-badge {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+.app-price { font-size: 0.75rem; color: var(--gold-light); }
+.app-card h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+.app-card p {
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+@media (max-width: 420px) {
+    .app-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" },
+    { "source": "/media/(.*)", "destination": "/api" }
+  ],
+  "functions": {
+    "api/index.py": {
+      "excludeFiles": "{assets,data,css,js}/**"
+    }
+  }
+}
