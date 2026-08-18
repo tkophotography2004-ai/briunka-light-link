@@ -16,19 +16,19 @@ const PACKAGE_INCLUDES = [
 ];
 
 const ARTWORK = [
-    { src: 'assets/images/briunka-belight.png', label: 'Be Light' },
-    { src: 'assets/images/briunka-halo.png', label: 'Halo' },
-    { src: 'assets/images/briunka-city.png', label: 'City Lights' },
-    { src: 'assets/images/briunka-stairs.png', label: 'Ascension' },
-    { src: 'assets/images/briunka-jungle.png', label: 'Jungle Queen' },
-    { src: 'assets/images/briunka-cross.png', label: 'Divine Cross' }
+    { src: 'assets/images/briunka-belight.jpg', label: 'Be Light' },
+    { src: 'assets/images/briunka-halo.jpg', label: 'Halo' },
+    { src: 'assets/images/briunka-city.jpg', label: 'City Lights' },
+    { src: 'assets/images/briunka-stairs.jpg', label: 'Ascension' },
+    { src: 'assets/images/briunka-jungle.jpg', label: 'Jungle Queen' },
+    { src: 'assets/images/briunka-cross.jpg', label: 'Divine Cross' }
 ];
 
 const DEFAULT_CONFIG = {
     name: 'Briunka Light',
     tagline: 'Across the Stars · Light Works Entertainment',
     bio: 'The First Community Powered AI Cinematic Universe. Be part of history. Build the future. Leave a legacy.',
-    avatar: 'assets/images/briunka-halo.png',
+    avatar: 'assets/images/briunka-halo.jpg',
     heroArt: 0,
     priceSheet: 'assets/images/across-the-stars-price-sheet.jpg',
     contactEmail: 'acrossthestars2026@gmail.com',
@@ -180,18 +180,18 @@ const DEFAULT_CONFIG = {
             price: 25,
             type: 'digital',
             url: '',
-            image: 'assets/images/briunka-belight.png',
+            image: 'assets/images/briunka-belight.jpg',
             description: 'Starter digital drop — rename this in Creator Studio and set your real file or checkout.',
             visible: true
         }
     ],
     casting: [
-        { id: 'ats-cameo', name: 'Cameo Spot', movie: 'Across the Stars', position: 'Cameo · 5–10 sec appearance', description: 'Appear in a future episode for 5–10 seconds. Upload your photos — we craft your AI likeness.', price: 75, category: 'cast', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/briunka-belight.png', visible: true },
+        { id: 'ats-cameo', name: 'Cameo Spot', movie: 'Across the Stars', position: 'Cameo · 5–10 sec appearance', description: 'Appear in a future episode for 5–10 seconds. Upload your photos — we craft your AI likeness.', price: 75, category: 'cast', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/briunka-belight.jpg', visible: true },
         { id: 'ats-featured', name: 'Featured Character', movie: 'Across the Stars', position: 'Speaking Role', description: 'Speaking role with custom character design. Be seen. Be remembered.', price: 150, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/across-the-stars-price-sheet.jpg', visible: true },
-        { id: 'ats-villain', name: 'Villain Package', movie: 'Across the Stars', position: 'Legendary Villain', description: 'Become a legendary villain. We\'ll create you. We\'ll defeat you. You\'ll be unforgettable.', price: 250, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-city.png', visible: true },
-        { id: 'ats-royal', name: 'Royal Family Package', movie: 'Across the Stars', position: 'Royal Family', description: 'Join the Royal Family — Kings, Queens, Princes, Princesses. Legacy is yours.', price: 300, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-halo.png', visible: true },
+        { id: 'ats-villain', name: 'Villain Package', movie: 'Across the Stars', position: 'Legendary Villain', description: 'Become a legendary villain. We\'ll create you. We\'ll defeat you. You\'ll be unforgettable.', price: 250, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-city.jpg', visible: true },
+        { id: 'ats-royal', name: 'Royal Family Package', movie: 'Across the Stars', position: 'Royal Family', description: 'Join the Royal Family — Kings, Queens, Princes, Princesses. Legacy is yours.', price: 300, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-halo.jpg', visible: true },
         { id: 'ats-exec', name: 'Executive Producer', movie: 'Across the Stars', position: 'Executive Producer Credit', description: 'Executive Producer credit, VIP access, early previews, and exclusive behind-the-scenes.', price: 500, category: 'cast', requiresPhotos: false, type: 'casting', image: 'assets/images/across-the-stars-price-sheet.jpg', visible: true },
-        { id: 'ats-recurring', name: 'Recurring Character', movie: 'Across the Stars', position: 'Multi-Episode Role', description: 'Become a recurring character across multiple episodes. Your story. Your legacy.', price: 750, priceLabel: '$750+', category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-stairs.png', visible: true },
+        { id: 'ats-recurring', name: 'Recurring Character', movie: 'Across the Stars', position: 'Multi-Episode Role', description: 'Become a recurring character across multiple episodes. Your story. Your legacy.', price: 750, priceLabel: '$750+', category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-stairs.jpg', visible: true },
 
         { id: 'ats-char-build', name: '1-on-1 Character Building', movie: 'Across the Stars', position: 'With Briunka Light', description: 'Private session to build your character with Briunka Light.', price: 100, category: 'addon', requiresPhotos: true, type: 'casting', image: '', visible: true },
         { id: 'ats-scene', name: 'Custom Scene Upgrade', movie: 'Across the Stars', position: 'Enhanced Visuals', description: 'Custom scenes with enhanced visuals for your character.', price: 150, priceLabel: '$150+', category: 'addon', requiresPhotos: true, type: 'casting', image: '', visible: true },
