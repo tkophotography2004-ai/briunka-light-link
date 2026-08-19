@@ -9,3 +9,7 @@ _vercel_parts/
 _vercel_files.json
 _deploy_text_only.json
 assets/deploy/
+_go_public.py
+_wait_pages.py
+_pages_debug.py
+_strip_public.py
