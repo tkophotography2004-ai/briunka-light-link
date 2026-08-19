@@ -36,13 +36,21 @@ const YT = 'https://www.youtube.com/@briunkalightofficial';
 const TT_MAIN = 'https://www.tiktok.com/@briunkalightofficial';
 const TT_FILM = 'https://www.tiktok.com/@lightworksunivers';
 
+const AFFILIATES = [
+    { id: 'amazon', title: 'Amazon Picks', subtitle: 'Gear, books & tools I use on set', url: 'https://www.amazon.com', icon: 'fa-amazon', brand: true },
+    { id: 'canva', title: 'Canva Pro', subtitle: 'Lookbooks, thumbnails & campaign graphics', url: 'https://www.canva.com', icon: 'fa-palette' },
+    { id: 'capcut', title: 'CapCut', subtitle: 'The editor I use for shorts and teasers', url: 'https://www.capcut.com', icon: 'fa-scissors' },
+    { id: 'epidemic', title: 'Epidemic Sound', subtitle: 'Cinematic beds & licensed tracks', url: 'https://www.epidemicsound.com', icon: 'fa-headphones' },
+    { id: 'adobe', title: 'Adobe Express', subtitle: 'Post, story, and poster templates', url: 'https://www.adobe.com/express/', icon: 'fa-pen-nib' }
+];
+
 const HIGHLIGHTS = [
     {
         id: 'songs',
         label: 'Song Highlights',
         intro: 'Original music and cinematic scores for brands. License a track, place a song in an episode, or sponsor a release.',
         cta: 'Book song & music placement',
-        ctaHref: '#offer-music',
+        ctaHref: 'prices.html#offer-music',
         items: [
             { title: 'Be Light', blurb: 'Anthem energy for wellness, lifestyle, and launch campaigns.', image: 'assets/images/briunka-belight.jpg', url: YT, urlLabel: 'Listen', bookId: 'ats-song-place', bookLabel: 'Place a song · $100' },
             { title: 'Halo', blurb: 'Spiritual luxury sound for beauty, jewelry, and faith brands.', image: 'assets/images/briunka-halo.jpg', url: YT, urlLabel: 'Listen', bookId: 'ats-artist-spot', bookLabel: 'Artist spotlight · $200' },
@@ -55,7 +63,7 @@ const HIGHLIGHTS = [
         label: 'Episode Highlights',
         intro: 'Across the Stars scenes brands can sponsor, cameo in, or place product inside. Built for brand deals, not just fans.',
         cta: 'Sponsor or appear in an episode',
-        ctaHref: '#offer-cast',
+        ctaHref: 'prices.html#offer-cast',
         items: [
             { title: 'Across the Stars', blurb: 'Flagship episode energy. Title-card and opening-scene brand placement.', image: 'assets/images/briunka-belight.jpg', url: TT_FILM, urlLabel: 'Watch', bookId: 'ats-cameo', bookLabel: 'Cameo · $75' },
             { title: 'The Messenger', blurb: 'Divine / luxury tone for beauty, fragrance, and jewelry integrations.', image: 'assets/images/briunka-cross.jpg', url: TT_FILM, urlLabel: 'Watch', bookId: 'ats-featured', bookLabel: 'Featured role · $150' },
@@ -68,7 +76,7 @@ const HIGHLIGHTS = [
         label: 'Business Highlights',
         intro: 'Cinematic business films, grand openings, and in-universe storefronts. Made to land brand and company deals.',
         cta: 'Book a business film',
-        ctaHref: '#offer-business',
+        ctaHref: 'prices.html#offer-business',
         items: [
             { title: 'Luxury Business Promo', blurb: '15–30 second cinematic promo for a company, service, or founder.', image: 'assets/images/briunka-halo.jpg', url: YT, urlLabel: 'Watch style', bookId: 'ats-biz-promo', bookLabel: 'Business promo · $150' },
             { title: 'Grand Opening', blurb: 'Announcement film, social teaser, and launch visuals for a new location.', image: 'assets/images/briunka-stairs.jpg', url: YT, urlLabel: 'Watch style', bookId: 'ats-grand-open', bookLabel: 'Grand opening · $500' },
@@ -81,7 +89,7 @@ const HIGHLIGHTS = [
         label: 'Product Highlights',
         intro: 'Product ads, launch drops, and in-story merch placements. Show brands exactly where their item can live.',
         cta: 'Advertise a product',
-        ctaHref: '#offer-ads',
+        ctaHref: 'prices.html#offer-ads',
         items: [
             { title: 'Product Spotlight', blurb: 'A 15-second cinematic ad for one hero product, posted on Light Works channels.', image: 'assets/images/briunka-belight.jpg', url: TT_MAIN, urlLabel: 'See the look', bookId: 'ad-spotlight', bookLabel: 'Spotlight ad · $75' },
             { title: 'Launch Drop', blurb: 'Teaser, launch video, and stories so a product drop actually gets seen.', image: 'assets/images/briunka-jungle.jpg', url: TT_MAIN, urlLabel: 'See the look', bookId: 'ad-launch', bookLabel: 'Launch campaign · $200' },
@@ -135,7 +143,7 @@ const DEFAULT_CONFIG = {
             id: 'ats',
             title: 'Across the Stars — Join the Cast',
             subtitle: 'Cameo from $75 · Be part of the AI cinematic universe',
-            url: '#offer-cast',
+            url: 'prices.html#offer-cast',
             icon: 'fa-star',
             visible: true,
             group: 'experiences'
@@ -144,7 +152,7 @@ const DEFAULT_CONFIG = {
             id: 'ads',
             title: 'Advertise Your Product',
             subtitle: 'Cinematic ads from $75 · launches, drops & in-universe placement',
-            url: '#offer-ads',
+            url: 'prices.html#offer-ads',
             icon: 'fa-bullhorn',
             visible: true,
             group: 'experiences'
@@ -153,7 +161,7 @@ const DEFAULT_CONFIG = {
             id: 'authors',
             title: 'Book Release Marketing',
             subtitle: 'Trailers, launch campaigns & author placement — from $100',
-            url: '#offer-authors',
+            url: 'prices.html#offer-authors',
             icon: 'fa-book-open',
             visible: true,
             group: 'experiences'
@@ -164,7 +172,7 @@ const DEFAULT_CONFIG = {
             subtitle: 'Place, license, or sponsor a track — from $25',
             url: '#highlight-songs',
             icon: 'fa-music',
-            visible: true,
+            visible: false,
             group: 'experiences'
         },
         {
@@ -173,7 +181,7 @@ const DEFAULT_CONFIG = {
             subtitle: 'Sponsor a scene or place your brand in Across the Stars',
             url: '#highlight-episodes',
             icon: 'fa-clapperboard',
-            visible: true,
+            visible: false,
             group: 'experiences'
         },
         {
@@ -182,7 +190,7 @@ const DEFAULT_CONFIG = {
             subtitle: 'Cinematic company films & in-universe storefronts',
             url: '#highlight-business',
             icon: 'fa-briefcase',
-            visible: true,
+            visible: false,
             group: 'experiences'
         },
         {
@@ -191,14 +199,14 @@ const DEFAULT_CONFIG = {
             subtitle: 'Product ads, launches & on-screen merch placement',
             url: '#highlight-products',
             icon: 'fa-gem',
-            visible: true,
+            visible: false,
             group: 'experiences'
         },
         {
             id: 'pricesheet',
-            title: 'Full Price List',
-            subtitle: 'View all packages, ads, books, music & business offers',
-            url: '#price-sheet-section',
+            title: 'Across the Stars Prices',
+            subtitle: 'Full rate sheet — casting, ads, books, music & business',
+            url: 'prices.html',
             icon: 'fa-list',
             visible: true,
             group: 'experiences'
@@ -531,6 +539,7 @@ function render() {
     }
 
     renderSocials();
+    renderAffiliates();
     renderDirect();
     renderClips();
     renderApps();
@@ -631,8 +640,31 @@ function renderApps() {
     `).join('');
 }
 
+function renderAffiliates() {
+    const el = document.getElementById('affiliate-list');
+    const section = document.getElementById('affiliate-section');
+    if (!el || !section) return;
+    const items = AFFILIATES.filter(a => a.url);
+    if (!items.length) {
+        section.style.display = 'none';
+        return;
+    }
+    section.style.display = 'block';
+    el.innerHTML = items.map(a => `
+        <a class="affiliate-card" href="${a.url}" target="_blank" rel="sponsored nofollow noopener">
+            <span class="affiliate-icon"><i class="${a.brand ? 'fa-brands' : 'fa-solid'} ${a.icon}"></i></span>
+            <span class="affiliate-text">
+                <span class="affiliate-title">${esc(a.title)}</span>
+                <span class="affiliate-sub">${esc(a.subtitle)}</span>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square affiliate-out"></i>
+        </a>
+    `).join('');
+}
+
 function renderSocials() {
     const el = document.getElementById('social-bar');
+    if (!el) return;
     const visible = (config.socials || []).filter(s => s.visible);
     el.innerHTML = visible.map(s => {
         const labeled = s.icon === 'fa-tiktok' || s.id === 'yt' || s.id === 'fb';
@@ -647,12 +679,15 @@ function renderSocials() {
 }
 
 function renderLinks() {
+    const featuredEl = document.getElementById('featured-section');
+    const container = document.getElementById('links-container');
+    if (!featuredEl || !container) return;
+
     const featured = config.links.find(l => l.featured && l.visible);
-    document.getElementById('featured-section').innerHTML = featured
+    featuredEl.innerHTML = featured
         ? buildLinkCard(featured, true, 2) : '';
 
     const groups = ['experiences', 'tools'];
-    const container = document.getElementById('links-container');
     container.innerHTML = '';
 
     groups.forEach((group, gi) => {
@@ -746,9 +781,9 @@ function renderPriceSheet() {
 function renderCasting() {
     const section = document.getElementById('casting-section');
     const grid = document.getElementById('casting-grid');
-    const roles = (config.casting || []).filter(c => c.visible);
-
     renderPriceSheet();
+    if (!section || !grid) return;
+    const roles = (config.casting || []).filter(c => c.visible);
 
     if (!roles.length) {
         section.style.display = 'none';
@@ -824,13 +859,15 @@ function closePriceSheetLightbox() {
 
 function renderProducts() {
     const el = document.getElementById('product-grid');
+    const section = document.getElementById('shop-section');
+    if (!el || !section) return;
     const products = (config.products || []).filter(p => p.visible);
 
     if (!products.length) {
-        document.getElementById('shop-section').style.display = 'none';
+        section.style.display = 'none';
         return;
     }
-    document.getElementById('shop-section').style.display = 'block';
+    section.style.display = 'block';
 
     el.innerHTML = products.map((p, i) => {
         const imgContent = p.image
@@ -1611,6 +1648,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadPaymentConfig();
     if (!isPublicHost()) await hydrateFromServer();
     render();
+    if (location.hash) {
+        requestAnimationFrame(() => {
+            document.querySelector(location.hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
 
     if (new URLSearchParams(location.search).get('cancelled')) {
         showToast('Checkout cancelled');

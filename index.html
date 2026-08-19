@@ -46,6 +46,12 @@
 
         <div class="art-dots" id="art-dots"></div>
 
+        <section id="affiliate-section" class="affiliate-section delay-1" style="animation: fadeUp 0.6s ease 0.08s forwards; opacity:0">
+            <p class="section-label">Affiliate links</p>
+            <p class="casting-intro">Tools and shops I actually use. Some links are affiliate — I may earn a commission at no extra cost to you.</p>
+            <div id="affiliate-list" class="affiliate-list"></div>
+        </section>
+
         <!-- Skool — first CTA -->
         <section id="featured-section" class="delay-1" style="animation: fadeUp 0.6s ease 0.1s forwards; opacity:0"></section>
 
@@ -68,13 +74,12 @@
         </section>
 
         <nav class="bio-jump" aria-label="On this page">
+            <a href="#affiliate-section">Affiliates</a>
             <a href="#highlight-songs">Songs</a>
             <a href="#highlight-episodes">Episodes</a>
             <a href="#highlight-business">Business</a>
             <a href="#highlight-products">Products</a>
-            <a href="#offer-ads">Advertise</a>
-            <a href="#offer-authors">Authors</a>
-            <a href="#offer-cast">Be in the film</a>
+            <a href="prices.html">Prices</a>
         </nav>
 
         <div class="gold-divider"></div>
@@ -91,31 +96,12 @@
         <section id="apps-section" style="display:none"><div id="apps-grid"></div></section>
         <section id="review-section" style="display:none"></section>
 
-        <div class="gold-divider"></div>
-
-        <!-- Price Sheet -->
-        <section id="price-sheet-section" class="delay-3" style="animation: fadeUp 0.6s ease 0.3s forwards; opacity:0">
-            <p class="section-label">Across the Stars</p>
-            <p class="casting-intro">The First Community Powered AI Cinematic Universe. <strong>Be part of history.</strong> Tap to view the full price list.</p>
-            <button class="price-sheet-btn" onclick="openPriceSheetLightbox()">
-                <img id="price-sheet-img" src="assets/images/across-the-stars-price-sheet.jpg" alt="Across the Stars Price List">
-                <span class="price-sheet-overlay"><i class="fa-solid fa-expand"></i> View Full Price List</span>
-            </button>
-        </section>
-
-        <!-- Packages -->
-        <section id="casting-section" class="delay-4" style="animation: fadeUp 0.6s ease 0.35s forwards; opacity:0">
-            <p class="section-label">Packages & Opportunities</p>
-            <p class="casting-intro">Join the film, advertise a product, or launch a book. Upload <strong>your photos or cover art</strong> after checkout — we craft the cinematic piece.</p>
-            <ul id="package-includes" class="package-includes"></ul>
-            <div class="casting-grid" id="casting-grid"></div>
-        </section>
-
-        <section id="shop-section" class="delay-4" style="display:none">
-            <p class="section-label">Shop</p>
-            <p class="casting-intro">Drops, digital goods, and merch. Checkout with Stripe or PayPal when keys are on.</p>
-            <div class="product-grid" id="product-grid"></div>
-        </section>
+        <a class="prices-jump" href="prices.html">
+            <span class="prices-jump-kicker">Across the Stars</span>
+            <span class="prices-jump-title serif">Full prices & packages</span>
+            <span class="prices-jump-sub">Casting, ads, books, music & business — open the rate sheet</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
 
         <p class="movement-tagline">This is more than a movie. This is a movement.<br>One universe. One community. Endless possibilities.</p>
 

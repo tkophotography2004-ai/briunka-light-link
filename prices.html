@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Across the Stars Prices — Briunka Light</title>
+    <meta name="description" content="Across the Stars rate sheet — casting, product ads, book marketing, music and business packages. Pay with Stripe.">
+    <meta property="og:title" content="Across the Stars Prices — Briunka Light">
+    <meta property="og:description" content="Casting from $75. Product ads, author campaigns, music and business packages.">
+    <meta property="og:image" content="assets/images/across-the-stars-price-sheet.jpg">
+    <meta name="theme-color" content="#0b0b0d">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/briunka-link.css">
+    <script>
+        if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+            document.documentElement.classList.add('public-launch');
+        }
+    </script>
+</head>
+<body data-page="prices">
+
+    <div class="art-hero" id="art-hero"></div>
+    <div class="hero-vignette"></div>
+    <div class="cosmic-glow"></div>
+    <div class="grain"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="page">
+        <header class="profile-header">
+            <div class="avatar-orbit">
+                <div class="avatar-ring">
+                    <div class="avatar-inner">
+                        <img id="avatar-img" src="assets/images/briunka-halo.jpg" alt="Briunka Light">
+                        <div class="avatar-fallback" id="avatar-fallback" style="display:none">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="brand-name serif" id="brand-name">Across the Stars</h1>
+            <p class="brand-tagline" id="brand-tagline">Price list · Light Works Entertainment</p>
+            <p class="brand-bio" id="brand-bio">Casting, product ads, book campaigns, music and business packages. Pay with Stripe.</p>
+        </header>
+
+        <div class="art-dots" id="art-dots"></div>
+
+        <p class="section-label" style="text-align:center"><a href="index.html" style="color:var(--gold);text-decoration:none">← Back to bio</a></p>
+
+        <nav class="bio-jump" aria-label="On this page">
+            <a href="#offer-cast">Cast</a>
+            <a href="#offer-ads">Advertise</a>
+            <a href="#offer-authors">Authors</a>
+            <a href="#offer-music">Music</a>
+            <a href="#offer-business">Business</a>
+        </nav>
+
+        <section id="price-sheet-section" class="delay-2" style="animation: fadeUp 0.6s ease 0.15s forwards; opacity:0">
+            <p class="section-label">Rate sheet</p>
+            <p class="casting-intro">The First Community Powered AI Cinematic Universe. <strong>Be part of history.</strong> Tap to view the full price list.</p>
+            <button class="price-sheet-btn" onclick="openPriceSheetLightbox()">
+                <img id="price-sheet-img" src="assets/images/across-the-stars-price-sheet.jpg" alt="Across the Stars Price List">
+                <span class="price-sheet-overlay"><i class="fa-solid fa-expand"></i> View Full Price List</span>
+            </button>
+        </section>
+
+        <section id="casting-section" class="delay-3" style="animation: fadeUp 0.6s ease 0.2s forwards; opacity:0">
+            <p class="section-label">Packages & Opportunities</p>
+            <p class="casting-intro">Join the film, advertise a product, or launch a book. Email <strong>photos or cover art</strong> after checkout — we craft the cinematic piece.</p>
+            <ul id="package-includes" class="package-includes"></ul>
+            <div class="casting-grid" id="casting-grid"></div>
+        </section>
+
+        <section id="shop-section" style="display:none">
+            <div class="product-grid" id="product-grid"></div>
+        </section>
+
+        <p class="movement-tagline">This is more than a movie. This is a movement.<br>One universe. One community. Endless possibilities.</p>
+
+        <footer class="footer">
+            <div id="footer-contact" class="footer-contact"></div>
+            <p class="footer-copy">© Light Works Entertainment · Across the Stars</p>
+        </footer>
+    </div>
+
+    <div id="studio-overlay" class="studio-overlay" style="display:none"></div>
+
+    <div class="checkout-overlay" id="checkout-overlay" onclick="if(event.target===this)closeCheckout()">
+        <div class="checkout-modal checkout-modal-wide">
+            <button class="checkout-close" onclick="closeCheckout()">×</button>
+            <img id="checkout-product-img" class="checkout-product-img" style="display:none" alt="">
+            <div class="checkout-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+            <h3 class="checkout-title serif" id="checkout-title">Product</h3>
+            <p class="checkout-desc" id="checkout-desc"></p>
+            <div id="casting-checkout-info" class="casting-checkout-info" style="display:none"></div>
+            <div class="checkout-price" id="checkout-price">$0</div>
+            <div class="checkout-form">
+                <input id="checkout-name" class="field-input" type="text" placeholder="Full name *" required>
+                <input id="checkout-email" class="field-input" type="email" placeholder="your@email.com" required>
+                <div id="casting-fields" style="display:none">
+                    <input id="checkout-phone" class="field-input" type="tel" placeholder="Phone (optional)">
+                    <input id="checkout-instagram" class="field-input" type="text" placeholder="Instagram handle (optional)">
+                    <textarea id="checkout-notes" class="field-input" rows="2" placeholder="Notes"></textarea>
+                    <label class="field-label">Your Photos <span class="field-hint">(optional here — you can also email them after payment)</span></label>
+                    <label class="upload-zone upload-zone-compact">
+                        <i class="fa-solid fa-images"></i>
+                        <p>Upload photos, or email them after you pay</p>
+                        <input id="checkout-ref-photo" type="file" accept="image/*" multiple onchange="previewRefPhoto(this)">
+                    </label>
+                    <div id="ref-photos-grid" class="ref-photos-grid"></div>
+                </div>
+            </div>
+            <div class="checkout-actions" id="payment-buttons"></div>
+        </div>
+    </div>
+
+    <div class="price-sheet-lightbox" id="price-sheet-lightbox" onclick="if(event.target===this)closePriceSheetLightbox()">
+        <button class="lightbox-close" onclick="closePriceSheetLightbox()">×</button>
+        <img src="assets/images/across-the-stars-price-sheet.jpg" alt="Across the Stars Full Price List">
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <script src="js/payments.js"></script>
+    <script src="js/briunka-link.js"></script>
+</body>
+</html>
