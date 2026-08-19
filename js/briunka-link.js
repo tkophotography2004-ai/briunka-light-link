@@ -669,18 +669,33 @@ function renderAffiliates() {
     });
 }
 
+function socialBrand(s) {
+    if (s.icon === 'fa-tiktok') return 'tiktok';
+    if (s.icon === 'fa-youtube') return 'youtube';
+    if (s.icon === 'fa-facebook') return 'facebook';
+    if (s.icon === 'fa-instagram') return 'instagram';
+    if (s.icon === 'fa-spotify') return 'spotify';
+    if (s.icon === 'fa-x-twitter') return 'x';
+    return 'other';
+}
+
 function renderSocials() {
     const el = document.getElementById('social-bar');
     if (!el) return;
     const visible = (config.socials || []).filter(s => s.visible);
-    el.innerHTML = visible.map(s => {
-        const labeled = s.icon === 'fa-tiktok' || s.id === 'yt' || s.id === 'fb';
-        const cls = labeled ? 'social-pill social-pill-labeled' : 'social-pill';
-        const label = labeled && s.shortLabel
-            ? `<span class="social-label">${esc(s.shortLabel)}</span>` : '';
+    el.innerHTML = visible.map((s, i) => {
+        const brand = socialBrand(s);
+        const featured = s.id === 'tt-main';
+        const handle = s.shortLabel || s.label;
+        const kind = s.icon === 'fa-tiktok' ? 'TikTok' : s.label;
         return `
-            <a href="${s.url}" target="_blank" rel="noopener" class="${cls}" title="${esc(s.label)}">
-                <i class="fa-brands ${s.icon}"></i>${label}
+            <a href="${s.url}" target="_blank" rel="noopener" class="social-tile social-${brand}${featured ? ' is-featured' : ''}" title="${esc(s.label)}" style="animation-delay:${0.05 * i}s">
+                <span class="social-tile-icon"><i class="fa-brands ${s.icon}"></i></span>
+                <span class="social-tile-copy">
+                    <span class="social-tile-handle">${esc(handle)}</span>
+                    <span class="social-tile-kind">${esc(kind)}</span>
+                </span>
+                <i class="fa-solid fa-arrow-up-right-from-square social-tile-out"></i>
             </a>`;
     }).join('');
 }
