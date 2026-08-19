@@ -42,9 +42,10 @@ const DEFAULT_CONFIG = {
         { id: 'tt-main', icon: 'fa-tiktok', url: 'https://www.tiktok.com/@briunkalightofficial', label: 'TikTok Main', shortLabel: '@briunkalightofficial', visible: true },
         { id: 'tt-backup', icon: 'fa-tiktok', url: 'https://www.tiktok.com/@briunkalightbackup', label: 'TikTok Backup', shortLabel: '@briunkalightbackup', visible: true },
         { id: 'tt-film', icon: 'fa-tiktok', url: 'https://www.tiktok.com/@lightworksunivers', label: 'Light Works Film', shortLabel: '@lightworksunivers', visible: true },
+        { id: 'yt', icon: 'fa-youtube', url: 'https://www.youtube.com/@briunkalightofficial', label: 'YouTube', shortLabel: 'YouTube', visible: true },
+        { id: 'fb', icon: 'fa-facebook', url: 'https://www.facebook.com/profile.php?id=61586469727677', label: 'Facebook', shortLabel: 'Facebook', visible: true },
         { id: 'ig', icon: 'fa-instagram', url: 'https://instagram.com', label: 'Instagram', shortLabel: 'Instagram', visible: false },
         { id: 'sp', icon: 'fa-spotify', url: 'https://open.spotify.com', label: 'Spotify', shortLabel: 'Spotify', visible: false },
-        { id: 'yt', icon: 'fa-youtube', url: 'https://youtube.com', label: 'YouTube', shortLabel: 'YouTube', visible: false },
         { id: 'x', icon: 'fa-x-twitter', url: 'https://x.com', label: 'X', shortLabel: 'X', visible: false }
     ],
     links: [
@@ -508,9 +509,9 @@ function renderSocials() {
     const el = document.getElementById('social-bar');
     const visible = (config.socials || []).filter(s => s.visible);
     el.innerHTML = visible.map(s => {
-        const isTikTok = s.icon === 'fa-tiktok';
-        const cls = isTikTok ? 'social-pill social-pill-labeled' : 'social-pill';
-        const label = isTikTok && s.shortLabel
+        const labeled = s.icon === 'fa-tiktok' || s.id === 'yt' || s.id === 'fb';
+        const cls = labeled ? 'social-pill social-pill-labeled' : 'social-pill';
+        const label = labeled && s.shortLabel
             ? `<span class="social-label">${esc(s.shortLabel)}</span>` : '';
         return `
             <a href="${s.url}" target="_blank" rel="noopener" class="${cls}" title="${esc(s.label)}">
