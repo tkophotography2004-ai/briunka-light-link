@@ -13,3 +13,4 @@ _go_public.py
 _wait_pages.py
 _pages_debug.py
 _strip_public.py
+_connect_stripe.py

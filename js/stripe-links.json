@@ -1,0 +1,154 @@
+{
+  "ats-cameo": {
+    "name": "Cameo Spot",
+    "url": "https://buy.stripe.com/4gM00j1W9apL2uF2Ku8og00",
+    "product": "prod_V6T1DKqQzRpHJh",
+    "price": null,
+    "amount": 7500,
+    "recurring": false
+  },
+  "ats-featured": {
+    "name": "Featured Character",
+    "url": "https://buy.stripe.com/fZu7sL9oBeG13yJ3Oy8og01",
+    "product": "prod_V6T1AksfSZQGYr",
+    "price": null,
+    "amount": 15000,
+    "recurring": false
+  },
+  "ats-villain": {
+    "name": "Villain Package",
+    "url": "https://buy.stripe.com/28EfZh7gt9lHednacW8og02",
+    "product": "prod_V6T1j0h1Xyp0yB",
+    "price": null,
+    "amount": 25000,
+    "recurring": false
+  },
+  "ats-royal": {
+    "name": "Royal Family Package",
+    "url": "https://buy.stripe.com/8x214n1W99lH3yJacW8og03",
+    "product": "prod_V6T1JiDdkKfPur",
+    "price": null,
+    "amount": 30000,
+    "recurring": false
+  },
+  "ats-exec": {
+    "name": "Executive Producer",
+    "url": "https://buy.stripe.com/dRm9ATbwJcxTedn70K8og04",
+    "product": "prod_V6T1hFXlTeUqWa",
+    "price": null,
+    "amount": 50000,
+    "recurring": false
+  },
+  "ats-recurring": {
+    "name": "Recurring Character",
+    "url": "https://buy.stripe.com/fZu28rasF1Tf8T3acW8og05",
+    "product": "prod_V6T10c5JpX7JLT",
+    "price": null,
+    "amount": 75000,
+    "recurring": false
+  },
+  "ats-char-build": {
+    "name": "1-on-1 Character Building",
+    "url": "https://buy.stripe.com/dRm5kDdERcxT0mx1Gq8og06",
+    "product": "prod_V6T1KPwCReg77Z",
+    "price": null,
+    "amount": 10000,
+    "recurring": false
+  },
+  "ats-scene": {
+    "name": "Custom Scene Upgrade",
+    "url": "https://buy.stripe.com/3cIeVd9oBeG12uFbh08og07",
+    "product": "prod_V6T13hxhEyb6Hx",
+    "price": null,
+    "amount": 15000,
+    "recurring": false
+  },
+  "ats-poster": {
+    "name": "Signed Digital Poster",
+    "url": "https://buy.stripe.com/8x228rgR3gO9d9j84O8og08",
+    "product": "prod_V6T1OJR2cfxAfb",
+    "price": null,
+    "amount": 5000,
+    "recurring": false
+  },
+  "ats-song-review": {
+    "name": "Song Review",
+    "url": "https://buy.stripe.com/5kQdR99oBeG1fhracW8og09",
+    "product": "prod_V6T11unilnniSM",
+    "price": null,
+    "amount": 2500,
+    "recurring": false
+  },
+  "ats-song-place": {
+    "name": "Song Placement",
+    "url": "https://buy.stripe.com/5kQcN51W97dz2uFdp88og0a",
+    "product": "prod_V6T1trsmnl2HEY",
+    "price": null,
+    "amount": 10000,
+    "recurring": false
+  },
+  "ats-artist-spot": {
+    "name": "Featured Artist Spotlight",
+    "url": "https://buy.stripe.com/00w14nfMZ55redn84O8og0b",
+    "product": "prod_V6T1EuRHThhHeo",
+    "price": null,
+    "amount": 20000,
+    "recurring": false
+  },
+  "ats-soundtrack": {
+    "name": "Official Soundtrack Partner",
+    "url": "https://buy.stripe.com/8x2aEX6cpbtPfhrfxg8og0c",
+    "product": "prod_V6T1q29CcdHfJd",
+    "price": null,
+    "amount": 50000,
+    "recurring": false
+  },
+  "ats-biz-promo": {
+    "name": "Cinematic Business Promo",
+    "url": "https://buy.stripe.com/cNifZh9oBeG10mx2Ku8og0d",
+    "product": "prod_V6T1jAIok4N4ka",
+    "price": null,
+    "amount": 15000,
+    "recurring": false
+  },
+  "ats-biz-universe": {
+    "name": "Business in the Universe",
+    "url": "https://buy.stripe.com/dRmcN5gR38hD2uFbh08og0e",
+    "product": "prod_V6T1FhLu86YiNc",
+    "price": null,
+    "amount": 30000,
+    "recurring": false
+  },
+  "ats-grand-open": {
+    "name": "Grand Opening Package",
+    "url": "https://buy.stripe.com/14A6oH30d41n4CN5WG8og0f",
+    "product": "prod_V6T1WdBg1oYaFN",
+    "price": null,
+    "amount": 50000,
+    "recurring": false
+  },
+  "ats-brand": {
+    "name": "Brand Partnership",
+    "url": "https://buy.stripe.com/5kQdR9cANfK58T35WG8og0g",
+    "product": "prod_V6T1p02nZuVpCh",
+    "price": null,
+    "amount": 100000,
+    "recurring": false
+  },
+  "ats-founding": {
+    "name": "Founding Supporter",
+    "url": "https://buy.stripe.com/00w5kD6cp7dz1qB98S8og0h",
+    "product": "prod_V6T1oespPoPWjl",
+    "price": null,
+    "amount": 1000,
+    "recurring": false
+  },
+  "ats-vip": {
+    "name": "VIP Insider Membership",
+    "url": "https://buy.stripe.com/00w3cv9oBbtPc5fgBk8og0i",
+    "product": "prod_V6T19OiW8N9qSE",
+    "price": "price_1U6G63HuGENKoTvwJJjynMah",
+    "amount": 999,
+    "recurring": true
+  }
+}

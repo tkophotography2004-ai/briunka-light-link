@@ -77,9 +77,16 @@
                     document.getElementById('msg').textContent = 'Payment received — you\'re in the review queue!';
                 });
             }
-        } else if (params.get('product')?.startsWith('cast')) {
-            document.getElementById('msg').textContent =
-                'Your casting application is confirmed! Briunka will reach out with production details. Be light.';
+        } else if (params.get('product')) {
+            const product = params.get('product');
+            const needsPhotos = [
+                'ats-cameo', 'ats-featured', 'ats-villain', 'ats-royal', 'ats-recurring',
+                'ats-char-build', 'ats-scene', 'ats-artist-spot', 'ats-biz-promo'
+            ].includes(product);
+            document.getElementById('msg').textContent = needsPhotos
+                ? 'Payment confirmed. Email your photos to acrossthestars2026@gmail.com with this package in the subject so we can build your AI likeness.'
+                : 'Payment confirmed. Check your email for the Stripe receipt. Briunka will reach out with next steps. Be light.';
+            document.getElementById('back-link').href = 'index.html#casting-section';
         }
     </script>
 </body>

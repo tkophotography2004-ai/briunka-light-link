@@ -781,13 +781,14 @@ function openCheckout(productId, isCasting) {
     window._refPhotos = [];
     document.getElementById('checkout-ref-photo').value = '';
 
-    const hasPayments = paymentConfig.paymentsEnabled;
-    paymentBtns.innerHTML = hasPayments ? `
+    const stripeUrl = checkoutProduct.stripeUrl;
+    paymentBtns.innerHTML = stripeUrl ? `
         <button class="checkout-btn-primary" onclick="completePurchase('stripe')"><i class="fa-brands fa-stripe"></i> Pay with Card</button>
-        <button class="checkout-btn-paypal" onclick="completePurchase('paypal')"><i class="fa-brands fa-paypal"></i> Pay with PayPal</button>
+        <button class="checkout-btn-paypal" onclick="completePurchase('inquire')">Request by email instead</button>
+        ${checkoutProduct.requiresPhotos ? '<p class="checkout-demo-note">After payment, email your photos to acrossthestars2026@gmail.com</p>' : ''}
     ` : `
         <button class="checkout-btn-primary" onclick="completePurchase('inquire')">Request this package</button>
-        <p class="checkout-demo-note">Sends an email to Light Works. Card checkout comes next.</p>`;
+        <p class="checkout-demo-note">Sends an email to Light Works.</p>`;
 
     document.getElementById('checkout-overlay').classList.add('open');
 }
@@ -847,7 +848,7 @@ async function completePurchase(provider) {
 
     const refPhotos = (window._refPhotos || []).filter(Boolean);
 
-    if (checkoutIsCasting && checkoutProduct.requiresPhotos && !refPhotos.length) {
+    if (provider !== 'stripe' && checkoutIsCasting && checkoutProduct.requiresPhotos && !refPhotos.length) {
         showToast('Upload your photos for the AI film');
         return;
     }
@@ -865,6 +866,14 @@ async function completePurchase(provider) {
     const product = { ...checkoutProduct };
 
     try {
+        if (provider === 'stripe' && checkoutProduct.stripeUrl) {
+            const pay = new URL(checkoutProduct.stripeUrl);
+            pay.searchParams.set('prefilled_email', email);
+            showToast('Opening secure Stripe checkout');
+            window.location.href = pay.toString();
+            return;
+        }
+
         if (provider === 'demo' || provider === 'inquire') {
             try {
                 if (checkoutIsCasting) await submitCastingApplication({ ...customer, product, paymentProvider: 'inquire' });
@@ -1428,11 +1437,23 @@ function applyPublicLaunch() {
     document.getElementById('studio-overlay')?.remove();
 }
 
+async function loadStripeLinks() {
+    try {
+        const res = await fetch('js/stripe-links.json');
+        if (!res.ok) return;
+        const links = await res.json();
+        (config.casting || []).forEach(c => {
+            if (links[c.id] && links[c.id].url) c.stripeUrl = links[c.id].url;
+        });
+    } catch { /* keep inquire-only fallback */ }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     loadConfig();
     applyPublicLaunch();
     initParticles();
     initArtHero();
+    await loadStripeLinks();
     await loadPaymentConfig();
     if (!isPublicHost()) await hydrateFromServer();
     render();
