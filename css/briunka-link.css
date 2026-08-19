@@ -1868,6 +1868,88 @@ html.public-launch .studio-overlay {
     white-space: pre-wrap;
 }
 
+.highlight-section {
+    margin: 0 0 2.25rem;
+}
+.highlight-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    margin-top: 0.85rem;
+}
+@media (min-width: 560px) {
+    .highlight-grid { grid-template-columns: 1fr 1fr; }
+}
+.highlight-card {
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+.highlight-card img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+}
+.highlight-body {
+    padding: 0.9rem 1rem 1rem;
+}
+.highlight-kicker {
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.35rem;
+}
+.highlight-body h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.35rem;
+}
+.highlight-body p {
+    color: var(--muted);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+}
+.highlight-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+    align-items: stretch;
+}
+.highlight-link {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 0.9rem;
+    border-radius: 9999px;
+    border: 1px solid var(--glass-border);
+    color: var(--ivory);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.highlight-link:hover { border-color: var(--gold); color: var(--gold); }
+.highlight-actions .buy-btn {
+    flex: 1;
+    margin: 0;
+    font-size: 0.7rem;
+    padding: 0.65rem 0.5rem;
+}
+.highlight-section-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+.highlight-section-cta:hover { color: var(--gold-light); }
+
 .clips-rail {
     display: grid;
     grid-auto-flow: column;
