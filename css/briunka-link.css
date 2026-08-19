@@ -1927,6 +1927,29 @@ html.public-launch .studio-overlay {
 .prices-jump-sub { grid-area: sub; font-size: 0.78rem; color: var(--muted); }
 .prices-jump i { grid-area: arrow; color: var(--gold); }
 
+.stream-section { margin: 0 0 2rem; }
+.stream-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 0.75rem;
+}
+.stream-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.65rem 0.95rem;
+    border-radius: 9999px;
+    border: 1px solid var(--glass-border);
+    background: var(--surface);
+    color: var(--ivory);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+.stream-pill:hover { border-color: var(--gold); color: var(--gold); }
+.stream-pill i { font-size: 0.95rem; }
+
 .highlight-section {
     margin: 0 0 2.25rem;
 }

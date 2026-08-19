@@ -43,32 +43,30 @@ const AFFILIATES = [
     { id: 'amazon', title: 'Amazon Shop', subtitle: 'TKO Talks storefront — gear, books & picks', url: 'https://www.amazon.com/shop/tkotalks', icon: 'fa-amazon', brand: true }
 ];
 
+const STREAMING = [
+    { id: 'spotify', label: 'Spotify', url: '', icon: 'fa-spotify' },
+    { id: 'apple', label: 'Apple Music', url: '', icon: 'fa-apple' },
+    { id: 'youtube-music', label: 'YouTube Music', url: '', icon: 'fa-youtube' },
+    { id: 'amazon-music', label: 'Amazon Music', url: '', icon: 'fa-amazon' },
+    { id: 'soundcloud', label: 'SoundCloud', url: '', icon: 'fa-soundcloud' }
+];
+
 const HIGHLIGHTS = [
     {
         id: 'songs',
         label: 'Song Highlights',
-        intro: 'Original music and cinematic scores for brands. License a track, place a song in an episode, or sponsor a release.',
-        cta: 'Book song & music placement',
-        ctaHref: 'prices.html#offer-music',
-        items: [
-            { title: 'Be Light', blurb: 'Anthem energy for wellness, lifestyle, and launch campaigns.', image: 'assets/images/briunka-belight.jpg', url: YT, urlLabel: 'Listen', bookId: 'ats-song-place', bookLabel: 'Place a song · $100' },
-            { title: 'Halo', blurb: 'Spiritual luxury sound for beauty, jewelry, and faith brands.', image: 'assets/images/briunka-halo.jpg', url: YT, urlLabel: 'Listen', bookId: 'ats-artist-spot', bookLabel: 'Artist spotlight · $200' },
-            { title: 'City Lights', blurb: 'Night-drive cinematic score for fashion, auto, and nightlife.', image: 'assets/images/briunka-city.jpg', url: YT, urlLabel: 'Listen', bookId: 'ats-soundtrack', bookLabel: 'Soundtrack partner · $500' },
-            { title: 'Jungle Queen', blurb: 'World / adventure texture for travel, sport, and heritage brands.', image: 'assets/images/briunka-jungle.jpg', url: YT, urlLabel: 'Listen', bookId: 'ats-song-review', bookLabel: 'Song review · $25' }
-        ]
+        intro: 'Individual tracks will live here. Add Spotify, Apple, or YouTube song links when they are ready.',
+        cta: '',
+        ctaHref: '',
+        items: []
     },
     {
         id: 'episodes',
         label: 'Episode Highlights',
-        intro: 'Across the Stars scenes brands can sponsor, cameo in, or place product inside. Built for brand deals, not just fans.',
-        cta: 'Sponsor or appear in an episode',
-        ctaHref: 'prices.html#offer-cast',
-        items: [
-            { title: 'Across the Stars', blurb: 'Flagship episode energy. Title-card and opening-scene brand placement.', image: 'assets/images/briunka-belight.jpg', url: TT_FILM, urlLabel: 'Watch', bookId: 'ats-cameo', bookLabel: 'Cameo · $75' },
-            { title: 'The Messenger', blurb: 'Divine / luxury tone for beauty, fragrance, and jewelry integrations.', image: 'assets/images/briunka-cross.jpg', url: TT_FILM, urlLabel: 'Watch', bookId: 'ats-featured', bookLabel: 'Featured role · $150' },
-            { title: 'Ascension', blurb: 'Climb, ritual, transformation — strong for fashion and wellness brands.', image: 'assets/images/briunka-stairs.jpg', url: TT_FILM, urlLabel: 'Watch', bookId: 'ats-brand', bookLabel: 'Brand partnership · $1,000+' },
-            { title: 'City of Light', blurb: 'Urban night world for auto, tech, nightlife, and lifestyle products.', image: 'assets/images/briunka-city.jpg', url: TT_MAIN, urlLabel: 'Watch', bookId: 'ats-recurring', bookLabel: 'Recurring · $750+' }
-        ]
+        intro: 'Across the Stars episode clips will live here. Add TikTok or YouTube episode links when they are ready.',
+        cta: '',
+        ctaHref: '',
+        items: []
     },
     {
         id: 'business',
@@ -77,10 +75,10 @@ const HIGHLIGHTS = [
         cta: 'Book a business film',
         ctaHref: 'prices.html#offer-business',
         items: [
-            { title: 'Luxury Business Promo', blurb: '15–30 second cinematic promo for a company, service, or founder.', image: 'assets/images/briunka-halo.jpg', url: YT, urlLabel: 'Watch style', bookId: 'ats-biz-promo', bookLabel: 'Business promo · $150' },
-            { title: 'Grand Opening', blurb: 'Announcement film, social teaser, and launch visuals for a new location.', image: 'assets/images/briunka-stairs.jpg', url: YT, urlLabel: 'Watch style', bookId: 'ats-grand-open', bookLabel: 'Grand opening · $500' },
-            { title: 'Business in the Universe', blurb: 'Your company appears inside Across the Stars as a story-world brand.', image: 'assets/images/briunka-city.jpg', url: TT_FILM, urlLabel: 'Watch', bookId: 'ats-biz-universe', bookLabel: 'In-universe · $300' },
-            { title: 'Executive Brand Film', blurb: 'High-ticket partnership across multiple episodes and posts.', image: 'assets/images/across-the-stars-price-sheet.jpg', url: YT, urlLabel: 'Watch style', bookId: 'ats-brand', bookLabel: 'Brand partnership · $1,000+' }
+            { title: 'Luxury Business Promo', blurb: '15–30 second cinematic promo for a company, service, or founder.', image: 'assets/images/briunka-halo.jpg', url: '', urlLabel: '', bookId: 'ats-biz-promo', bookLabel: 'Business promo · $150' },
+            { title: 'Grand Opening', blurb: 'Announcement film, social teaser, and launch visuals for a new location.', image: 'assets/images/briunka-stairs.jpg', url: '', urlLabel: '', bookId: 'ats-grand-open', bookLabel: 'Grand opening · $500' },
+            { title: 'Business in the Universe', blurb: 'Your company appears inside Across the Stars as a story-world brand.', image: 'assets/images/briunka-city.jpg', url: '', urlLabel: '', bookId: 'ats-biz-universe', bookLabel: 'In-universe · $300' },
+            { title: 'Executive Brand Film', blurb: 'High-ticket partnership across multiple episodes and posts.', image: 'assets/images/across-the-stars-price-sheet.jpg', url: '', urlLabel: '', bookId: 'ats-brand', bookLabel: 'Brand partnership · $1,000+' }
         ]
     },
     {
@@ -90,10 +88,10 @@ const HIGHLIGHTS = [
         cta: 'Advertise a product',
         ctaHref: 'prices.html#offer-ads',
         items: [
-            { title: 'Product Spotlight', blurb: 'A 15-second cinematic ad for one hero product, posted on Light Works channels.', image: 'assets/images/briunka-belight.jpg', url: TT_MAIN, urlLabel: 'See the look', bookId: 'ad-spotlight', bookLabel: 'Spotlight ad · $75' },
-            { title: 'Launch Drop', blurb: 'Teaser, launch video, and stories so a product drop actually gets seen.', image: 'assets/images/briunka-jungle.jpg', url: TT_MAIN, urlLabel: 'See the look', bookId: 'ad-launch', bookLabel: 'Launch campaign · $200' },
-            { title: 'Product in the Universe', blurb: 'The item appears on screen inside Across the Stars.', image: 'assets/images/briunka-cross.jpg', url: TT_FILM, urlLabel: 'Watch', bookId: 'ad-universe', bookLabel: 'In-universe product · $350' },
-            { title: 'Brand Campaign', blurb: 'Multi-post cinematic advertising across Briunka’s platforms.', image: 'assets/images/briunka-halo.jpg', url: YT, urlLabel: 'See the look', bookId: 'ad-brand', bookLabel: 'Brand ad package · $500' }
+            { title: 'Product Spotlight', blurb: 'A 15-second cinematic ad for one hero product, posted on Light Works channels.', image: 'assets/images/briunka-belight.jpg', url: '', urlLabel: '', bookId: 'ad-spotlight', bookLabel: 'Spotlight ad · $75' },
+            { title: 'Launch Drop', blurb: 'Teaser, launch video, and stories so a product drop actually gets seen.', image: 'assets/images/briunka-jungle.jpg', url: '', urlLabel: '', bookId: 'ad-launch', bookLabel: 'Launch campaign · $200' },
+            { title: 'Product in the Universe', blurb: 'The item appears on screen inside Across the Stars.', image: 'assets/images/briunka-cross.jpg', url: '', urlLabel: '', bookId: 'ad-universe', bookLabel: 'In-universe product · $350' },
+            { title: 'Brand Campaign', blurb: 'Multi-post cinematic advertising across Briunka’s platforms.', image: 'assets/images/briunka-halo.jpg', url: '', urlLabel: '', bookId: 'ad-brand', bookLabel: 'Brand ad package · $500' }
         ]
     }
 ];
@@ -543,6 +541,7 @@ function render() {
     renderClips();
     renderApps();
     renderLinks();
+    renderStreaming();
     renderHighlights();
     renderCasting();
     renderProducts();
@@ -749,10 +748,29 @@ function buildLinkCard(link, isFeatured, delay) {
         </a>`;
 }
 
+function renderStreaming() {
+    const section = document.getElementById('stream-section');
+    const el = document.getElementById('stream-list');
+    if (!section || !el) return;
+    const items = STREAMING.filter(s => s.url);
+    if (!items.length) {
+        section.style.display = 'none';
+        return;
+    }
+    section.style.display = 'block';
+    el.innerHTML = items.map(s => `
+        <a class="stream-pill" href="${s.url}" target="_blank" rel="noopener">
+            <i class="fa-brands ${s.icon}"></i>
+            <span>${esc(s.label)}</span>
+        </a>
+    `).join('');
+}
+
 function renderHighlights() {
     const root = document.getElementById('highlights-root');
     if (!root) return;
-    root.innerHTML = HIGHLIGHTS.map(section => `
+    const sections = HIGHLIGHTS.filter(section => (section.items || []).length);
+    root.innerHTML = sections.map(section => `
         <section id="highlight-${section.id}" class="highlight-section">
             <p class="section-label">${esc(section.label)}</p>
             <p class="casting-intro">${esc(section.intro)}</p>
@@ -765,14 +783,14 @@ function renderHighlights() {
                             <h3 class="serif">${esc(item.title)}</h3>
                             <p>${esc(item.blurb)}</p>
                             <div class="highlight-actions">
-                                <a class="highlight-link" href="${item.url}" target="_blank" rel="noopener">${esc(item.urlLabel)}</a>
-                                <button type="button" class="buy-btn" onclick="openCheckout('${item.bookId}', true)">${esc(item.bookLabel)}</button>
+                                ${item.url ? `<a class="highlight-link" href="${item.url}" target="_blank" rel="noopener">${esc(item.urlLabel || 'Open')}</a>` : ''}
+                                ${item.bookId ? `<button type="button" class="buy-btn" onclick="openCheckout('${item.bookId}', true)">${esc(item.bookLabel)}</button>` : ''}
                             </div>
                         </div>
                     </article>
                 `).join('')}
             </div>
-            <a class="highlight-section-cta" href="${section.ctaHref}">${esc(section.cta)} <i class="fa-solid fa-arrow-right"></i></a>
+            ${section.cta && section.ctaHref ? `<a class="highlight-section-cta" href="${section.ctaHref}">${esc(section.cta)} <i class="fa-solid fa-arrow-right"></i></a>` : ''}
         </section>
     `).join('');
 }
