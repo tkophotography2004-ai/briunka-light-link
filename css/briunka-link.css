@@ -1896,6 +1896,17 @@ html.public-launch .studio-overlay {
 .affiliate-title { font-size: 0.875rem; font-weight: 600; }
 .affiliate-sub { font-size: 0.7rem; color: var(--muted); }
 .affiliate-out { color: var(--muted); font-size: 0.7rem; }
+.affiliate-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    padding: 0.28rem 0.45rem;
+    border-radius: 0.4rem;
+    border: 1px solid rgba(191, 161, 90, 0.45);
+    color: var(--gold);
+    background: rgba(191, 161, 90, 0.1);
+    white-space: nowrap;
+}
 
 .prices-jump {
     display: grid;

@@ -37,11 +37,10 @@ const TT_MAIN = 'https://www.tiktok.com/@briunkalightofficial';
 const TT_FILM = 'https://www.tiktok.com/@lightworksunivers';
 
 const AFFILIATES = [
-    { id: 'amazon', title: 'Amazon Picks', subtitle: 'Gear, books & tools I use on set', url: 'https://www.amazon.com', icon: 'fa-amazon', brand: true },
-    { id: 'canva', title: 'Canva Pro', subtitle: 'Lookbooks, thumbnails & campaign graphics', url: 'https://www.canva.com', icon: 'fa-palette' },
-    { id: 'capcut', title: 'CapCut', subtitle: 'The editor I use for shorts and teasers', url: 'https://www.capcut.com', icon: 'fa-scissors' },
-    { id: 'epidemic', title: 'Epidemic Sound', subtitle: 'Cinematic beds & licensed tracks', url: 'https://www.epidemicsound.com', icon: 'fa-headphones' },
-    { id: 'adobe', title: 'Adobe Express', subtitle: 'Post, story, and poster templates', url: 'https://www.adobe.com/express/', icon: 'fa-pen-nib' }
+    { id: 'openart', title: 'OpenArt', subtitle: 'AI image studio I use for looks and stills', url: 'https://openart.ai/home?utm_source=youtube&utm_medium=influencer&utm_campaign=infl-youtube--na-acq-web&ref=briunka', icon: 'fa-wand-magic-sparkles' },
+    { id: 'runway', title: 'Runway ML', subtitle: 'AI video. Use code CREATE15 at checkout', url: 'https://runwayml.com', icon: 'fa-film', code: 'CREATE15' },
+    { id: 'syllaby', title: 'Syllaby', subtitle: 'Scripts and content systems', url: 'https://syllaby.io/?via=ashley16', icon: 'fa-comments' },
+    { id: 'amazon', title: 'Amazon Shop', subtitle: 'TKO Talks storefront — gear, books & picks', url: 'https://www.amazon.com/shop/tkotalks', icon: 'fa-amazon', brand: true }
 ];
 
 const HIGHLIGHTS = [
@@ -657,9 +656,18 @@ function renderAffiliates() {
                 <span class="affiliate-title">${esc(a.title)}</span>
                 <span class="affiliate-sub">${esc(a.subtitle)}</span>
             </span>
+            ${a.code ? `<span class="affiliate-code" title="Copy code">${esc(a.code)}</span>` : ''}
             <i class="fa-solid fa-arrow-up-right-from-square affiliate-out"></i>
         </a>
     `).join('');
+    el.querySelectorAll('.affiliate-code').forEach(badge => {
+        badge.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            const code = badge.textContent.trim();
+            navigator.clipboard.writeText(code).then(() => showToast('Copied ' + code));
+        });
+    });
 }
 
 function renderSocials() {
