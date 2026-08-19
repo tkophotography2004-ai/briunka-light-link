@@ -8,6 +8,8 @@ function isPublicHost() {
 
 const CAST_CATEGORIES = [
     { id: 'cast', label: 'Cast & Character Packages' },
+    { id: 'ads', label: 'Advertise Your Product' },
+    { id: 'authors', label: 'Book Release Marketing' },
     { id: 'addon', label: 'Add-On Experiences' },
     { id: 'music', label: 'Music Artist Opportunities' },
     { id: 'business', label: 'Business & Brand Packages' },
@@ -74,15 +76,33 @@ const DEFAULT_CONFIG = {
             id: 'ats',
             title: 'Across the Stars — Join the Cast',
             subtitle: 'Cameo from $75 · Be part of the AI cinematic universe',
-            url: '#casting-section',
+            url: '#offer-cast',
             icon: 'fa-star',
+            visible: true,
+            group: 'experiences'
+        },
+        {
+            id: 'ads',
+            title: 'Advertise Your Product',
+            subtitle: 'Cinematic ads from $75 · launches, drops & in-universe placement',
+            url: '#offer-ads',
+            icon: 'fa-bullhorn',
+            visible: true,
+            group: 'experiences'
+        },
+        {
+            id: 'authors',
+            title: 'Book Release Marketing',
+            subtitle: 'Trailers, launch campaigns & author placement — from $100',
+            url: '#offer-authors',
+            icon: 'fa-book-open',
             visible: true,
             group: 'experiences'
         },
         {
             id: 'pricesheet',
             title: 'Full Price List',
-            subtitle: 'View all packages, music & business opportunities',
+            subtitle: 'View all packages, ads, books, music & business offers',
             url: '#price-sheet-section',
             icon: 'fa-list',
             visible: true,
@@ -208,6 +228,16 @@ const DEFAULT_CONFIG = {
         { id: 'ats-song-place', name: 'Song Placement', movie: 'Across the Stars', position: 'In an Episode', description: 'Your song placed in an Across the Stars episode.', price: 100, category: 'music', requiresPhotos: false, promoVideo: true, type: 'casting', image: '', visible: true },
         { id: 'ats-artist-spot', name: 'Featured Artist Spotlight', movie: 'Across the Stars', position: 'Artist Feature', description: 'Featured artist spotlight in the universe — AI music promo included.', price: 200, category: 'music', requiresPhotos: true, promoVideo: true, type: 'casting', image: '', visible: true },
         { id: 'ats-soundtrack', name: 'Official Soundtrack Partner', movie: 'Across the Stars', position: 'Soundtrack Partner', description: 'Multiple placements plus exclusive promotion across the series.', price: 500, category: 'music', requiresPhotos: false, promoVideo: true, type: 'casting', image: '', visible: true },
+
+        { id: 'ad-spotlight', name: 'Product Spotlight Ad', movie: 'Light Works Ads', position: '15-sec cinematic ad', description: 'A cinematic ad for your product, posted across Light Works channels.', price: 75, category: 'ads', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/briunka-belight.jpg', visible: true },
+        { id: 'ad-launch', name: 'Product Launch Campaign', movie: 'Light Works Ads', position: 'Teaser + launch + stories', description: 'Teaser, launch video, and story frames so your drop actually gets seen.', price: 200, category: 'ads', requiresPhotos: true, type: 'casting', image: '', visible: true },
+        { id: 'ad-universe', name: 'Product in the Universe', movie: 'Across the Stars', position: 'In-story product placement', description: 'Your product appears inside Across the Stars as an in-universe placement.', price: 350, category: 'ads', requiresPhotos: false, type: 'casting', image: '', visible: true },
+        { id: 'ad-brand', name: 'Brand Ad Package', movie: 'Light Works Ads', position: 'Multi-post campaign', description: 'Multi-post cinematic advertising across Briunka’s platforms.', price: 500, category: 'ads', requiresPhotos: true, type: 'casting', image: '', visible: true },
+
+        { id: 'book-spotlight', name: 'Author Spotlight', movie: 'Light Works Books', position: 'Cinematic book promo', description: 'A cinematic promo and author spotlight for your book across Light Works channels.', price: 100, category: 'authors', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/briunka-halo.jpg', visible: true },
+        { id: 'book-launch', name: 'Book Launch Campaign', movie: 'Light Works Books', position: 'Release-week campaign', description: 'Book trailer, cover motion, captions, and posting for your release week.', price: 250, category: 'authors', requiresPhotos: true, type: 'casting', image: '', visible: true },
+        { id: 'book-universe', name: 'Author in the Universe', movie: 'Across the Stars', position: 'In-story author placement', description: 'Your likeness or story world appears in Across the Stars, plus a launch promo.', price: 400, category: 'authors', requiresPhotos: true, type: 'casting', image: '', visible: true },
+        { id: 'book-full', name: 'Full Book Release Marketing', movie: 'Light Works Books', position: 'Trailer + campaign + live shout', description: 'Trailer, social campaign, in-universe placement, and a live shout for your book.', price: 750, category: 'authors', requiresPhotos: true, type: 'casting', image: '', visible: true },
 
         { id: 'ats-biz-promo', name: 'Cinematic Business Promo', movie: 'Across the Stars', position: '15–30 sec luxury video', description: 'Luxury cinematic promo video for your business — AI-produced.', price: 150, category: 'business', requiresPhotos: true, type: 'casting', image: '', visible: true },
         { id: 'ats-biz-universe', name: 'Business in the Universe', movie: 'Across the Stars', position: 'In-Story Placement', description: 'Your business appears inside the Across the Stars story.', price: 300, category: 'business', requiresPhotos: false, type: 'casting', image: '', visible: true },
@@ -619,7 +649,7 @@ function renderCasting() {
         const featured = items.find(c => c.featured);
         const rest = items.filter(c => !c.featured);
 
-        html += `<div class="casting-category"><p class="section-label">${cat.label}</p>`;
+        html += `<div class="casting-category" id="offer-${cat.id}"><p class="section-label">${cat.label}</p>`;
         if (featured) html += buildCastingCard(featured, delay++, true);
         html += `<div class="casting-list">${rest.map(c => buildCastingCard(c, delay++, false, true)).join('')}</div>`;
         html += '</div>';

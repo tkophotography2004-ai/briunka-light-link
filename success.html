@@ -81,7 +81,9 @@
             const product = params.get('product');
             const needsPhotos = [
                 'ats-cameo', 'ats-featured', 'ats-villain', 'ats-royal', 'ats-recurring',
-                'ats-char-build', 'ats-scene', 'ats-artist-spot', 'ats-biz-promo'
+                'ats-char-build', 'ats-scene', 'ats-artist-spot', 'ats-biz-promo',
+                'ad-spotlight', 'ad-launch', 'ad-brand',
+                'book-spotlight', 'book-launch', 'book-universe', 'book-full'
             ].includes(product);
             document.getElementById('msg').textContent = needsPhotos
                 ? 'Payment confirmed. Email your photos to acrossthestars2026@gmail.com with this package in the subject so we can build your AI likeness.'

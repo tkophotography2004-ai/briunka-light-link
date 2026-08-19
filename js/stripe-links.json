@@ -147,8 +147,72 @@
     "name": "VIP Insider Membership",
     "url": "https://buy.stripe.com/00w3cv9oBbtPc5fgBk8og0i",
     "product": "prod_V6T19OiW8N9qSE",
-    "price": "price_1U6G63HuGENKoTvwJJjynMah",
+    "price": null,
     "amount": 999,
     "recurring": true
+  },
+  "ad-spotlight": {
+    "name": "Product Spotlight Ad",
+    "url": "https://buy.stripe.com/9B6bJ17gtgO9d9jbh08og0j",
+    "product": "prod_V6T5L2IYymsqDM",
+    "price": "price_1U6G9ZHuGENKoTvwsvS4QBuA",
+    "amount": 7500,
+    "recurring": false
+  },
+  "ad-launch": {
+    "name": "Product Launch Campaign",
+    "url": "https://buy.stripe.com/3cI4gz9oBbtP0mxbh08og0k",
+    "product": "prod_V6T59CUD9Dyd8n",
+    "price": "price_1U6G9aHuGENKoTvweTcNy0mp",
+    "amount": 20000,
+    "recurring": false
+  },
+  "ad-universe": {
+    "name": "Product in the Universe",
+    "url": "https://buy.stripe.com/dRm9ATbwJfK5d9j84O8og0l",
+    "product": "prod_V6T575rWJ9CG5L",
+    "price": "price_1U6G9bHuGENKoTvw2B56Az5s",
+    "amount": 35000,
+    "recurring": false
+  },
+  "ad-brand": {
+    "name": "Brand Ad Package",
+    "url": "https://buy.stripe.com/dRm7sL7gt55r4CN4SC8og0m",
+    "product": "prod_V6T5bC0buVelEH",
+    "price": "price_1U6G9cHuGENKoTvwm0nZ6kub",
+    "amount": 50000,
+    "recurring": false
+  },
+  "book-spotlight": {
+    "name": "Author Spotlight",
+    "url": "https://buy.stripe.com/3cIbJ1eIV41n5GR98S8og0n",
+    "product": "prod_V6T5WzANkAO36n",
+    "price": "price_1U6G9dHuGENKoTvwrq5i679q",
+    "amount": 10000,
+    "recurring": false
+  },
+  "book-launch": {
+    "name": "Book Launch Campaign",
+    "url": "https://buy.stripe.com/fZudR9gR3gO9glv4SC8og0o",
+    "product": "prod_V6T5435RZpO9oy",
+    "price": "price_1U6G9dHuGENKoTvwxJGVpjlN",
+    "amount": 25000,
+    "recurring": false
+  },
+  "book-universe": {
+    "name": "Author in the Universe",
+    "url": "https://buy.stripe.com/6oUdR98kx55r8T35WG8og0p",
+    "product": "prod_V6T5Fe3x597Jxj",
+    "price": "price_1U6G9eHuGENKoTvwRP4sJiRa",
+    "amount": 40000,
+    "recurring": false
+  },
+  "book-full": {
+    "name": "Full Book Release Marketing",
+    "url": "https://buy.stripe.com/6oU5kDcANeG1glv98S8og0q",
+    "product": "prod_V6T5uARhni9CSS",
+    "price": "price_1U6G9fHuGENKoTvwnQY9AzCK",
+    "amount": 75000,
+    "recurring": false
   }
 }
