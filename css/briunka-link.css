@@ -1293,6 +1293,11 @@ body {
 }
 
 /* ── Studio FAB ── */
+html.public-launch .studio-fab,
+html.public-launch .studio-overlay {
+    display: none !important;
+}
+
 .studio-fab {
     position: fixed;
     bottom: 1.5rem;

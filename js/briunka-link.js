@@ -1,4 +1,10 @@
-const STORAGE_KEY = 'briunkaLightLinkConfig_v2';
+const STORAGE_KEY = 'briunkaLightLinkConfig_v3';
+const CONTACT_EMAIL = 'acrossthestars2026@gmail.com';
+
+function isPublicHost() {
+    const h = location.hostname;
+    return h !== 'localhost' && h !== '127.0.0.1';
+}
 
 const CAST_CATEGORIES = [
     { id: 'cast', label: 'Cast & Character Packages' },
@@ -60,7 +66,7 @@ const DEFAULT_CONFIG = {
             url: '#review-section',
             icon: 'fa-tower-broadcast',
             featured: false,
-            visible: true,
+            visible: false,
             group: 'experiences'
         },
         {
@@ -87,7 +93,7 @@ const DEFAULT_CONFIG = {
             subtitle: 'Beats, scores & healing frequencies',
             url: '../hitmaker-vault/index.html?mode=shop',
             icon: 'fa-store',
-            visible: true,
+            visible: false,
             group: 'experiences'
         },
         {
@@ -96,7 +102,7 @@ const DEFAULT_CONFIG = {
             subtitle: 'Meditations, Solfeggio tones & sound baths',
             url: '../healing-frequency-portal/index.html',
             icon: 'fa-spa',
-            visible: true,
+            visible: false,
             group: 'experiences'
         },
         {
@@ -105,7 +111,7 @@ const DEFAULT_CONFIG = {
             subtitle: 'AI job tools, lookbooks & digital products',
             url: '../canva-product-studio/index.html',
             icon: 'fa-wand-magic-sparkles',
-            visible: true,
+            visible: false,
             group: 'experiences'
         },
         {
@@ -114,7 +120,7 @@ const DEFAULT_CONFIG = {
             subtitle: 'Surprise Me, Recipe Lab & Hook Maker',
             url: '../hitmaker-vault/index.html',
             icon: 'fa-infinity',
-            visible: true,
+            visible: false,
             group: 'tools'
         }
     ],
@@ -143,7 +149,7 @@ const DEFAULT_CONFIG = {
             url: 'http://127.0.0.1:8788',
             badge: 'Studio',
             priceLabel: 'Open',
-            visible: true
+            visible: false
         },
         {
             id: 'app-healing',
@@ -152,7 +158,7 @@ const DEFAULT_CONFIG = {
             url: '../healing-frequency-portal/index.html',
             badge: 'Sound',
             priceLabel: 'Enter',
-            visible: true
+            visible: false
         },
         {
             id: 'app-canva',
@@ -161,7 +167,7 @@ const DEFAULT_CONFIG = {
             url: '../canva-product-studio/index.html',
             badge: 'Maker',
             priceLabel: 'Open',
-            visible: true
+            visible: false
         },
         {
             id: 'app-hitmaker',
@@ -170,7 +176,7 @@ const DEFAULT_CONFIG = {
             url: '../hitmaker-vault/index.html',
             badge: 'Music',
             priceLabel: 'Enter',
-            visible: true
+            visible: false
         }
     ],
     products: [
@@ -182,7 +188,7 @@ const DEFAULT_CONFIG = {
             url: '',
             image: 'assets/images/briunka-belight.jpg',
             description: 'Starter digital drop — rename this in Creator Studio and set your real file or checkout.',
-            visible: true
+            visible: false
         }
     ],
     casting: [
@@ -225,6 +231,11 @@ let checkoutProduct = null;
 let checkoutIsCasting = false;
 
 function loadConfig() {
+    if (isPublicHost()) {
+        config = structuredClone(DEFAULT_CONFIG);
+        artIndex = config.heroArt || 0;
+        return;
+    }
     try {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
@@ -404,7 +415,7 @@ function render() {
 }
 
 function renderFooter() {
-    const email = config.contactEmail || 'acrossthestars2026@gmail.com';
+    const email = config.contactEmail || CONTACT_EMAIL;
     const el = document.getElementById('footer-contact');
     if (el) {
         el.innerHTML = `
@@ -686,6 +697,11 @@ function renderProducts() {
 }
 
 /* ── Email capture ── */
+function mailtoInquire(subject, body) {
+    const to = config.contactEmail || CONTACT_EMAIL;
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 async function handleEmailSignup(e) {
     e.preventDefault();
     const email = document.getElementById('email-input').value.trim();
@@ -696,8 +712,12 @@ async function handleEmailSignup(e) {
         await subscribeEmail(email, name, 'bio-newsletter');
         document.getElementById('email-form').reset();
         showToast('Welcome to the LIGHT list ✦');
-    } catch (err) {
-        showToast(err.message || 'Could not subscribe');
+    } catch {
+        mailtoInquire(
+            'LIGHT List signup',
+            `Please add me to the LIGHT list.\n\nName: ${name || ''}\nEmail: ${email}\n`
+        );
+        showToast('Opening email to join the LIGHT list');
     }
 }
 
@@ -717,8 +737,10 @@ function openCheckout(productId, isCasting) {
     const paymentBtns = document.getElementById('payment-buttons');
 
     if (checkoutProduct.applyOnly) {
-        const email = config.contactEmail || 'acrossthestars2026@gmail.com';
-        window.location.href = `mailto:${email}?subject=${encodeURIComponent('Across the Stars — ' + checkoutProduct.name)}&body=${encodeURIComponent('Hi Briunka,\n\nI would like to apply for: ' + checkoutProduct.name + '\n\nName:\nEmail:\nWhy I want to join:\n')}`;
+        mailtoInquire(
+            'Across the Stars — ' + checkoutProduct.name,
+            'Hi Briunka,\n\nI would like to apply for: ' + checkoutProduct.name + '\n\nName:\nEmail:\nWhy I want to join:\n'
+        );
         return;
     }
 
@@ -763,8 +785,8 @@ function openCheckout(productId, isCasting) {
         <button class="checkout-btn-primary" onclick="completePurchase('stripe')"><i class="fa-brands fa-stripe"></i> Pay with Card</button>
         <button class="checkout-btn-paypal" onclick="completePurchase('paypal')"><i class="fa-brands fa-paypal"></i> Pay with PayPal</button>
     ` : `
-        <button class="checkout-btn-primary" onclick="completePurchase('demo')">Complete Order</button>
-        <p class="checkout-demo-note">Add Stripe/PayPal keys to .env to enable live payments</p>`;
+        <button class="checkout-btn-primary" onclick="completePurchase('inquire')">Request this package</button>
+        <p class="checkout-demo-note">Sends an email to Light Works. Card checkout comes next.</p>`;
 
     document.getElementById('checkout-overlay').classList.add('open');
 }
@@ -842,15 +864,19 @@ async function completePurchase(provider) {
     const product = { ...checkoutProduct };
 
     try {
-        if (provider === 'demo') {
-            if (checkoutIsCasting) await submitCastingApplication({ ...customer, product, paymentProvider: 'demo' });
-            showToast('Order placed! We\'ll be in touch.');
-            if (checkoutIsCasting && checkoutProduct.spotsLeft > 0) {
-                checkoutProduct.spotsLeft--;
-                saveConfig();
+        if (provider === 'demo' || provider === 'inquire') {
+            try {
+                if (checkoutIsCasting) await submitCastingApplication({ ...customer, product, paymentProvider: 'inquire' });
+                showToast('Request sent. We\'ll be in touch.');
+            } catch {
+                const price = checkoutProduct.priceLabel || ('$' + checkoutProduct.price);
+                mailtoInquire(
+                    'Across the Stars — ' + checkoutProduct.name,
+                    `Hi Briunka,\n\nI want: ${checkoutProduct.name} (${price})\n\nName: ${customer.name}\nEmail: ${customer.email}\nPhone: ${customer.phone || ''}\nInstagram: ${customer.instagram || ''}\nNotes: ${customer.notes || ''}\n\nI'll send reference photos in a follow-up if needed.\n`
+                );
+                showToast('Opening email to request this package');
             }
             closeCheckout();
-            renderCasting();
             return;
         }
 
@@ -1388,12 +1414,26 @@ function resetDefaults() {
     showToast('Defaults restored');
 }
 
+function applyPublicLaunch() {
+    const review = document.getElementById('review-section');
+    if (review) review.style.display = 'none';
+    const shop = document.getElementById('shop-section');
+    if (shop) shop.style.display = 'none';
+    const apps = document.getElementById('apps-section');
+    if (apps) apps.style.display = 'none';
+
+    if (!isPublicHost()) return;
+    document.querySelector('.studio-fab')?.remove();
+    document.getElementById('studio-overlay')?.remove();
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     loadConfig();
+    applyPublicLaunch();
     initParticles();
     initArtHero();
     await loadPaymentConfig();
-    await hydrateFromServer();
+    if (!isPublicHost()) await hydrateFromServer();
     render();
 
     if (new URLSearchParams(location.search).get('cancelled')) {

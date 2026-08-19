@@ -1,5 +1,7 @@
 {
+  "cleanUrls": true,
   "rewrites": [
+    { "source": "/join", "destination": "/join-skool.html" },
     { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/media/(.*)", "destination": "/api" }
   ],

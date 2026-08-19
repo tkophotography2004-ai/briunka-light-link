@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Across the Stars — Briunka Light</title>
-    <meta name="description" content="Join Light Works Universe on Skool. Across the Stars — community-powered AI cinematic universe. Casting from $75, live reviews & more.">
+    <meta name="description" content="Join Light Works Universe on Skool. Across the Stars — community-powered AI cinematic universe. Casting from $75. Be light.">
     <meta property="og:title" content="Briunka Light — Light Works Universe">
-    <meta property="og:description" content="Join the Skool community. Pay to join the cast. Live reviews. Be light.">
+    <meta property="og:description" content="Join the Skool community. Pay to join the cast. Be light.">
     <meta property="og:url" content="https://www.skool.com/light-works-universe-5888">
     <meta property="og:image" content="assets/images/briunka-belight.jpg">
     <meta name="theme-color" content="#0b0b0d">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/briunka-link.css">
+    <script>
+        if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+            document.documentElement.classList.add('public-launch');
+        }
+    </script>
 </head>
 <body>
 
@@ -64,11 +69,8 @@
 
         <nav class="bio-jump" aria-label="On this page">
             <a href="#direct-section">Direct</a>
-            <a href="#clips-section">Clips</a>
-            <a href="#apps-section">Apps</a>
-            <a href="#shop-section">Shop</a>
+            <a href="#price-sheet-section">Price list</a>
             <a href="#casting-section">Be in the film</a>
-            <a href="#links-container">Links</a>
         </nav>
 
         <div class="gold-divider"></div>
@@ -85,7 +87,7 @@
             <div id="clips-rail" class="clips-rail"></div>
         </section>
 
-        <section id="apps-section" class="delay-2" style="animation: fadeUp 0.6s ease 0.26s forwards; opacity:0">
+        <section id="apps-section" class="delay-2" style="display:none">
             <p class="section-label">Apps I built</p>
             <p class="casting-intro">Tools and studios for fans, clients, and collaborators.</p>
             <div id="apps-grid" class="app-grid"></div>
@@ -94,7 +96,7 @@
         <section id="links-container"></section>
 
         <!-- Live Review Submissions (Nero-style) -->
-        <section id="review-section" class="delay-2" style="animation: fadeUp 0.6s ease 0.25s forwards; opacity:0">
+        <section id="review-section" class="delay-2" style="display:none">
             <p class="section-label">Live Review</p>
             <p class="casting-intro">AI artists & creators — submit your video for review during Briunka's lives. Paste a link or upload your file.</p>
 
@@ -178,14 +180,11 @@
 
         <footer class="footer delay-5" style="animation: fadeUp 0.6s ease 0.5s forwards; opacity:0">
             <div id="footer-contact" class="footer-contact"></div>
-            <a href="../hitmaker-vault/index.html">
-                <i class="fa-solid fa-infinity"></i> HITMAKER VAULT
-            </a>
             <p class="footer-copy">© Light Works Entertainment · Across the Stars</p>
         </footer>
     </div>
 
-    <button class="studio-fab" onclick="toggleStudio()" title="Creator Studio">
+    <button class="studio-fab" id="studio-fab" onclick="toggleStudio()" title="Creator Studio">
         <i class="fa-solid fa-pen"></i>
     </button>
 

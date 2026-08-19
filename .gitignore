@@ -5,3 +5,7 @@ data/
 data/uploads/
 .DS_Store
 .vercel
+_vercel_parts/
+_vercel_files.json
+_deploy_text_only.json
+assets/deploy/
