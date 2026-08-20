@@ -29,7 +29,7 @@ const ARTWORK = [
     { src: 'assets/images/briunka-city.jpg', label: 'City Lights' },
     { src: 'assets/images/briunka-stairs.jpg', label: 'Ascension' },
     { src: 'assets/images/briunka-jungle.jpg', label: 'Jungle Queen' },
-    { src: 'assets/images/briunka-cross.jpg', label: 'Divine Cross' }
+    { src: 'assets/images/briunka-cross.jpg', label: 'Burgundy Night' }
 ];
 
 const YT = 'https://www.youtube.com/@briunkalightofficial';
