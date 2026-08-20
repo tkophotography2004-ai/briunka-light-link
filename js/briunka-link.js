@@ -24,12 +24,12 @@ const PACKAGE_INCLUDES = [
 ];
 
 const ARTWORK = [
-    { src: 'assets/images/briunka-belight.jpg', label: 'Ivory Gold' },
-    { src: 'assets/images/briunka-halo.jpg', label: 'Burgundy Glam' },
-    { src: 'assets/images/briunka-city.jpg', label: 'City Lights' },
-    { src: 'assets/images/briunka-stairs.jpg', label: 'Royal Gold' },
-    { src: 'assets/images/briunka-jungle.jpg', label: 'Emerald' },
-    { src: 'assets/images/briunka-cross.jpg', label: 'Vintage Night' }
+    { src: 'assets/images/looks/ivory.jpg?v=2', label: 'Ivory Gold' },
+    { src: 'assets/images/looks/burgundy.jpg?v=2', label: 'Burgundy Glam' },
+    { src: 'assets/images/looks/city.jpg?v=2', label: 'City Lights' },
+    { src: 'assets/images/looks/royal.jpg?v=2', label: 'Royal Gold' },
+    { src: 'assets/images/looks/emerald.jpg?v=2', label: 'Emerald' },
+    { src: 'assets/images/looks/vintage.jpg?v=2', label: 'Vintage Night' }
 ];
 
 const YT = 'https://www.youtube.com/@briunkalightofficial';
@@ -75,9 +75,9 @@ const HIGHLIGHTS = [
         cta: 'Book a business film',
         ctaHref: 'prices.html#offer-business',
         items: [
-            { title: 'Luxury Business Promo', blurb: '15–30 second cinematic promo for a company, service, or founder.', image: 'assets/images/briunka-halo.jpg', url: '', urlLabel: '', bookId: 'ats-biz-promo', bookLabel: 'Business promo · $150' },
-            { title: 'Grand Opening', blurb: 'Announcement film, social teaser, and launch visuals for a new location.', image: 'assets/images/briunka-stairs.jpg', url: '', urlLabel: '', bookId: 'ats-grand-open', bookLabel: 'Grand opening · $500' },
-            { title: 'Business in the Universe', blurb: 'Your company appears inside Across the Stars as a story-world brand.', image: 'assets/images/briunka-city.jpg', url: '', urlLabel: '', bookId: 'ats-biz-universe', bookLabel: 'In-universe · $300' },
+            { title: 'Luxury Business Promo', blurb: '15–30 second cinematic promo for a company, service, or founder.', image: 'assets/images/looks/burgundy.jpg?v=2', url: '', urlLabel: '', bookId: 'ats-biz-promo', bookLabel: 'Business promo · $150' },
+            { title: 'Grand Opening', blurb: 'Announcement film, social teaser, and launch visuals for a new location.', image: 'assets/images/looks/royal.jpg?v=2', url: '', urlLabel: '', bookId: 'ats-grand-open', bookLabel: 'Grand opening · $500' },
+            { title: 'Business in the Universe', blurb: 'Your company appears inside Across the Stars as a story-world brand.', image: 'assets/images/looks/city.jpg?v=2', url: '', urlLabel: '', bookId: 'ats-biz-universe', bookLabel: 'In-universe · $300' },
             { title: 'Executive Brand Film', blurb: 'High-ticket partnership across multiple episodes and posts.', image: 'assets/images/across-the-stars-price-sheet.jpg', url: '', urlLabel: '', bookId: 'ats-brand', bookLabel: 'Brand partnership · $1,000+' }
         ]
     },
@@ -88,10 +88,10 @@ const HIGHLIGHTS = [
         cta: 'Advertise a product',
         ctaHref: 'prices.html#offer-ads',
         items: [
-            { title: 'Product Spotlight', blurb: 'A 15-second cinematic ad for one hero product, posted on Light Works channels.', image: 'assets/images/briunka-belight.jpg', url: '', urlLabel: '', bookId: 'ad-spotlight', bookLabel: 'Spotlight ad · $75' },
-            { title: 'Launch Drop', blurb: 'Teaser, launch video, and stories so a product drop actually gets seen.', image: 'assets/images/briunka-jungle.jpg', url: '', urlLabel: '', bookId: 'ad-launch', bookLabel: 'Launch campaign · $200' },
-            { title: 'Product in the Universe', blurb: 'The item appears on screen inside Across the Stars.', image: 'assets/images/briunka-cross.jpg', url: '', urlLabel: '', bookId: 'ad-universe', bookLabel: 'In-universe product · $350' },
-            { title: 'Brand Campaign', blurb: 'Multi-post cinematic advertising across Briunka’s platforms.', image: 'assets/images/briunka-halo.jpg', url: '', urlLabel: '', bookId: 'ad-brand', bookLabel: 'Brand ad package · $500' }
+            { title: 'Product Spotlight', blurb: 'A 15-second cinematic ad for one hero product, posted on Light Works channels.', image: 'assets/images/looks/ivory.jpg?v=2', url: '', urlLabel: '', bookId: 'ad-spotlight', bookLabel: 'Spotlight ad · $75' },
+            { title: 'Launch Drop', blurb: 'Teaser, launch video, and stories so a product drop actually gets seen.', image: 'assets/images/looks/emerald.jpg?v=2', url: '', urlLabel: '', bookId: 'ad-launch', bookLabel: 'Launch campaign · $200' },
+            { title: 'Product in the Universe', blurb: 'The item appears on screen inside Across the Stars.', image: 'assets/images/looks/vintage.jpg?v=2', url: '', urlLabel: '', bookId: 'ad-universe', bookLabel: 'In-universe product · $350' },
+            { title: 'Brand Campaign', blurb: 'Multi-post cinematic advertising across Briunka’s platforms.', image: 'assets/images/looks/burgundy.jpg?v=2', url: '', urlLabel: '', bookId: 'ad-brand', bookLabel: 'Brand ad package · $500' }
         ]
     }
 ];
@@ -100,7 +100,7 @@ const DEFAULT_CONFIG = {
     name: 'Briunka Light',
     tagline: 'Across the Stars · Light Works Entertainment',
     bio: 'The First Community Powered AI Cinematic Universe. Be part of history. Build the future. Leave a legacy.',
-    avatar: 'assets/images/briunka-halo.jpg',
+    avatar: 'assets/images/looks/burgundy.jpg?v=2',
     heroArt: 0,
     priceSheet: 'assets/images/across-the-stars-price-sheet.jpg',
     contactEmail: 'acrossthestars2026@gmail.com',
@@ -307,18 +307,18 @@ const DEFAULT_CONFIG = {
             price: 25,
             type: 'digital',
             url: '',
-            image: 'assets/images/briunka-belight.jpg',
+            image: 'assets/images/looks/ivory.jpg?v=2',
             description: 'Starter digital drop — rename this in Creator Studio and set your real file or checkout.',
             visible: false
         }
     ],
     casting: [
-        { id: 'ats-cameo', name: 'Cameo Spot', movie: 'Across the Stars', position: 'Cameo · 5–10 sec appearance', description: 'Appear in a future episode for 5–10 seconds. Upload your photos — we craft your AI likeness.', price: 75, category: 'cast', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/briunka-belight.jpg', visible: true },
+        { id: 'ats-cameo', name: 'Cameo Spot', movie: 'Across the Stars', position: 'Cameo · 5–10 sec appearance', description: 'Appear in a future episode for 5–10 seconds. Upload your photos — we craft your AI likeness.', price: 75, category: 'cast', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/looks/ivory.jpg?v=2', visible: true },
         { id: 'ats-featured', name: 'Featured Character', movie: 'Across the Stars', position: 'Speaking Role', description: 'Speaking role with custom character design. Be seen. Be remembered.', price: 150, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/across-the-stars-price-sheet.jpg', visible: true },
-        { id: 'ats-villain', name: 'Villain Package', movie: 'Across the Stars', position: 'Legendary Villain', description: 'Become a legendary villain. We\'ll create you. We\'ll defeat you. You\'ll be unforgettable.', price: 250, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-city.jpg', visible: true },
-        { id: 'ats-royal', name: 'Royal Family Package', movie: 'Across the Stars', position: 'Royal Family', description: 'Join the Royal Family — Kings, Queens, Princes, Princesses. Legacy is yours.', price: 300, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-halo.jpg', visible: true },
+        { id: 'ats-villain', name: 'Villain Package', movie: 'Across the Stars', position: 'Legendary Villain', description: 'Become a legendary villain. We\'ll create you. We\'ll defeat you. You\'ll be unforgettable.', price: 250, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/looks/city.jpg?v=2', visible: true },
+        { id: 'ats-royal', name: 'Royal Family Package', movie: 'Across the Stars', position: 'Royal Family', description: 'Join the Royal Family — Kings, Queens, Princes, Princesses. Legacy is yours.', price: 300, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/looks/burgundy.jpg?v=2', visible: true },
         { id: 'ats-exec', name: 'Executive Producer', movie: 'Across the Stars', position: 'Executive Producer Credit', description: 'Executive Producer credit, VIP access, early previews, and exclusive behind-the-scenes.', price: 500, category: 'cast', requiresPhotos: false, type: 'casting', image: 'assets/images/across-the-stars-price-sheet.jpg', visible: true },
-        { id: 'ats-recurring', name: 'Recurring Character', movie: 'Across the Stars', position: 'Multi-Episode Role', description: 'Become a recurring character across multiple episodes. Your story. Your legacy.', price: 750, priceLabel: '$750+', category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/briunka-stairs.jpg', visible: true },
+        { id: 'ats-recurring', name: 'Recurring Character', movie: 'Across the Stars', position: 'Multi-Episode Role', description: 'Become a recurring character across multiple episodes. Your story. Your legacy.', price: 750, priceLabel: '$750+', category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/looks/royal.jpg?v=2', visible: true },
 
         { id: 'ats-char-build', name: '1-on-1 Character Building', movie: 'Across the Stars', position: 'With Briunka Light', description: 'Private session to build your character with Briunka Light.', price: 100, category: 'addon', requiresPhotos: true, type: 'casting', image: '', visible: true },
         { id: 'ats-scene', name: 'Custom Scene Upgrade', movie: 'Across the Stars', position: 'Enhanced Visuals', description: 'Custom scenes with enhanced visuals for your character.', price: 150, priceLabel: '$150+', category: 'addon', requiresPhotos: true, type: 'casting', image: '', visible: true },
@@ -329,12 +329,12 @@ const DEFAULT_CONFIG = {
         { id: 'ats-artist-spot', name: 'Featured Artist Spotlight', movie: 'Across the Stars', position: 'Artist Feature', description: 'Featured artist spotlight in the universe — AI music promo included.', price: 200, category: 'music', requiresPhotos: true, promoVideo: true, type: 'casting', image: '', visible: true },
         { id: 'ats-soundtrack', name: 'Official Soundtrack Partner', movie: 'Across the Stars', position: 'Soundtrack Partner', description: 'Multiple placements plus exclusive promotion across the series.', price: 500, category: 'music', requiresPhotos: false, promoVideo: true, type: 'casting', image: '', visible: true },
 
-        { id: 'ad-spotlight', name: 'Product Spotlight Ad', movie: 'Light Works Ads', position: '15-sec cinematic ad', description: 'A cinematic ad for your product, posted across Light Works channels.', price: 75, category: 'ads', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/briunka-belight.jpg', visible: true },
+        { id: 'ad-spotlight', name: 'Product Spotlight Ad', movie: 'Light Works Ads', position: '15-sec cinematic ad', description: 'A cinematic ad for your product, posted across Light Works channels.', price: 75, category: 'ads', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/looks/ivory.jpg?v=2', visible: true },
         { id: 'ad-launch', name: 'Product Launch Campaign', movie: 'Light Works Ads', position: 'Teaser + launch + stories', description: 'Teaser, launch video, and story frames so your drop actually gets seen.', price: 200, category: 'ads', requiresPhotos: true, type: 'casting', image: '', visible: true },
         { id: 'ad-universe', name: 'Product in the Universe', movie: 'Across the Stars', position: 'In-story product placement', description: 'Your product appears inside Across the Stars as an in-universe placement.', price: 350, category: 'ads', requiresPhotos: false, type: 'casting', image: '', visible: true },
         { id: 'ad-brand', name: 'Brand Ad Package', movie: 'Light Works Ads', position: 'Multi-post campaign', description: 'Multi-post cinematic advertising across Briunka’s platforms.', price: 500, category: 'ads', requiresPhotos: true, type: 'casting', image: '', visible: true },
 
-        { id: 'book-spotlight', name: 'Author Spotlight', movie: 'Light Works Books', position: 'Cinematic book promo', description: 'A cinematic promo and author spotlight for your book across Light Works channels.', price: 100, category: 'authors', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/briunka-halo.jpg', visible: true },
+        { id: 'book-spotlight', name: 'Author Spotlight', movie: 'Light Works Books', position: 'Cinematic book promo', description: 'A cinematic promo and author spotlight for your book across Light Works channels.', price: 100, category: 'authors', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/looks/burgundy.jpg?v=2', visible: true },
         { id: 'book-launch', name: 'Book Launch Campaign', movie: 'Light Works Books', position: 'Release-week campaign', description: 'Book trailer, cover motion, captions, and posting for your release week.', price: 250, category: 'authors', requiresPhotos: true, type: 'casting', image: '', visible: true },
         { id: 'book-universe', name: 'Author in the Universe', movie: 'Across the Stars', position: 'In-story author placement', description: 'Your likeness or story world appears in Across the Stars, plus a launch promo.', price: 400, category: 'authors', requiresPhotos: true, type: 'casting', image: '', visible: true },
         { id: 'book-full', name: 'Full Book Release Marketing', movie: 'Light Works Books', position: 'Trailer + campaign + live shout', description: 'Trailer, social campaign, in-universe placement, and a live shout for your book.', price: 750, category: 'authors', requiresPhotos: true, type: 'casting', image: '', visible: true },
