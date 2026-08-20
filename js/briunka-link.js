@@ -37,7 +37,7 @@ const TT_MAIN = 'https://www.tiktok.com/@briunkalightofficial';
 const TT_FILM = 'https://www.tiktok.com/@lightworksunivers';
 
 const AFFILIATES = [
-    { id: 'openart', title: 'OpenArt', subtitle: 'AI image studio I use for looks and stills', url: 'https://openart.ai/home?utm_source=youtube&utm_medium=influencer&utm_campaign=infl-youtube--na-acq-web&ref=briunka', icon: 'fa-wand-magic-sparkles' },
+    { id: 'openart', title: 'OpenArt', subtitle: 'AI image studio I use for looks and stills. Use code BRIUNKA for 15% off', url: 'https://openart.ai/home?utm_source=youtube&utm_medium=influencer&utm_campaign=infl-youtube--na-acq-web&ref=briunka', icon: 'fa-wand-magic-sparkles', code: 'BRIUNKA' },
     { id: 'runway', title: 'Runway ML', subtitle: 'AI video. Use code CREATE15 at checkout', url: 'https://runwayml.com', icon: 'fa-film', code: 'CREATE15' },
     { id: 'syllaby', title: 'Syllaby', subtitle: 'Scripts and content systems', url: 'https://syllaby.io/?via=ashley16', icon: 'fa-comments' },
     { id: 'amazon', title: 'Amazon Shop', subtitle: 'TKO Talks storefront — gear, books & picks', url: 'https://www.amazon.com/shop/tkotalks', icon: 'fa-amazon', brand: true }
@@ -109,7 +109,7 @@ const DEFAULT_CONFIG = {
         { id: 'tt-backup', icon: 'fa-tiktok', url: 'https://www.tiktok.com/@briunkalightbackup', label: 'TikTok Backup', shortLabel: '@briunkalightbackup', visible: true },
         { id: 'tt-film', icon: 'fa-tiktok', url: 'https://www.tiktok.com/@lightworksunivers', label: 'Light Works Film', shortLabel: '@lightworksunivers', visible: true },
         { id: 'yt', icon: 'fa-youtube', url: 'https://www.youtube.com/@briunkalightofficial', label: 'YouTube', shortLabel: 'YouTube', visible: true },
-        { id: 'fb', icon: 'fa-facebook', url: 'https://www.facebook.com/profile.php?id=61586469727677', label: 'Facebook', shortLabel: 'Facebook', visible: true },
+        { id: 'fb', icon: 'fa-facebook', url: 'https://www.facebook.com/61586469727677', label: 'Facebook', shortLabel: 'Briunkalightofficial', visible: true },
         { id: 'ig', icon: 'fa-instagram', url: 'https://instagram.com', label: 'Instagram', shortLabel: 'Instagram', visible: false },
         { id: 'sp', icon: 'fa-spotify', url: 'https://open.spotify.com', label: 'Spotify', shortLabel: 'Spotify', visible: false },
         { id: 'x', icon: 'fa-x-twitter', url: 'https://x.com', label: 'X', shortLabel: 'X', visible: false }
@@ -689,7 +689,7 @@ function renderSocials() {
         const handle = s.shortLabel || s.label;
         const kind = s.icon === 'fa-tiktok' ? 'TikTok' : s.label;
         return `
-            <a href="${s.url}" target="_blank" rel="noopener" class="social-tile social-${brand}${featured ? ' is-featured' : ''}" title="${esc(s.label)}" style="animation-delay:${0.05 * i}s">
+            <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="social-tile social-${brand}${featured ? ' is-featured' : ''}" title="${esc(s.label)}" style="animation-delay:${0.05 * i}s">
                 <span class="social-tile-icon"><i class="fa-brands ${s.icon}"></i></span>
                 <span class="social-tile-copy">
                     <span class="social-tile-handle">${esc(handle)}</span>
@@ -698,6 +698,17 @@ function renderSocials() {
                 <i class="fa-solid fa-arrow-up-right-from-square social-tile-out"></i>
             </a>`;
     }).join('');
+    el.querySelectorAll('a.social-facebook').forEach(a => {
+        a.addEventListener('click', e => {
+            const ua = navigator.userAgent || '';
+            const inApp = /Instagram|TikTok|Twitter|Snapchat|Line\/|MicroMessenger/i.test(ua);
+            if (!inApp) return;
+            e.preventDefault();
+            navigator.clipboard.writeText(a.href).then(() => {
+                showToast('Facebook copied. Tap ⋯ then Open in Browser');
+            });
+        });
+    });
 }
 
 function renderLinks() {
