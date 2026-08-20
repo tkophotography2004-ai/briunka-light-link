@@ -24,12 +24,12 @@ const PACKAGE_INCLUDES = [
 ];
 
 const ARTWORK = [
-    { src: 'assets/images/briunka-belight.jpg', label: 'Be Light' },
-    { src: 'assets/images/briunka-halo.jpg', label: 'Halo' },
+    { src: 'assets/images/briunka-belight.jpg', label: 'Ivory Gold' },
+    { src: 'assets/images/briunka-halo.jpg', label: 'Burgundy Glam' },
     { src: 'assets/images/briunka-city.jpg', label: 'City Lights' },
-    { src: 'assets/images/briunka-stairs.jpg', label: 'Ascension' },
-    { src: 'assets/images/briunka-jungle.jpg', label: 'Jungle Queen' },
-    { src: 'assets/images/briunka-cross.jpg', label: 'Burgundy Night' }
+    { src: 'assets/images/briunka-stairs.jpg', label: 'Royal Gold' },
+    { src: 'assets/images/briunka-jungle.jpg', label: 'Emerald' },
+    { src: 'assets/images/briunka-cross.jpg', label: 'Vintage Night' }
 ];
 
 const YT = 'https://www.youtube.com/@briunkalightofficial';
