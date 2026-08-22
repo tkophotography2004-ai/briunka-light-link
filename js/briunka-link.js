@@ -139,7 +139,7 @@ const DEFAULT_CONFIG = {
         {
             id: 'ats',
             title: 'Across the Stars — Join the Cast',
-            subtitle: 'Cameo from $75 · Be part of the AI cinematic universe',
+            subtitle: 'Fan cameo on sale $25 (was $75) · Be part of the AI cinematic universe',
             url: 'prices.html#offer-cast',
             icon: 'fa-star',
             visible: true,
@@ -256,7 +256,7 @@ const DEFAULT_CONFIG = {
         {
             id: 'direct-cast',
             title: 'Be in the videos',
-            body: 'Fans can buy a cameo or featured role in Across the Stars. Upload your photos at checkout. We build your AI likeness into the episode. Cameo starts at $75.',
+            body: 'Fans can buy a cameo or featured role in Across the Stars. Upload your photos at checkout. We build your AI likeness into the episode. Fan cameos are on sale at $25 (was $75).',
             pinned: false,
             visible: true
         }
@@ -313,7 +313,7 @@ const DEFAULT_CONFIG = {
         }
     ],
     casting: [
-        { id: 'ats-cameo', name: 'Cameo Spot', movie: 'Across the Stars', position: 'Cameo · 5–10 sec appearance', description: 'Appear in a future episode for 5–10 seconds. Upload your photos — we craft your AI likeness.', price: 75, category: 'cast', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/looks/ivory.jpg?v=2', visible: true },
+        { id: 'ats-cameo', name: 'Cameo Spot', movie: 'Across the Stars', position: 'Fan Cameo · 5–10 sec appearance', description: 'Special sale: appear in a future episode for 5–10 seconds. Upload your photos — we craft your AI likeness.', price: 25, originalPrice: 75, onSale: true, category: 'cast', requiresPhotos: true, featured: true, type: 'casting', image: 'assets/images/looks/ivory.jpg?v=2', visible: true },
         { id: 'ats-featured', name: 'Featured Character', movie: 'Across the Stars', position: 'Speaking Role', description: 'Speaking role with custom character design. Be seen. Be remembered.', price: 150, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/across-the-stars-price-sheet.jpg', visible: true },
         { id: 'ats-villain', name: 'Villain Package', movie: 'Across the Stars', position: 'Legendary Villain', description: 'Become a legendary villain. We\'ll create you. We\'ll defeat you. You\'ll be unforgettable.', price: 250, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/looks/city.jpg?v=2', visible: true },
         { id: 'ats-royal', name: 'Royal Family Package', movie: 'Across the Stars', position: 'Royal Family', description: 'Join the Royal Family — Kings, Queens, Princes, Princesses. Legacy is yours.', price: 300, category: 'cast', requiresPhotos: true, type: 'casting', image: 'assets/images/looks/burgundy.jpg?v=2', visible: true },

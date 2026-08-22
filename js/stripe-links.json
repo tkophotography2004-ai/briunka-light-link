@@ -1,10 +1,10 @@
 {
   "ats-cameo": {
     "name": "Cameo Spot",
-    "url": "https://buy.stripe.com/4gM00j1W9apL2uF2Ku8og00",
+    "url": "https://buy.stripe.com/7sY3cv44hapLfhrdp88og0r",
     "product": "prod_V6T1DKqQzRpHJh",
-    "price": null,
-    "amount": 7500,
+    "price": "price_1U77UaHuGENKoTvwXm06RnJv",
+    "amount": 2500,
     "recurring": false
   },
   "ats-featured": {
