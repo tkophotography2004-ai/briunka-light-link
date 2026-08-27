@@ -7,11 +7,11 @@
     <meta name="description" content="Join Light Works Universe on Skool. Across the Stars — community-powered AI cinematic universe. Fan cameos on sale $25. Be light.">
     <meta property="og:title" content="Briunka Light — Light Works Universe">
     <meta property="og:description" content="Join the Skool community. Pay to join the cast. Be light.">
-    <meta property="og:url" content="https://www.skool.com/light-works-universe-5888">
+    <meta property="og:url" content="https://www.skool.com/light-works-universe-5888/about">
     <meta property="og:image" content="assets/images/looks/burgundy.jpg?v=2">
     <meta name="theme-color" content="#0b0b0d">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/briunka-link.css">
+    <link rel="stylesheet" href="css/briunka-link.css?v=eco2">
     <script>
         if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
             document.documentElement.classList.add('public-launch');
@@ -44,16 +44,36 @@
             <p class="brand-bio" id="brand-bio">Creative Director • Hitmaker • AI Films & cinematic sound. Pay to be part of the universe. Be light.</p>
         </header>
 
+        <a class="skool-cta ecosystem-cta" href="join-ecosystem.html" data-ecosystem-join="1" onclick="event.preventDefault(); openEcosystemNda();">
+            <span class="skool-cta-icon"><i class="fa-solid fa-lock"></i></span>
+            <span class="skool-cta-text">
+                <span class="skool-cta-kicker">Invite only · NDA required</span>
+                <span class="skool-cta-title serif">Request To Join The Ecosystem</span>
+                <span class="skool-cta-sub">Independent filmmakers &amp; music artists — waitlist now open</span>
+            </span>
+            <span class="skool-cta-arrow">APPLY <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a class="skool-cta" href="https://www.skool.com/light-works-universe-5888/about" target="_blank" rel="noopener">
+            <span class="skool-cta-icon"><i class="fa-solid fa-users"></i></span>
+            <span class="skool-cta-text">
+                <span class="skool-cta-kicker">Join the community</span>
+                <span class="skool-cta-title serif">Light Works Universe on Skool</span>
+                <span class="skool-cta-sub">Casting, lives & exclusive access</span>
+            </span>
+            <span class="skool-cta-arrow">JOIN <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
         <div class="art-dots" id="art-dots"></div>
+
+        <!-- Skool featured card + other featured links -->
+        <section id="featured-section" class="delay-1" style="animation: fadeUp 0.6s ease 0.1s forwards; opacity:0"></section>
 
         <section id="affiliate-section" class="affiliate-section delay-1" style="animation: fadeUp 0.6s ease 0.08s forwards; opacity:0">
             <p class="section-label">Affiliate links</p>
             <p class="casting-intro">Tools and shops I actually use. Some links are affiliate — I may earn a commission at no extra cost to you.</p>
             <div id="affiliate-list" class="affiliate-list"></div>
         </section>
-
-        <!-- Skool — first CTA -->
-        <section id="featured-section" class="delay-1" style="animation: fadeUp 0.6s ease 0.1s forwards; opacity:0"></section>
 
         <!-- Social -->
         <section class="delay-1" style="animation: fadeUp 0.6s ease 0.15s forwards; opacity:0">
@@ -74,6 +94,7 @@
         </section>
 
         <nav class="bio-jump" aria-label="On this page">
+            <a href="https://www.skool.com/light-works-universe-5888/about" target="_blank" rel="noopener">Skool</a>
             <a href="#affiliate-section">Affiliates</a>
             <a href="#highlight-business">Business</a>
             <a href="#highlight-products">Products</a>
@@ -154,9 +175,29 @@
         <img src="assets/images/across-the-stars-price-sheet.jpg" alt="Across the Stars Full Price List">
     </div>
 
+    <div class="nda-overlay" id="nda-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="nda-title">
+        <div class="nda-modal" role="document">
+            <div class="nda-icon"><i class="fa-solid fa-file-signature"></i></div>
+            <p class="nda-kicker">Confidential · Invite only</p>
+            <h3 class="nda-title serif" id="nda-title">NDA required. Do not copy this house.</h3>
+            <p class="nda-lead">This is a private creator ecosystem. It is not a template, not open source, and not yours to rebuild. If you continue, you are asking to join as a creator — not to take the blueprint.</p>
+            <ul class="nda-list">
+                <li>You will not copy, clone, or recreate this platform or its features.</li>
+                <li>You will not share how it works, how it looks, or how it is priced so someone else can duplicate it.</li>
+                <li>You will not use this access to start a competing house.</li>
+            </ul>
+            <label class="nda-check">
+                <input id="nda-agree" type="checkbox" onchange="syncEcosystemNda()">
+                <span>I understand. I will not copy, clone, or help anyone duplicate this house.</span>
+            </label>
+            <button type="button" class="nda-continue" id="nda-continue" disabled onclick="continueEcosystemJoin()">I agree — request to join</button>
+            <button type="button" class="nda-back" onclick="closeEcosystemNda()">Not for me</button>
+        </div>
+    </div>
+
     <div class="toast" id="toast"></div>
 
     <script src="js/payments.js"></script>
-    <script src="js/briunka-link.js"></script>
+    <script src="js/briunka-link.js?v=eco2"></script>
 </body>
 </html>

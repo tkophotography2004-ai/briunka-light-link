@@ -209,6 +209,102 @@ body {
     font-weight: 300;
 }
 
+.skool-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin: 1.35rem 0 0.25rem;
+    padding: 1rem 1.1rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 1.15rem;
+    border: 1px solid rgba(255, 210, 74, 0.5);
+    background: linear-gradient(135deg, rgba(42, 32, 8, 0.95), rgba(11, 11, 13, 0.96));
+    box-shadow: 0 0 36px rgba(255, 210, 74, 0.12);
+    animation: fadeUp 0.6s ease 0.06s forwards;
+    opacity: 0;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.skool-cta:hover {
+    border-color: rgba(255, 210, 74, 0.75);
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.55), 0 0 28px rgba(255, 210, 74, 0.16);
+    transform: translateY(-2px);
+}
+
+.skool-cta-icon {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 210, 74, 0.16);
+    border: 1px solid rgba(255, 210, 74, 0.4);
+    color: #ffd24a;
+    font-size: 1.05rem;
+}
+
+.skool-cta-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.skool-cta-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ffd24a;
+}
+
+.skool-cta-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ivory);
+}
+
+.skool-cta-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 1.35;
+}
+
+.skool-cta-arrow {
+    flex-shrink: 0;
+    color: #ffd24a;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    font-size: 0.625rem;
+}
+
+.ecosystem-cta {
+    border-color: rgba(191, 161, 90, 0.55);
+    background: linear-gradient(135deg, rgba(42, 28, 10, 0.96), rgba(11, 11, 13, 0.97));
+    box-shadow: 0 0 36px rgba(191, 161, 90, 0.14);
+}
+
+.ecosystem-cta .skool-cta-icon {
+    background: rgba(191, 161, 90, 0.16);
+    border-color: rgba(191, 161, 90, 0.45);
+    color: var(--gold);
+}
+
+.ecosystem-cta .skool-cta-kicker,
+.ecosystem-cta .skool-cta-arrow {
+    color: var(--gold);
+}
+
+.ecosystem-cta:hover {
+    border-color: rgba(191, 161, 90, 0.8);
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.55), 0 0 28px rgba(191, 161, 90, 0.18);
+}
+
 .gold-divider {
     height: 1px;
     margin: 2rem 0;
@@ -1147,6 +1243,33 @@ body {
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 210, 74, 0.12);
 }
 
+.link-card.ecosystem {
+    border-color: rgba(191, 161, 90, 0.5);
+    background: linear-gradient(135deg, rgba(42, 28, 10, 0.94), rgba(11, 11, 13, 0.96));
+    box-shadow: 0 0 40px rgba(191, 161, 90, 0.1);
+}
+
+.link-card.ecosystem .link-glow {
+    background: radial-gradient(circle, rgba(191, 161, 90, 0.28), transparent 70%);
+}
+
+.link-card.ecosystem .link-icon {
+    background: rgba(191, 161, 90, 0.16);
+    border-color: rgba(191, 161, 90, 0.4);
+    color: var(--gold);
+}
+
+.link-card.ecosystem .link-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+}
+
+.link-card.ecosystem:hover {
+    border-color: rgba(191, 161, 90, 0.75);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(191, 161, 90, 0.16);
+}
+
 .link-inner {
     position: relative;
     display: flex;
@@ -1843,6 +1966,148 @@ html.public-launch .studio-overlay {
 }
 
 .checkout-btn-secondary:hover { color: var(--ivory); }
+
+/* ── NDA gate (cannot miss, cannot click away) ── */
+.nda-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+}
+
+.nda-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.nda-modal {
+    width: 100%;
+    max-width: 26rem;
+    background: #14110e;
+    border: 1px solid rgba(191, 161, 90, 0.45);
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.35rem 1.35rem;
+    box-shadow: 0 0 0 4px rgba(191, 161, 90, 0.08), 0 24px 60px rgba(0, 0, 0, 0.7);
+    max-height: 92dvh;
+    overflow-y: auto;
+}
+
+.nda-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    background: rgba(191, 161, 90, 0.15);
+    border: 1px solid rgba(191, 161, 90, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.85rem;
+    color: var(--gold);
+    font-size: 1.2rem;
+}
+
+.nda-kicker {
+    text-align: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+}
+
+.nda-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    color: var(--ivory);
+}
+
+.nda-lead {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin-bottom: 0.85rem;
+}
+
+.nda-list {
+    margin: 0 0 1rem;
+    padding: 0.85rem 0.85rem 0.85rem 1.35rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(191, 161, 90, 0.2);
+    border-radius: 0.75rem;
+    color: var(--ivory);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+}
+
+.nda-list li { margin-bottom: 0.45rem; }
+.nda-list li:last-child { margin-bottom: 0; }
+
+.nda-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--ivory);
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.nda-check input {
+    margin-top: 0.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--gold);
+    flex-shrink: 0;
+}
+
+.nda-continue {
+    width: 100%;
+    padding: 0.95rem 1rem;
+    border: none;
+    border-radius: 9999px;
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.nda-continue:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.nda-continue:not(:disabled):hover {
+    background: var(--gold-light);
+    box-shadow: 0 4px 20px var(--gold-glow);
+}
+
+.nda-back {
+    display: block;
+    width: 100%;
+    margin-top: 0.55rem;
+    padding: 0.7rem;
+    border: none;
+    background: none;
+    color: var(--muted);
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.nda-back:hover { color: var(--ivory); }
 
 /* ── Toast ── */
 .toast {

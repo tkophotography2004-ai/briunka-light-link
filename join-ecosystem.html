@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request To Join The Ecosystem — Briunka Light</title>
+    <meta name="description" content="Invite-only creator house. NDA required. Do not copy, clone, or rebuild this platform.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/briunka-link.css?v=eco2">
+</head>
+<body>
+    <div class="art-hero" id="art-hero"></div>
+    <div class="hero-vignette"></div>
+    <div class="grain"></div>
+
+    <div class="nda-overlay open" id="nda-overlay" aria-hidden="false" role="dialog" aria-modal="true" aria-labelledby="nda-title">
+        <div class="nda-modal" role="document">
+            <div class="nda-icon"><i class="fa-solid fa-file-signature"></i></div>
+            <p class="nda-kicker">Confidential · Invite only</p>
+            <h3 class="nda-title serif" id="nda-title">NDA required. Do not copy this house.</h3>
+            <p class="nda-lead">This is a private creator ecosystem. It is not a template, not open source, and not yours to rebuild. If you continue, you are asking to join as a creator — not to take the blueprint.</p>
+            <ul class="nda-list">
+                <li>You will not copy, clone, or recreate this platform or its features.</li>
+                <li>You will not share how it works, how it looks, or how it is priced so someone else can duplicate it.</li>
+                <li>You will not use this access to start a competing house.</li>
+            </ul>
+            <label class="nda-check">
+                <input id="nda-agree" type="checkbox">
+                <span>I understand. I will not copy, clone, or help anyone duplicate this house.</span>
+            </label>
+            <button type="button" class="nda-continue" id="nda-continue" disabled>I agree — request to join</button>
+            <a class="nda-back" href="index.html">Not for me</a>
+        </div>
+    </div>
+
+    <script>
+        function houseUrl() {
+            if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+                return 'http://localhost:3100/register';
+            }
+            return 'http://localhost:3100/register';
+        }
+        const box = document.getElementById('nda-agree');
+        const go = document.getElementById('nda-continue');
+        box.addEventListener('change', () => { go.disabled = !box.checked; });
+        go.addEventListener('click', () => {
+            if (!box.checked) return;
+            window.location.href = houseUrl();
+        });
+        document.body.style.overflow = 'hidden';
+    </script>
+</body>
+</html>

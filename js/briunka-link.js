@@ -116,13 +116,24 @@ const DEFAULT_CONFIG = {
     ],
     links: [
         {
+            id: 'ecosystem',
+            title: 'Request To Join The Ecosystem',
+            subtitle: 'Invite only · NDA required · independent filmmakers & music artists',
+            url: 'join-ecosystem.html',
+            icon: 'fa-lock',
+            featured: true,
+            visible: true,
+            group: 'featured',
+            style: 'ecosystem'
+        },
+        {
             id: 'skool',
             title: 'Light Works Universe',
             subtitle: 'Join the Skool community — casting, lives & exclusive access',
-            url: 'join-skool.html',
+            url: 'https://www.skool.com/light-works-universe-5888/about',
             icon: 'fa-users',
-            featured: true,
-            visible: true,
+            featured: false,
+            visible: false,
             group: 'featured',
             style: 'skool'
         },
@@ -389,26 +400,46 @@ function loadConfig() {
     artIndex = config.heroArt || 0;
 }
 
-const SKOOL_URL = 'join-skool.html';
-const SKOOL_DIRECT = 'https://www.skool.com/light-works-universe-5888';
+const SKOOL_URL = 'https://www.skool.com/light-works-universe-5888/about';
+const SKOOL_DIRECT = 'https://www.skool.com/light-works-universe-5888/about';
+
+function ecosystemHouseUrl() {
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        return 'http://localhost:3100/register';
+    }
+    return 'join-ecosystem.html';
+}
 
 function mergeLinks(saved) {
     const links = saved?.length ? [...saved] : [...DEFAULT_CONFIG.links];
+    const ecoDefault = DEFAULT_CONFIG.links.find(l => l.id === 'ecosystem');
+    if (ecoDefault && !links.some(l => l.id === 'ecosystem')) {
+        links.unshift({ ...ecoDefault });
+    }
+    const eco = links.find(l => l.id === 'ecosystem');
+    if (eco && ecoDefault) {
+        eco.title = ecoDefault.title;
+        eco.subtitle = ecoDefault.subtitle;
+        eco.url = ecoDefault.url;
+        eco.icon = ecoDefault.icon;
+        eco.featured = true;
+        eco.visible = true;
+        eco.group = 'featured';
+        eco.style = 'ecosystem';
+    }
+    links.forEach(l => {
+        if (l.id !== 'ecosystem') l.featured = false;
+    });
     const skoolDefault = DEFAULT_CONFIG.links.find(l => l.id === 'skool');
-    const hasSkool = links.some(l => l.id === 'skool');
-    if (!hasSkool && skoolDefault) {
-        links.unshift(skoolDefault);
-    } else {
-        const skool = links.find(l => l.id === 'skool');
-        if (skool) {
-            if (!skool.url || skool.url.includes('skool.com')) skool.url = SKOOL_URL;
-            skool.featured = true;
-            skool.visible = true;
-            skool.style = 'skool';
-        }
-        links.forEach(l => {
-            if (l.id === 'live-review') l.featured = false;
-        });
+    if (skoolDefault && !links.some(l => l.id === 'skool')) {
+        links.push({ ...skoolDefault });
+    }
+    const skool = links.find(l => l.id === 'skool');
+    if (skool) {
+        skool.url = SKOOL_DIRECT;
+        skool.featured = false;
+        skool.visible = false;
+        skool.style = 'skool';
     }
     return links;
 }
@@ -541,6 +572,7 @@ function render() {
     renderClips();
     renderApps();
     renderLinks();
+    bindEcosystemJoin();
     renderStreaming();
     renderHighlights();
     renderCasting();
@@ -748,20 +780,24 @@ function renderLinks() {
 
 function buildLinkCard(link, isFeatured, delay) {
     const skoolCls = link.style === 'skool' ? ' skool-card' : '';
+    const ecoCls = link.style === 'ecosystem' || link.id === 'ecosystem' ? ' ecosystem' : '';
     const cls = isFeatured
-        ? 'link-card featured' + skoolCls + ' delay-' + delay
-        : 'link-card delay-' + delay;
+        ? 'link-card featured' + skoolCls + ecoCls + ' delay-' + delay
+        : 'link-card' + ecoCls + ' delay-' + delay;
     const glow = isFeatured ? '<div class="link-glow"></div>' : '';
     const arrow = isFeatured
         ? (link.style === 'skool'
             ? '<span class="link-arrow skool-arrow">JOIN <i class="fa-solid fa-arrow-right"></i></span>'
-            : '<span class="link-arrow">ENTER <i class="fa-solid fa-arrow-right"></i></span>')
+            : link.id === 'ecosystem'
+                ? '<span class="link-arrow">REQUEST <i class="fa-solid fa-arrow-right"></i></span>'
+                : '<span class="link-arrow">ENTER <i class="fa-solid fa-arrow-right"></i></span>')
         : '<i class="fa-solid fa-chevron-right link-arrow"></i>';
     const isHash = link.url.startsWith('#');
     const external = link.url.startsWith('http') ? 'target="_blank" rel="noopener"' : '';
+    const ecoAttr = link.id === 'ecosystem' ? 'data-ecosystem-join="1"' : '';
 
     return `
-        <a href="${link.url}" class="${cls}" ${external} ${isHash ? 'onclick="event.preventDefault();document.querySelector(\'' + link.url + '\').scrollIntoView({behavior:\'smooth\'})"' : ''}>
+        <a href="${link.url}" class="${cls}" ${external} ${ecoAttr} ${isHash ? 'onclick="event.preventDefault();document.querySelector(\'' + link.url + '\').scrollIntoView({behavior:\'smooth\'})"' : ''}>
             ${glow}
             <div class="link-inner">
                 <div class="link-icon"><i class="fa-solid ${link.icon || 'fa-link'}"></i></div>
@@ -1040,6 +1076,50 @@ function closeCheckout() {
     document.getElementById('checkout-overlay').classList.remove('open');
     checkoutProduct = null;
     checkoutIsCasting = false;
+}
+
+function bindEcosystemJoin() {
+    document.querySelectorAll('[data-ecosystem-join="1"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            openEcosystemNda();
+        });
+    });
+}
+
+function openEcosystemNda() {
+    const overlay = document.getElementById('nda-overlay');
+    const box = document.getElementById('nda-agree');
+    const go = document.getElementById('nda-continue');
+    if (!overlay) {
+        window.location.href = 'join-ecosystem.html';
+        return;
+    }
+    if (box) box.checked = false;
+    if (go) go.disabled = true;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeEcosystemNda() {
+    const overlay = document.getElementById('nda-overlay');
+    if (!overlay) return;
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+function syncEcosystemNda() {
+    const box = document.getElementById('nda-agree');
+    const go = document.getElementById('nda-continue');
+    if (go) go.disabled = !box?.checked;
+}
+
+function continueEcosystemJoin() {
+    const box = document.getElementById('nda-agree');
+    if (!box?.checked) return;
+    window.location.href = ecosystemHouseUrl();
 }
 
 window._refPhotos = [];
@@ -1651,6 +1731,8 @@ async function hydrateFromServer() {
         if (data.clips) config.clips = data.clips;
         if (data.apps) config.apps = data.apps;
         if (data.products && data.products.length) config.products = data.products;
+        if (data.links) config.links = mergeLinks(data.links);
+        else config.links = mergeLinks(config.links);
         saveConfig();
         render();
     } catch { /* stay on localStorage */ }
