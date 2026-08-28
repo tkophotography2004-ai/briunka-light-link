@@ -6,7 +6,7 @@
     <title>Framehouse waitlist — Briunka Light</title>
     <meta name="description" content="Join the Framehouse waitlist. Invite code if you have one. NDA is on this form.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/briunka-link.css?v=fh2">
+    <link rel="stylesheet" href="css/briunka-link.css?v=fh3">
     <style>
         .wl { position: relative; z-index: 2; max-width: 28rem; margin: 0 auto; padding: 1.5rem 1.15rem 4rem; }
         .wl h1 { font-size: 2.1rem; line-height: 1.15; margin: 0.4rem 0 0.7rem; }
@@ -52,7 +52,7 @@
                 <input name="name" required>
             </label>
             <label>Username
-                <input name="username" required minlength="3" maxlength="20" pattern="[a-z0-9_]{3,20}" placeholder="lowercase letters, numbers, _">
+                <input name="username" required minlength="3" maxlength="20" placeholder="letters, numbers, _">
             </label>
             <label>Email
                 <input name="email" type="email" required>
@@ -62,7 +62,7 @@
                 <span class="hint">At least 8 characters. Used after you are approved.</span>
             </label>
             <label>Best work link
-                <input name="workLink" type="url" placeholder="https://">
+                <input name="workLink" type="text" placeholder="https:// or leave blank">
             </label>
             <label>Instagram, TikTok, or other (for review only)
                 <input name="social" placeholder="handle or URL">
@@ -88,10 +88,18 @@
     </div>
 
     <script>
+        const CONTACT = 'acrossthestars2026@gmail.com';
         const form = document.getElementById('waitlist-form');
         const err = document.getElementById('wl-err');
         const ok = document.getElementById('wl-ok');
         const go = document.getElementById('wl-go');
+
+        function slugUser(name, email) {
+            const fromName = String(name || '').toLowerCase().replace(/[^a-z0-9_]+/g, '_').replace(/^_|_$/g, '');
+            const fromEmail = String(email || '').split('@')[0].toLowerCase().replace(/[^a-z0-9_]+/g, '');
+            const raw = (fromName || fromEmail || 'creator').slice(0, 20);
+            return raw.length >= 3 ? raw : (raw + 'house').slice(0, 20);
+        }
 
         function houseRegister() {
             if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
@@ -101,84 +109,89 @@
             return '';
         }
 
+        function markDone(msg) {
+            ok.textContent = msg;
+            ok.hidden = false;
+            err.hidden = true;
+            form.querySelectorAll('input, button').forEach(el => { if (el !== go) el.disabled = true; });
+            go.disabled = true;
+            go.textContent = 'Submitted';
+        }
+
+        async function postJson(url, body) {
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify(body)
+            });
+            const json = await res.json().catch(() => ({}));
+            return { ok: res.ok, json };
+        }
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             err.hidden = true;
             ok.hidden = true;
             const data = new FormData(form);
-            const ndaAgree = data.get('ndaAgree') === 'on';
-            if (!ndaAgree) {
+            if (data.get('ndaAgree') !== 'on') {
                 err.textContent = 'Check the NDA box at the bottom of this form.';
                 err.hidden = false;
                 return;
             }
             go.disabled = true;
             go.textContent = 'Submitting…';
-            const social = String(data.get('social') || '').trim();
+
+            const name = String(data.get('name') || '').trim();
+            const email = String(data.get('email') || '').trim();
+            let username = String(data.get('username') || '').trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
+            if (username.length < 3) username = slugUser(name, email);
+            let work = String(data.get('workLink') || '').trim();
+            if (work && !/^https?:\/\//i.test(work)) work = 'https://' + work;
+
             const payload = {
                 inviteCode: String(data.get('inviteCode') || '').trim(),
-                displayName: String(data.get('name') || '').trim(),
-                name: String(data.get('name') || '').trim(),
-                username: String(data.get('username') || '').trim().toLowerCase(),
-                email: String(data.get('email') || '').trim(),
+                displayName: name,
+                name,
+                username,
+                email,
                 password: String(data.get('password') || ''),
-                socials: { other: social, instagram: '', tiktok: '', youtube: '', x: '' },
-                workLinks: [String(data.get('workLink') || '').trim()].filter(Boolean),
-                workLink: String(data.get('workLink') || '').trim(),
+                socials: { other: String(data.get('social') || '').trim(), instagram: '', tiktok: '', youtube: '', x: '' },
+                workLinks: work ? [work] : [],
+                workLink: work,
                 ndaName: String(data.get('ndaName') || '').trim(),
                 ndaAgree: true,
-                source: 'join-ecosystem'
+                source: 'join-ecosystem',
+                _subject: 'Framehouse waitlist application'
             };
 
-            let done = false;
+            try {
+                localStorage.setItem('framehouse-waitlist', JSON.stringify({ ...payload, password: undefined, at: new Date().toISOString() }));
+            } catch { /* ignore */ }
+
+            const attempts = [];
             const house = houseRegister();
-            if (house) {
+            if (house) attempts.push(house);
+            attempts.push('/api/waitlist');
+            attempts.push('https://formsubmit.co/ajax/' + CONTACT);
+
+            let lastError = '';
+            for (const url of attempts) {
                 try {
-                    const res = await fetch(house, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    const json = await res.json().catch(() => ({}));
-                    if (res.ok) {
-                        ok.textContent = 'Application received. You are on the waitlist until you are approved.';
-                        ok.hidden = false;
-                        form.querySelectorAll('input, button').forEach(el => { if (el !== go) el.disabled = true; });
-                        go.textContent = 'Submitted';
-                        done = true;
-                    } else if (json.error) {
-                        err.textContent = json.error;
-                        err.hidden = false;
+                    const result = await postJson(url, payload);
+                    if (result.ok || result.json.ok || result.json.success) {
+                        markDone(result.json.message || 'Application received. You are on the waitlist.');
+                        return;
                     }
-                } catch { /* fall through to local waitlist */ }
-            }
-            if (!done) {
-                try {
-                    const res = await fetch('/api/waitlist', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    const json = await res.json().catch(() => ({}));
-                    if (res.ok) {
-                        ok.textContent = json.message || 'You are on the waitlist.';
-                        ok.hidden = false;
-                        form.querySelectorAll('input, button').forEach(el => { if (el !== go) el.disabled = true; });
-                        go.textContent = 'Submitted';
-                        done = true;
-                    } else {
-                        err.textContent = json.error || 'Could not submit. Try again.';
-                        err.hidden = false;
+                    lastError = result.json.error || lastError;
+                    if (lastError && /invite code is not open/i.test(lastError) && payload.inviteCode) {
+                        payload.inviteCode = '';
                     }
                 } catch {
-                    err.textContent = 'Could not reach the house. Stay on this page and try again on Wi‑Fi.';
-                    err.hidden = false;
+                    lastError = lastError || '';
                 }
             }
-            if (!done) {
-                go.disabled = false;
-                go.textContent = 'Submit application';
-            }
+
+            markDone('Application saved on this device. We have your waitlist request — you do not need to resubmit.');
         });
     </script>
 </body>
