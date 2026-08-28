@@ -22,6 +22,7 @@ else:
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 SUBSCRIBERS_FILE = DATA_DIR / "subscribers.json"
+WAITLIST_FILE = DATA_DIR / "ecosystem-waitlist.json"
 ORDERS_FILE = DATA_DIR / "orders.json"
 CASTING_FILE = DATA_DIR / "casting-applications.json"
 REVIEW_FILE = DATA_DIR / "review-submissions.json"
@@ -165,6 +166,45 @@ def public_config():
         "paypalMode": PAYPAL_MODE,
         "paymentsEnabled": STRIPE_READY or PAYPAL_READY,
     })
+
+
+@app.route("/api/waitlist", methods=["POST", "OPTIONS"])
+def ecosystem_waitlist():
+    if request.method == "OPTIONS":
+        return "", 204
+
+    body = request.get_json(silent=True) or {}
+    email = (body.get("email") or "").strip().lower()
+    name = (body.get("name") or "").strip()
+    invite = (body.get("inviteCode") or "").strip()
+    nda_name = (body.get("ndaName") or "").strip()
+    if not email or "@" not in email:
+        return jsonify({"error": "Enter a valid email."}), 400
+    if not name:
+        return jsonify({"error": "Enter your name."}), 400
+    if not body.get("ndaAgree"):
+        return jsonify({"error": "You must sign the NDA on this form."}), 400
+    if len(nda_name) < 3:
+        return jsonify({"error": "Type your legal name to sign the NDA."}), 400
+
+    rows = _read_json(WAITLIST_FILE, [])
+    if any((r.get("email") or "").lower() == email for r in rows):
+        return jsonify({"ok": True, "duplicate": True, "message": "You are already on the waitlist."})
+
+    rows.append({
+        "id": str(uuid.uuid4()),
+        "email": email,
+        "name": name,
+        "username": (body.get("username") or "").strip().lower(),
+        "inviteCode": invite,
+        "workLink": (body.get("workLink") or "").strip(),
+        "ndaName": nda_name,
+        "ndaSignedAt": _now(),
+        "source": body.get("source", "join-ecosystem"),
+        "createdAt": _now(),
+    })
+    _write_json(WAITLIST_FILE, rows)
+    return jsonify({"ok": True, "message": "You're on the waitlist. We will review your application."})
 
 
 @app.route("/api/subscribe", methods=["POST", "OPTIONS"])

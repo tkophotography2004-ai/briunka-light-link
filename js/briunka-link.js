@@ -1149,26 +1149,16 @@ function closeCheckout() {
 
 function bindEcosystemJoin() {
     document.querySelectorAll('[data-ecosystem-join="1"]').forEach(a => {
+        a.setAttribute('href', 'join-ecosystem.html');
         a.addEventListener('click', e => {
             e.preventDefault();
-            openEcosystemNda();
+            window.location.href = 'join-ecosystem.html';
         });
     });
 }
 
 function openEcosystemNda() {
-    const overlay = document.getElementById('nda-overlay');
-    const box = document.getElementById('nda-agree');
-    const go = document.getElementById('nda-continue');
-    if (!overlay) {
-        window.location.href = 'join-ecosystem.html';
-        return;
-    }
-    if (box) box.checked = false;
-    if (go) go.disabled = true;
-    overlay.classList.add('open');
-    overlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    window.location.href = 'join-ecosystem.html';
 }
 
 function closeEcosystemNda() {
@@ -1186,9 +1176,7 @@ function syncEcosystemNda() {
 }
 
 function continueEcosystemJoin() {
-    const box = document.getElementById('nda-agree');
-    if (!box?.checked) return;
-    window.location.href = ecosystemHouseUrl();
+    window.location.href = 'join-ecosystem.html';
 }
 
 window._refPhotos = [];
