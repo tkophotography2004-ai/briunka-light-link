@@ -6,7 +6,7 @@
     <title>Request To Join The Ecosystem — Briunka Light</title>
     <meta name="description" content="Invite-only creator house. NDA required. Do not copy, clone, or rebuild this platform.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/briunka-link.css?v=eco2">
+    <link rel="stylesheet" href="css/briunka-link.css?v=fh1">
 </head>
 <body>
     <div class="art-hero" id="art-hero"></div>
@@ -38,7 +38,8 @@
             if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
                 return 'http://localhost:3100/register';
             }
-            return 'http://localhost:3100/register';
+            if (window.FRAMEHOUSE_PUBLIC) return window.FRAMEHOUSE_PUBLIC.replace(/\/$/, '') + '/register';
+            return 'framehouse.html';
         }
         const box = document.getElementById('nda-agree');
         const go = document.getElementById('nda-continue');

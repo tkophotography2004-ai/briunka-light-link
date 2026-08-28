@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Framehouse — Films stay here. Fans stay here.</title>
+    <meta name="description" content="Invite-only streaming house for independent films, series, and music. Hook Studio picks the 60 seconds. Founding beta — storage on the house.">
+    <meta name="theme-color" content="#09080a">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/briunka-link.css?v=fh1">
+    <style>
+        .fh-page { position: relative; z-index: 2; max-width: 32rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+        .fh-kicker { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+        .fh-page h1 { font-size: 2.4rem; line-height: 1.1; margin: 0.6rem 0 0.8rem; }
+        .fh-lead { color: var(--muted); font-size: 1rem; line-height: 1.55; }
+        .fh-list { margin: 1.4rem 0; padding: 1rem 1rem 1rem 1.6rem; border: 1px solid var(--glass-border); background: var(--glass); border-radius: 1rem; color: var(--ivory); font-size: 0.9rem; line-height: 1.5; }
+        .fh-list li { margin: 0.4rem 0; }
+        .fh-actions { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1.5rem; }
+        .fh-btn { display: flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0.85rem 1.1rem; border-radius: 1rem; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+        .fh-btn-gold { background: var(--gold); color: #0b0b0d; }
+        .fh-btn-ghost { border: 1px solid var(--glass-border); color: var(--ivory); }
+        .fh-note { margin-top: 1.25rem; font-size: 0.75rem; color: var(--muted); line-height: 1.45; }
+        .fh-back { display: inline-block; margin-bottom: 1.5rem; color: var(--muted); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <div class="art-hero" id="art-hero"></div>
+    <div class="hero-vignette"></div>
+    <div class="grain"></div>
+
+    <div class="fh-page">
+        <a class="fh-back" href="index.html"><i class="fa-solid fa-arrow-left"></i> Link in bio</a>
+        <p class="fh-kicker">The house</p>
+        <h1 class="serif">Framehouse</h1>
+        <p class="fh-lead">Films stay here. Fans stay here. Independent films, series, and music — a closed page so the audience does not leak to another app.</p>
+        <ul class="fh-list">
+            <li>Upload a film, episode, or music video from Studio.</li>
+            <li>Hook Studio picks the most viral 60 seconds and builds a visualizer.</li>
+            <li>Fans rent, buy, like, and share on your Framehouse page. You keep 80%.</li>
+            <li>Founding beta: storage is on the house. Films/series are $3/month to upload. Music and hooks: no house fee.</li>
+        </ul>
+        <div class="fh-actions">
+            <a class="fh-btn fh-btn-gold" href="join-ecosystem.html">Apply with invite</a>
+            <a class="fh-btn fh-btn-ghost" id="fh-enter" href="http://localhost:3100">Enter the house</a>
+        </div>
+        <p class="fh-note">Invite is personal. No product walkthroughs. Test with a short, a trailer, or one hook — not a complete series. After you are approved, sign in from Studio.</p>
+    </div>
+
+    <script>
+        (function () {
+            var local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            var enter = document.getElementById('fh-enter');
+            if (local) enter.href = 'http://localhost:3100';
+            else enter.href = 'join-ecosystem.html';
+        })();
+    </script>
+</body>
+</html>

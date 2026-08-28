@@ -116,6 +116,17 @@ const DEFAULT_CONFIG = {
     ],
     links: [
         {
+            id: 'framehouse',
+            title: 'Framehouse',
+            subtitle: 'Films, series, music & the 60-second cut — fans stay here',
+            url: 'framehouse.html',
+            icon: 'fa-film',
+            featured: true,
+            visible: true,
+            group: 'featured',
+            style: 'house'
+        },
+        {
             id: 'ecosystem',
             title: 'Request To Join The Ecosystem',
             subtitle: 'Invite only · NDA required · independent filmmakers & music artists',
@@ -275,6 +286,15 @@ const DEFAULT_CONFIG = {
     clips: [],
     apps: [
         {
+            id: 'app-framehouse',
+            name: 'Framehouse',
+            blurb: 'Independent films, series, and Hook Studio. Founding beta — storage on the house.',
+            url: 'framehouse.html',
+            badge: 'House',
+            priceLabel: 'Open',
+            visible: true
+        },
+        {
             id: 'app-onyx',
             name: 'ONYX',
             blurb: 'Midjourney-style costume close-ups for Black aesthetics.',
@@ -391,7 +411,7 @@ function loadConfig() {
                 casting: mergeCasting(parsed.casting),
                 direct: parsed.direct || DEFAULT_CONFIG.direct,
                 clips: parsed.clips || DEFAULT_CONFIG.clips,
-                apps: parsed.apps || DEFAULT_CONFIG.apps
+                apps: mergeApps(parsed.apps)
             };
         }
     } catch {
@@ -403,11 +423,21 @@ function loadConfig() {
 const SKOOL_URL = 'https://www.skool.com/light-works-universe-5888/about';
 const SKOOL_DIRECT = 'https://www.skool.com/light-works-universe-5888/about';
 
+function framehouseUrl(path) {
+    const p = path || '/';
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        return 'http://localhost:3100' + p;
+    }
+    if (window.FRAMEHOUSE_PUBLIC) return window.FRAMEHOUSE_PUBLIC.replace(/\/$/, '') + p;
+    return 'framehouse.html';
+}
+
 function ecosystemHouseUrl() {
     if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
         return 'http://localhost:3100/register';
     }
-    return 'join-ecosystem.html';
+    if (window.FRAMEHOUSE_PUBLIC) return window.FRAMEHOUSE_PUBLIC.replace(/\/$/, '') + '/register';
+    return 'framehouse.html';
 }
 
 function mergeLinks(saved) {
@@ -427,8 +457,23 @@ function mergeLinks(saved) {
         eco.group = 'featured';
         eco.style = 'ecosystem';
     }
+    const houseDefault = DEFAULT_CONFIG.links.find(l => l.id === 'framehouse');
+    if (houseDefault && !links.some(l => l.id === 'framehouse')) {
+        links.unshift({ ...houseDefault });
+    }
+    const house = links.find(l => l.id === 'framehouse');
+    if (house && houseDefault) {
+        house.title = houseDefault.title;
+        house.subtitle = houseDefault.subtitle;
+        house.url = houseDefault.url;
+        house.icon = houseDefault.icon;
+        house.featured = true;
+        house.visible = true;
+        house.group = 'featured';
+        house.style = 'house';
+    }
     links.forEach(l => {
-        if (l.id !== 'ecosystem') l.featured = false;
+        if (l.id !== 'ecosystem' && l.id !== 'framehouse') l.featured = false;
     });
     const skoolDefault = DEFAULT_CONFIG.links.find(l => l.id === 'skool');
     if (skoolDefault && !links.some(l => l.id === 'skool')) {
@@ -442,6 +487,24 @@ function mergeLinks(saved) {
         skool.style = 'skool';
     }
     return links;
+}
+
+function mergeApps(saved) {
+    const apps = saved?.length ? [...saved] : [...DEFAULT_CONFIG.apps];
+    const house = DEFAULT_CONFIG.apps.find(a => a.id === 'app-framehouse');
+    if (house && !apps.some(a => a.id === 'app-framehouse' || a.id === 'framehouse')) {
+        apps.unshift({ ...house });
+    }
+    const row = apps.find(a => a.id === 'app-framehouse' || a.id === 'framehouse');
+    if (row && house) {
+        row.name = house.name;
+        row.blurb = house.blurb;
+        row.url = house.url;
+        row.badge = house.badge;
+        row.priceLabel = house.priceLabel;
+        row.visible = true;
+    }
+    return apps;
 }
 
 function mergeCasting(saved) {
@@ -652,7 +715,13 @@ function renderApps() {
     const grid = document.getElementById('apps-grid');
     const section = document.getElementById('apps-section');
     if (!grid || !section) return;
-    const apps = (config.apps || []).filter(a => a.visible);
+    let apps = (config.apps || []).filter(a => a.visible);
+    if (isPublicHost()) {
+        apps = apps.filter(a => {
+            const u = String(a.url || '');
+            return u && !u.startsWith('http://127.') && !u.startsWith('http://localhost') && !u.startsWith('../');
+        });
+    }
     if (!apps.length) {
         section.style.display = 'none';
         return;
@@ -780,7 +849,7 @@ function renderLinks() {
 
 function buildLinkCard(link, isFeatured, delay) {
     const skoolCls = link.style === 'skool' ? ' skool-card' : '';
-    const ecoCls = link.style === 'ecosystem' || link.id === 'ecosystem' ? ' ecosystem' : '';
+    const ecoCls = link.style === 'ecosystem' || link.id === 'ecosystem' ? ' ecosystem' : link.id === 'framehouse' ? ' house' : '';
     const cls = isFeatured
         ? 'link-card featured' + skoolCls + ecoCls + ' delay-' + delay
         : 'link-card' + ecoCls + ' delay-' + delay;
@@ -1754,8 +1823,6 @@ function applyPublicLaunch() {
     if (review) review.style.display = 'none';
     const shop = document.getElementById('shop-section');
     if (shop) shop.style.display = 'none';
-    const apps = document.getElementById('apps-section');
-    if (apps) apps.style.display = 'none';
 
     if (!isPublicHost()) return;
     document.querySelector('.studio-fab')?.remove();

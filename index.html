@@ -11,7 +11,7 @@
     <meta property="og:image" content="assets/images/looks/burgundy.jpg?v=2">
     <meta name="theme-color" content="#0b0b0d">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/briunka-link.css?v=eco2">
+    <link rel="stylesheet" href="css/briunka-link.css?v=fh1">
     <script>
         if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
             document.documentElement.classList.add('public-launch');
@@ -43,6 +43,16 @@
             <p class="brand-tagline" id="brand-tagline">Light Works Entertainment</p>
             <p class="brand-bio" id="brand-bio">Creative Director • Hitmaker • AI Films & cinematic sound. Pay to be part of the universe. Be light.</p>
         </header>
+
+        <a class="skool-cta house-cta" href="framehouse.html">
+            <span class="skool-cta-icon"><i class="fa-solid fa-film"></i></span>
+            <span class="skool-cta-text">
+                <span class="skool-cta-kicker">The house · films · music · hooks</span>
+                <span class="skool-cta-title serif">Framehouse</span>
+                <span class="skool-cta-sub">Independent films, series &amp; the 60-second cut — fans stay here</span>
+            </span>
+            <span class="skool-cta-arrow">OPEN <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
 
         <a class="skool-cta ecosystem-cta" href="join-ecosystem.html" data-ecosystem-join="1" onclick="event.preventDefault(); openEcosystemNda();">
             <span class="skool-cta-icon"><i class="fa-solid fa-lock"></i></span>
@@ -94,6 +104,7 @@
         </section>
 
         <nav class="bio-jump" aria-label="On this page">
+            <a href="framehouse.html">Framehouse</a>
             <a href="https://www.skool.com/light-works-universe-5888/about" target="_blank" rel="noopener">Skool</a>
             <a href="#affiliate-section">Affiliates</a>
             <a href="#highlight-business">Business</a>
@@ -117,7 +128,10 @@
         </section>
         <div id="highlights-root"></div>
         <section id="clips-section" style="display:none"><div id="clips-rail"></div></section>
-        <section id="apps-section" style="display:none"><div id="apps-grid"></div></section>
+        <section id="apps-section" style="display:none">
+            <p class="section-label">Apps</p>
+            <div id="apps-grid" class="app-grid"></div>
+        </section>
         <section id="review-section" style="display:none"></section>
 
         <a class="prices-jump" href="prices.html">

@@ -3,6 +3,7 @@
   "rewrites": [
     { "source": "/join", "destination": "/join-skool.html" },
     { "source": "/ecosystem", "destination": "/join-ecosystem.html" },
+    { "source": "/framehouse", "destination": "/framehouse.html" },
     { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/media/(.*)", "destination": "/api" }
   ],
