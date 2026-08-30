@@ -1530,8 +1530,16 @@ body {
 }
 
 body.bio-home .bio-waitlist,
-body.bio-home .join-overlay {
+body.bio-home .join-overlay,
+body.bio-home .ecosystem-cta,
+body.bio-home a[href="join-ecosystem.html"],
+body.bio-home a[href*="join-ecosystem"] {
     display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
 }
 .join-overlay {
     position: fixed;
@@ -1734,11 +1742,15 @@ body.bio-home .join-overlay {
 .bio-waitlist .wl-ok { color: var(--gold-light); font-size: 0.9rem; line-height: 1.45; margin-top: 0.8rem; }
 
 .house-cta,
+.ecosystem-cta,
 .link-card.house,
 .link-card.nda,
+.link-card.ecosystem,
 a[href="framehouse.html"],
 a[href="nda.html"],
-a[href*="framehouse"] {
+a[href="join-ecosystem.html"],
+a[href*="framehouse"],
+a[href*="join-ecosystem"] {
     display: none !important;
 }
 
@@ -2714,4 +2726,15 @@ html.public-launch .studio-overlay {
 
 @media (max-width: 420px) {
     .app-grid { grid-template-columns: 1fr; }
+}
+
+/* Last: kill waitlist/apply on any cached bio HTML TikTok still holds */
+.ecosystem-cta,
+.bio-waitlist,
+.join-overlay,
+a.skool-cta[href="join-ecosystem.html"],
+a[href="join-ecosystem.html"] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }

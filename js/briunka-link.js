@@ -1815,7 +1815,7 @@ function applyPublicLaunch() {
     if (review) review.style.display = 'none';
     const shop = document.getElementById('shop-section');
     if (shop) shop.style.display = 'none';
-    document.querySelectorAll('.bio-waitlist, .join-overlay, .nda-overlay, #nda-overlay, #waitlist-form').forEach(el => el.remove());
+    document.querySelectorAll('.bio-waitlist, .join-overlay, .nda-overlay, #nda-overlay, #waitlist-form, .ecosystem-cta, a[href="join-ecosystem.html"], a[href*="join-ecosystem"]').forEach(el => el.remove());
     const featured = document.getElementById('featured-section');
     if (featured) featured.style.display = 'none';
 
