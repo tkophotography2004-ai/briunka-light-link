@@ -2,83 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Waitlist — Light Works Ecosystem</title>
-    <meta name="description" content="Join the Light Works waitlist and sign the NDA on this one form. The house is sent after we approve you.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/briunka-link.css?v=fh8">
-    <style>
-        .wl { position: relative; z-index: 2; max-width: 28rem; margin: 0 auto; padding: 1.5rem 1.15rem 4rem; }
-        .wl h1 { font-size: 2.1rem; line-height: 1.15; margin: 0.4rem 0 0.7rem; }
-        .wl-lead { color: var(--muted); font-size: 0.92rem; line-height: 1.5; margin-bottom: 1.4rem; }
-        .wl label { display: block; margin: 0.85rem 0; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-        .wl input, .wl textarea {
-            width: 100%; margin-top: 0.4rem; padding: 0.85rem 0.9rem; border-radius: 0.7rem;
-            border: 1px solid var(--glass-border); background: rgba(11,11,13,0.7); color: var(--ivory); font-size: 1rem;
-            letter-spacing: 0; text-transform: none;
-        }
-        .wl-nda { margin-top: 1.4rem; padding: 1rem; border: 1px solid var(--glass-border); border-radius: 1rem; background: var(--glass); }
-        .wl-nda h2 { font-size: 1.25rem; margin: 0.3rem 0 0.6rem; }
-        .wl-nda p, .wl-nda li { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
-        .wl-nda ul { margin: 0.6rem 0 0.8rem 1.1rem; }
-        .wl-check { display: flex; gap: 0.7rem; align-items: flex-start; margin-top: 0.9rem; font-size: 0.85rem; letter-spacing: 0; text-transform: none; color: var(--ivory); }
-        .wl-check input { width: 1.25rem; height: 1.25rem; min-width: 1.25rem; margin-top: 0.15rem; accent-color: #bfa15a; }
-        .wl button[type=submit] {
-            width: 100%; min-height: 3rem; margin-top: 1.1rem; border: 0; border-radius: 1rem;
-            background: var(--gold); color: #0b0b0d; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.75rem;
-        }
-        .wl-err { color: #f0b4b4; font-size: 0.85rem; margin-top: 0.8rem; }
-        .wl-ok { color: var(--gold-light); font-size: 0.95rem; line-height: 1.5; margin-top: 1rem; }
-        .wl-back { display: inline-block; margin-bottom: 1.2rem; color: var(--muted); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briunka Light</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="refresh" content="0; url=index.html">
 </head>
-<body>
-    <div class="art-hero" id="art-hero"></div>
-    <div class="hero-vignette"></div>
-    <div class="grain"></div>
-
-    <div class="wl">
-        <a class="wl-back" href="index.html"><i class="fa-solid fa-arrow-left"></i> Link in bio</a>
-        <p class="fh-kicker" style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold)">Invite only</p>
-        <h1 class="serif">Request to join</h1>
-        <p class="wl-lead">One form. Register and sign here. Access is sent after we approve you.</p>
-
-        <form id="waitlist-form" data-source="waitlist">
-            <label>Display name
-                <input name="name" required>
-            </label>
-            <label>Username
-                <input name="username" required minlength="3" maxlength="20" placeholder="letters, numbers, _">
-            </label>
-            <label>Email
-                <input name="email" type="email" required>
-            </label>
-            <label>Best work link
-                <input name="workLink" type="text" placeholder="https:// or leave blank">
-            </label>
-            <label>Instagram, TikTok, or other (for review only)
-                <input name="social" placeholder="handle or URL">
-            </label>
-
-            <div class="wl-nda">
-                <p style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold)">Signature</p>
-                <p>This application is private and confidential. I will not copy, share, or use anything I see here to build a competing service. Any access sent later is personal and not to be shared.</p>
-                <label>Legal name
-                    <input name="ndaName" required minlength="3">
-                </label>
-                <label class="wl-check">
-                    <input type="checkbox" name="ndaAgree" required>
-                    <span>I have read this and I sign it as of today.</span>
-                </label>
-            </div>
-
-            <p class="wl-err" id="wl-err" hidden></p>
-            <p class="wl-ok" id="wl-ok" hidden></p>
-            <button type="submit" id="wl-go">Join and sign</button>
-        </form>
-    </div>
-
-    <script src="js/waitlist.js?v=fh9"></script>
+<body style="background:#0b0b0d;color:#f4f1ea;font-family:Georgia,serif;text-align:center;padding:4rem 1rem">
+    <p>Be light.</p>
+    <script>location.replace('index.html');</script>
 </body>
 </html>
-
