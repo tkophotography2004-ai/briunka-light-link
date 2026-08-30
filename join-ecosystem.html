@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Framehouse waitlist — Briunka Light</title>
-    <meta name="description" content="Join the Framehouse waitlist. Invite code if you have one. NDA is on this form.">
+    <title>Waitlist — Light Works Ecosystem</title>
+    <meta name="description" content="Join the Light Works waitlist and sign the NDA on this one form. The house is sent after we approve you.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/briunka-link.css?v=fh3">
+    <link rel="stylesheet" href="css/briunka-link.css?v=fh8">
     <style>
         .wl { position: relative; z-index: 2; max-width: 28rem; margin: 0 auto; padding: 1.5rem 1.15rem 4rem; }
         .wl h1 { font-size: 2.1rem; line-height: 1.15; margin: 0.4rem 0 0.7rem; }
@@ -17,10 +17,10 @@
             border: 1px solid var(--glass-border); background: rgba(11,11,13,0.7); color: var(--ivory); font-size: 1rem;
             letter-spacing: 0; text-transform: none;
         }
-        .wl .hint { display: block; margin-top: 0.35rem; font-size: 0.7rem; letter-spacing: 0; text-transform: none; color: var(--muted); }
         .wl-nda { margin-top: 1.4rem; padding: 1rem; border: 1px solid var(--glass-border); border-radius: 1rem; background: var(--glass); }
         .wl-nda h2 { font-size: 1.25rem; margin: 0.3rem 0 0.6rem; }
-        .wl-nda p { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+        .wl-nda p, .wl-nda li { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+        .wl-nda ul { margin: 0.6rem 0 0.8rem 1.1rem; }
         .wl-check { display: flex; gap: 0.7rem; align-items: flex-start; margin-top: 0.9rem; font-size: 0.85rem; letter-spacing: 0; text-transform: none; color: var(--ivory); }
         .wl-check input { width: 1.25rem; height: 1.25rem; min-width: 1.25rem; margin-top: 0.15rem; accent-color: #bfa15a; }
         .wl button[type=submit] {
@@ -39,15 +39,11 @@
 
     <div class="wl">
         <a class="wl-back" href="index.html"><i class="fa-solid fa-arrow-left"></i> Link in bio</a>
-        <p class="fh-kicker" style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold)">Waitlist</p>
-        <h1 class="serif">Join Framehouse</h1>
-        <p class="wl-lead">Registration first. Invite code if you have one. The NDA is at the bottom of this same form — not a page you have to get past first.</p>
+        <p class="fh-kicker" style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold)">Waitlist + NDA</p>
+        <h1 class="serif">Request to join</h1>
+        <p class="wl-lead">One form. Register and sign here. Access is sent after we approve you.</p>
 
-        <form id="waitlist-form">
-            <label>Invite code
-                <input name="inviteCode" placeholder="BETA-… if you have one" autocomplete="off">
-                <span class="hint">Optional. Leave blank to join the waitlist.</span>
-            </label>
+        <form id="waitlist-form" data-source="waitlist">
             <label>Display name
                 <input name="name" required>
             </label>
@@ -56,10 +52,6 @@
             </label>
             <label>Email
                 <input name="email" type="email" required>
-            </label>
-            <label>Password
-                <input name="password" type="password" minlength="8" required>
-                <span class="hint">At least 8 characters. Used after you are approved.</span>
             </label>
             <label>Best work link
                 <input name="workLink" type="text" placeholder="https:// or leave blank">
@@ -70,129 +62,23 @@
 
             <div class="wl-nda">
                 <p style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold)">Signature</p>
-                <h2 class="serif">Framehouse Beta Confidentiality</h2>
-                <p>This is an unreleased, invite-only house. You will not copy, clone, or describe the product to build a competing service. You will not share your login or unpublished links. You warrant you have the right to upload your work. Framehouse may pause beta access. This is not a license to reproduce Framehouse.</p>
+                <p>This application is private and confidential. I will not copy, share, or use anything I see here to build a competing service. Any access sent later is personal and not to be shared.</p>
                 <label>Legal name
                     <input name="ndaName" required minlength="3">
                 </label>
                 <label class="wl-check">
                     <input type="checkbox" name="ndaAgree" required>
-                    <span>I have read this agreement and I sign it as of today.</span>
+                    <span>I have read this and I sign it as of today.</span>
                 </label>
             </div>
 
             <p class="wl-err" id="wl-err" hidden></p>
             <p class="wl-ok" id="wl-ok" hidden></p>
-            <button type="submit" id="wl-go">Submit application</button>
+            <button type="submit" id="wl-go">Join and sign</button>
         </form>
     </div>
 
-    <script>
-        const CONTACT = 'acrossthestars2026@gmail.com';
-        const form = document.getElementById('waitlist-form');
-        const err = document.getElementById('wl-err');
-        const ok = document.getElementById('wl-ok');
-        const go = document.getElementById('wl-go');
-
-        function slugUser(name, email) {
-            const fromName = String(name || '').toLowerCase().replace(/[^a-z0-9_]+/g, '_').replace(/^_|_$/g, '');
-            const fromEmail = String(email || '').split('@')[0].toLowerCase().replace(/[^a-z0-9_]+/g, '');
-            const raw = (fromName || fromEmail || 'creator').slice(0, 20);
-            return raw.length >= 3 ? raw : (raw + 'house').slice(0, 20);
-        }
-
-        function houseRegister() {
-            if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-                return 'http://localhost:3100/api/auth/register';
-            }
-            if (window.FRAMEHOUSE_PUBLIC) return window.FRAMEHOUSE_PUBLIC.replace(/\/$/, '') + '/api/auth/register';
-            return '';
-        }
-
-        function markDone(msg) {
-            ok.textContent = msg;
-            ok.hidden = false;
-            err.hidden = true;
-            form.querySelectorAll('input, button').forEach(el => { if (el !== go) el.disabled = true; });
-            go.disabled = true;
-            go.textContent = 'Submitted';
-        }
-
-        async function postJson(url, body) {
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify(body)
-            });
-            const json = await res.json().catch(() => ({}));
-            return { ok: res.ok, json };
-        }
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            err.hidden = true;
-            ok.hidden = true;
-            const data = new FormData(form);
-            if (data.get('ndaAgree') !== 'on') {
-                err.textContent = 'Check the NDA box at the bottom of this form.';
-                err.hidden = false;
-                return;
-            }
-            go.disabled = true;
-            go.textContent = 'Submitting…';
-
-            const name = String(data.get('name') || '').trim();
-            const email = String(data.get('email') || '').trim();
-            let username = String(data.get('username') || '').trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
-            if (username.length < 3) username = slugUser(name, email);
-            let work = String(data.get('workLink') || '').trim();
-            if (work && !/^https?:\/\//i.test(work)) work = 'https://' + work;
-
-            const payload = {
-                inviteCode: String(data.get('inviteCode') || '').trim(),
-                displayName: name,
-                name,
-                username,
-                email,
-                password: String(data.get('password') || ''),
-                socials: { other: String(data.get('social') || '').trim(), instagram: '', tiktok: '', youtube: '', x: '' },
-                workLinks: work ? [work] : [],
-                workLink: work,
-                ndaName: String(data.get('ndaName') || '').trim(),
-                ndaAgree: true,
-                source: 'join-ecosystem',
-                _subject: 'Framehouse waitlist application'
-            };
-
-            try {
-                localStorage.setItem('framehouse-waitlist', JSON.stringify({ ...payload, password: undefined, at: new Date().toISOString() }));
-            } catch { /* ignore */ }
-
-            const attempts = [];
-            const house = houseRegister();
-            if (house) attempts.push(house);
-            attempts.push('/api/waitlist');
-            attempts.push('https://formsubmit.co/ajax/' + CONTACT);
-
-            let lastError = '';
-            for (const url of attempts) {
-                try {
-                    const result = await postJson(url, payload);
-                    if (result.ok || result.json.ok || result.json.success) {
-                        markDone(result.json.message || 'Application received. You are on the waitlist.');
-                        return;
-                    }
-                    lastError = result.json.error || lastError;
-                    if (lastError && /invite code is not open/i.test(lastError) && payload.inviteCode) {
-                        payload.inviteCode = '';
-                    }
-                } catch {
-                    lastError = lastError || '';
-                }
-            }
-
-            markDone('Application saved on this device. We have your waitlist request — you do not need to resubmit.');
-        });
-    </script>
+    <script src="js/waitlist.js?v=fh8"></script>
 </body>
 </html>
+

@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'briunkaLightLinkConfig_v3';
+const STORAGE_KEY = 'briunkaLightLinkConfig_v5';
 const CONTACT_EMAIL = 'acrossthestars2026@gmail.com';
 
 function isPublicHost() {
@@ -116,28 +116,6 @@ const DEFAULT_CONFIG = {
     ],
     links: [
         {
-            id: 'framehouse',
-            title: 'Framehouse',
-            subtitle: 'Films, series, music & the 60-second cut — fans stay here',
-            url: 'framehouse.html',
-            icon: 'fa-film',
-            featured: true,
-            visible: true,
-            group: 'featured',
-            style: 'house'
-        },
-        {
-            id: 'ecosystem',
-            title: 'Request To Join The Ecosystem',
-            subtitle: 'Invite only · NDA required · independent filmmakers & music artists',
-            url: 'join-ecosystem.html',
-            icon: 'fa-lock',
-            featured: true,
-            visible: true,
-            group: 'featured',
-            style: 'ecosystem'
-        },
-        {
             id: 'skool',
             title: 'Light Works Universe',
             subtitle: 'Join the Skool community — casting, lives & exclusive access',
@@ -231,6 +209,16 @@ const DEFAULT_CONFIG = {
             group: 'experiences'
         },
         {
+            id: 'suno-vault',
+            title: 'Suno Vault — Briunka Light Source approved',
+            subtitle: 'Save your Suno catalog as WAV masters before Sept 3 — $20',
+            url: 'suno-vault.html',
+            icon: 'fa-compact-disc',
+            featured: true,
+            visible: true,
+            group: 'experiences'
+        },
+        {
             id: 'vault',
             title: 'Shop The Vault',
             subtitle: 'Beats, scores & healing frequencies',
@@ -286,15 +274,6 @@ const DEFAULT_CONFIG = {
     clips: [],
     apps: [
         {
-            id: 'app-framehouse',
-            name: 'Framehouse',
-            blurb: 'Independent films, series, and Hook Studio. Founding beta — storage on the house.',
-            url: 'framehouse.html',
-            badge: 'House',
-            priceLabel: 'Open',
-            visible: true
-        },
-        {
             id: 'app-onyx',
             name: 'ONYX',
             blurb: 'Midjourney-style costume close-ups for Black aesthetics.',
@@ -332,6 +311,16 @@ const DEFAULT_CONFIG = {
         }
     ],
     products: [
+        {
+            id: 'suno-vault',
+            name: 'Suno Vault — Briunka Light Source approved',
+            price: 20,
+            type: 'digital',
+            url: 'suno-vault.html',
+            image: 'assets/images/suno-vault-hero.jpg',
+            description: 'Local WAV archive for your Suno catalog — genre, categorized tags, date, vocals vs instrumentals. Before the September 3 download cap.',
+            visible: true
+        },
         {
             id: 'prod-drop-1',
             name: 'Light Works Digital Drop',
@@ -407,7 +396,7 @@ function loadConfig() {
                 ...parsed,
                 socials: mergeSocials(parsed.socials),
                 links: mergeLinks(parsed.links),
-                products: (parsed.products && parsed.products.length) ? parsed.products : DEFAULT_CONFIG.products,
+                products: mergeProducts(parsed.products),
                 casting: mergeCasting(parsed.casting),
                 direct: parsed.direct || DEFAULT_CONFIG.direct,
                 clips: parsed.clips || DEFAULT_CONFIG.clips,
@@ -440,41 +429,18 @@ function ecosystemHouseUrl() {
     return 'framehouse.html';
 }
 
+function isHiddenPrivateLink(l) {
+    const id = String(l.id || '').toLowerCase();
+    const url = String(l.url || '').toLowerCase();
+    const title = String(l.title || '').toLowerCase();
+    if (id.includes('framehouse') || url.includes('framehouse') || title.includes('framehouse')) return true;
+    if (id === 'nda' || url.includes('nda.html')) return true;
+    if (id === 'ecosystem' || url.includes('join-ecosystem')) return true;
+    return false;
+}
+
 function mergeLinks(saved) {
-    const links = saved?.length ? [...saved] : [...DEFAULT_CONFIG.links];
-    const ecoDefault = DEFAULT_CONFIG.links.find(l => l.id === 'ecosystem');
-    if (ecoDefault && !links.some(l => l.id === 'ecosystem')) {
-        links.unshift({ ...ecoDefault });
-    }
-    const eco = links.find(l => l.id === 'ecosystem');
-    if (eco && ecoDefault) {
-        eco.title = ecoDefault.title;
-        eco.subtitle = ecoDefault.subtitle;
-        eco.url = ecoDefault.url;
-        eco.icon = ecoDefault.icon;
-        eco.featured = true;
-        eco.visible = true;
-        eco.group = 'featured';
-        eco.style = 'ecosystem';
-    }
-    const houseDefault = DEFAULT_CONFIG.links.find(l => l.id === 'framehouse');
-    if (houseDefault && !links.some(l => l.id === 'framehouse')) {
-        links.unshift({ ...houseDefault });
-    }
-    const house = links.find(l => l.id === 'framehouse');
-    if (house && houseDefault) {
-        house.title = houseDefault.title;
-        house.subtitle = houseDefault.subtitle;
-        house.url = houseDefault.url;
-        house.icon = houseDefault.icon;
-        house.featured = true;
-        house.visible = true;
-        house.group = 'featured';
-        house.style = 'house';
-    }
-    links.forEach(l => {
-        if (l.id !== 'ecosystem' && l.id !== 'framehouse') l.featured = false;
-    });
+    const links = (saved?.length ? [...saved] : [...DEFAULT_CONFIG.links]).filter(l => !isHiddenPrivateLink(l));
     const skoolDefault = DEFAULT_CONFIG.links.find(l => l.id === 'skool');
     if (skoolDefault && !links.some(l => l.id === 'skool')) {
         links.push({ ...skoolDefault });
@@ -486,25 +452,44 @@ function mergeLinks(saved) {
         skool.visible = false;
         skool.style = 'skool';
     }
+    const vaultDefault = DEFAULT_CONFIG.links.find(l => l.id === 'suno-vault');
+    if (vaultDefault && !links.some(l => l.id === 'suno-vault')) {
+        links.unshift({ ...vaultDefault });
+    }
+    const vault = links.find(l => l.id === 'suno-vault');
+    if (vault && vaultDefault) {
+        vault.title = vaultDefault.title;
+        vault.subtitle = vaultDefault.subtitle;
+        vault.url = vaultDefault.url;
+        vault.icon = vaultDefault.icon;
+        vault.visible = true;
+        vault.featured = true;
+        vault.group = 'experiences';
+    }
     return links;
+}
+
+function mergeProducts(saved) {
+    const products = saved?.length ? [...saved] : [...DEFAULT_CONFIG.products];
+    const vaultDefault = DEFAULT_CONFIG.products.find(p => p.id === 'suno-vault');
+    if (vaultDefault && !products.some(p => p.id === 'suno-vault')) {
+        products.unshift({ ...vaultDefault });
+    }
+    const vault = products.find(p => p.id === 'suno-vault');
+    if (vault && vaultDefault) {
+        Object.assign(vault, vaultDefault);
+    }
+    return products;
 }
 
 function mergeApps(saved) {
     const apps = saved?.length ? [...saved] : [...DEFAULT_CONFIG.apps];
-    const house = DEFAULT_CONFIG.apps.find(a => a.id === 'app-framehouse');
-    if (house && !apps.some(a => a.id === 'app-framehouse' || a.id === 'framehouse')) {
-        apps.unshift({ ...house });
-    }
-    const row = apps.find(a => a.id === 'app-framehouse' || a.id === 'framehouse');
-    if (row && house) {
-        row.name = house.name;
-        row.blurb = house.blurb;
-        row.url = house.url;
-        row.badge = house.badge;
-        row.priceLabel = house.priceLabel;
-        row.visible = true;
-    }
-    return apps;
+    return apps.filter(a => {
+        const id = String(a.id || '').toLowerCase();
+        const url = String(a.url || '').toLowerCase();
+        const name = String(a.name || '').toLowerCase();
+        return !id.includes('framehouse') && !url.includes('framehouse') && !name.includes('framehouse');
+    });
 }
 
 function mergeCasting(saved) {
@@ -614,7 +599,13 @@ function initParticles() {
 }
 
 /* ── Render ── */
+function stripPrivateFromConfig() {
+    config.links = mergeLinks(config.links || []);
+    config.apps = mergeApps(config.apps || []);
+}
+
 function render() {
+    stripPrivateFromConfig();
     document.getElementById('brand-name').textContent = config.name;
     document.getElementById('brand-tagline').textContent = config.tagline;
     document.getElementById('brand-bio').textContent = config.bio;
@@ -715,7 +706,13 @@ function renderApps() {
     const grid = document.getElementById('apps-grid');
     const section = document.getElementById('apps-section');
     if (!grid || !section) return;
-    let apps = (config.apps || []).filter(a => a.visible);
+    let apps = (config.apps || []).filter(a => {
+        const id = String(a.id || '').toLowerCase();
+        const url = String(a.url || '').toLowerCase();
+        const name = String(a.name || '').toLowerCase();
+        if (id.includes('framehouse') || url.includes('framehouse') || name.includes('framehouse')) return false;
+        return a.visible;
+    });
     if (isPublicHost()) {
         apps = apps.filter(a => {
             const u = String(a.url || '');
@@ -817,7 +814,10 @@ function renderLinks() {
     const container = document.getElementById('links-container');
     if (!featuredEl || !container) return;
 
-    const featured = config.links.find(l => l.featured && l.visible);
+    function publicLink(l) {
+        return l.visible && !isHiddenPrivateLink(l);
+    }
+    const featured = config.links.find(l => l.featured && publicLink(l));
     featuredEl.innerHTML = featured
         ? buildLinkCard(featured, true, 2) : '';
 
@@ -825,7 +825,7 @@ function renderLinks() {
     container.innerHTML = '';
 
     groups.forEach((group, gi) => {
-        const items = config.links.filter(l => l.group === group && l.visible && !l.featured);
+        const items = config.links.filter(l => l.group === group && publicLink(l) && !l.featured);
         if (!items.length) return;
         const section = document.createElement('div');
         section.className = `delay-${gi + 3}`;
@@ -836,7 +836,7 @@ function renderLinks() {
         container.appendChild(section);
     });
 
-    const customLinks = config.links.filter(l => l.group === 'custom' && l.visible);
+    const customLinks = config.links.filter(l => l.group === 'custom' && publicLink(l));
     if (customLinks.length) {
         const section = document.createElement('div');
         section.innerHTML = `<p class="section-label">My Links</p>`;
@@ -849,7 +849,11 @@ function renderLinks() {
 
 function buildLinkCard(link, isFeatured, delay) {
     const skoolCls = link.style === 'skool' ? ' skool-card' : '';
-    const ecoCls = link.style === 'ecosystem' || link.id === 'ecosystem' ? ' ecosystem' : link.id === 'framehouse' ? ' house' : '';
+    const ecoCls = link.style === 'ecosystem' || link.id === 'ecosystem'
+        ? ' ecosystem'
+        : link.id === 'nda' || link.style === 'nda'
+            ? ' nda'
+            : link.id === 'framehouse' ? ' house' : '';
     const cls = isFeatured
         ? 'link-card featured' + skoolCls + ecoCls + ' delay-' + delay
         : 'link-card' + ecoCls + ' delay-' + delay;
@@ -858,7 +862,7 @@ function buildLinkCard(link, isFeatured, delay) {
         ? (link.style === 'skool'
             ? '<span class="link-arrow skool-arrow">JOIN <i class="fa-solid fa-arrow-right"></i></span>'
             : link.id === 'ecosystem'
-                ? '<span class="link-arrow">REQUEST <i class="fa-solid fa-arrow-right"></i></span>'
+                ? '<span class="link-arrow">APPLY <i class="fa-solid fa-arrow-right"></i></span>'
                 : '<span class="link-arrow">ENTER <i class="fa-solid fa-arrow-right"></i></span>')
         : '<i class="fa-solid fa-chevron-right link-arrow"></i>';
     const isHash = link.url.startsWith('#');
@@ -1786,7 +1790,7 @@ async function hydrateFromServer() {
         const data = await res.json();
         if (data.direct) config.direct = data.direct;
         if (data.clips) config.clips = data.clips;
-        if (data.apps) config.apps = data.apps;
+        if (data.apps) config.apps = mergeApps(data.apps);
         if (data.products && data.products.length) config.products = data.products;
         if (data.links) config.links = mergeLinks(data.links);
         else config.links = mergeLinks(config.links);

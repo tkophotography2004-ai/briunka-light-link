@@ -3,7 +3,11 @@
   "rewrites": [
     { "source": "/join", "destination": "/join-skool.html" },
     { "source": "/ecosystem", "destination": "/join-ecosystem.html" },
+    { "source": "/waitlist", "destination": "/join-ecosystem.html" },
+    { "source": "/nda", "destination": "/join-ecosystem.html" },
     { "source": "/framehouse", "destination": "/framehouse.html" },
+    { "source": "/suno-vault", "destination": "/suno-vault.html" },
+    { "source": "/private/(.*)", "destination": "/api" },
     { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/media/(.*)", "destination": "/api" }
   ],

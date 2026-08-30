@@ -283,6 +283,19 @@ body {
     font-size: 0.625rem;
 }
 
+.vault-cta {
+    border-color: rgba(191, 161, 90, 0.55);
+    background: linear-gradient(135deg, rgba(42, 28, 10, 0.96), rgba(11, 11, 13, 0.97));
+    box-shadow: 0 0 36px rgba(191, 161, 90, 0.16);
+}
+.vault-cta .skool-cta-icon {
+    background: rgba(191, 161, 90, 0.16);
+    border-color: rgba(191, 161, 90, 0.45);
+    color: var(--gold);
+}
+.vault-cta .skool-cta-kicker,
+.vault-cta .skool-cta-arrow { color: var(--gold); }
+
 .ecosystem-cta {
     border-color: rgba(191, 161, 90, 0.55);
     background: linear-gradient(135deg, rgba(42, 28, 10, 0.96), rgba(11, 11, 13, 0.97));
@@ -303,6 +316,20 @@ body {
 .ecosystem-cta:hover {
     border-color: rgba(191, 161, 90, 0.8);
     box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.55), 0 0 28px rgba(191, 161, 90, 0.18);
+}
+
+.nda-cta {
+    border-color: rgba(184, 178, 170, 0.35);
+    background: linear-gradient(135deg, rgba(22, 20, 18, 0.96), rgba(11, 11, 13, 0.97));
+}
+.nda-cta .skool-cta-icon {
+    background: rgba(191, 161, 90, 0.1);
+    border-color: rgba(191, 161, 90, 0.3);
+    color: var(--gold);
+}
+.nda-cta .skool-cta-kicker,
+.nda-cta .skool-cta-arrow {
+    color: var(--gold);
 }
 
 .house-cta {
@@ -1272,6 +1299,11 @@ body {
     background: radial-gradient(circle, rgba(191, 161, 90, 0.28), transparent 70%);
 }
 
+.link-card.nda {
+    border-color: rgba(184, 178, 170, 0.28);
+    background: linear-gradient(135deg, rgba(22, 20, 18, 0.94), rgba(11, 11, 13, 0.96));
+}
+
 .link-card.ecosystem .link-icon {
     background: rgba(191, 161, 90, 0.16);
     border-color: rgba(191, 161, 90, 0.4);
@@ -1495,6 +1527,113 @@ body {
     color: rgba(184, 178, 170, 0.4);
     margin-top: 0.5rem;
     letter-spacing: 0.15em;
+}
+
+.bio-waitlist {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 1.6rem;
+    padding: 1.15rem 1.1rem 1.25rem;
+    border: 1px solid rgba(191, 161, 90, 0.45);
+    border-radius: 1.15rem;
+    background: linear-gradient(135deg, rgba(42, 28, 10, 0.94), rgba(11, 11, 13, 0.97));
+}
+.bio-waitlist .wl-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+.bio-waitlist h2 {
+    font-size: 1.7rem;
+    line-height: 1.15;
+    margin: 0.35rem 0 0.5rem;
+}
+.bio-waitlist .wl-lead {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 0.9rem;
+}
+.bio-waitlist label {
+    display: block;
+    margin: 0.7rem 0;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.bio-waitlist input {
+    width: 100%;
+    margin-top: 0.35rem;
+    padding: 0.8rem 0.85rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--glass-border);
+    background: rgba(11, 11, 13, 0.7);
+    color: var(--ivory);
+    font-size: 1rem;
+    letter-spacing: 0;
+    text-transform: none;
+}
+.bio-waitlist .wl-nda {
+    margin-top: 1rem;
+    padding: 0.95rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    background: var(--glass);
+}
+.bio-waitlist .wl-nda h3 {
+    font-size: 1.15rem;
+    margin: 0.25rem 0 0.5rem;
+}
+.bio-waitlist .wl-nda p,
+.bio-waitlist .wl-nda li {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.45;
+}
+.bio-waitlist .wl-nda ul { margin: 0.5rem 0 0.7rem 1.1rem; }
+.bio-waitlist .wl-check {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    margin-top: 0.8rem;
+    font-size: 0.82rem;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ivory);
+}
+.bio-waitlist .wl-check input {
+    width: 1.2rem;
+    height: 1.2rem;
+    min-width: 1.2rem;
+    margin-top: 0.15rem;
+    accent-color: #bfa15a;
+}
+.bio-waitlist button[type=submit] {
+    width: 100%;
+    min-height: 3rem;
+    margin-top: 0.95rem;
+    border: 0;
+    border-radius: 1rem;
+    background: var(--gold);
+    color: #0b0b0d;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+.bio-waitlist .wl-err { color: #f0b4b4; font-size: 0.85rem; margin-top: 0.7rem; }
+.bio-waitlist .wl-ok { color: var(--gold-light); font-size: 0.9rem; line-height: 1.45; margin-top: 0.8rem; }
+
+.house-cta,
+.link-card.house,
+.link-card.nda,
+a[href="framehouse.html"],
+a[href="nda.html"],
+a[href*="framehouse"] {
+    display: none !important;
 }
 
 /* ── Studio FAB ── */

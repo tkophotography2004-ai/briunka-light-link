@@ -11,7 +11,7 @@
     <meta property="og:image" content="assets/images/looks/burgundy.jpg?v=2">
     <meta name="theme-color" content="#0b0b0d">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/briunka-link.css?v=fh2">
+    <link rel="stylesheet" href="css/briunka-link.css?v=fh8">
     <script>
         if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
             document.documentElement.classList.add('public-launch');
@@ -44,26 +44,52 @@
             <p class="brand-bio" id="brand-bio">Creative Director • Hitmaker • AI Films & cinematic sound. Pay to be part of the universe. Be light.</p>
         </header>
 
-
-        <a class="skool-cta house-cta" href="https://promoted-scores-married-auctions.trycloudflare.com/suno-vault.html" target="_blank" rel="noopener">
+        <a class="skool-cta vault-cta" href="suno-vault.html">
             <span class="skool-cta-icon"><i class="fa-solid fa-compact-disc"></i></span>
             <span class="skool-cta-text">
                 <span class="skool-cta-kicker">Before September 3</span>
                 <span class="skool-cta-title serif">Suno Vault — Briunka Light Source approved</span>
-                <span class="skool-cta-sub">Briunka Light Source approved · WAV masters · $20</span>
+                <span class="skool-cta-sub">WAV masters · tags categorized · $20</span>
             </span>
             <span class="skool-cta-arrow">GET IT <i class="fa-solid fa-arrow-right"></i></span>
         </a>
 
-        <a class="skool-cta ecosystem-cta" href="join-ecosystem.html">
-            <span class="skool-cta-icon"><i class="fa-solid fa-lock"></i></span>
-            <span class="skool-cta-text">
-                <span class="skool-cta-kicker">Invite only · NDA required</span>
-                <span class="skool-cta-title serif">Request To Join The Ecosystem</span>
-                <span class="skool-cta-sub">Independent filmmakers &amp; music artists — waitlist now open</span>
-            </span>
-            <span class="skool-cta-arrow">APPLY <i class="fa-solid fa-arrow-right"></i></span>
-        </a>
+        <section class="bio-waitlist" id="waitlist">
+            <p class="wl-kicker">Invite only</p>
+            <h2 class="serif">Request to join</h2>
+            <p class="wl-lead">One form. Register and sign here. Access is sent after we approve you.</p>
+            <form id="waitlist-form" data-source="link-in-bio">
+                <label>Display name
+                    <input name="name" required>
+                </label>
+                <label>Username
+                    <input name="username" required minlength="3" maxlength="20" placeholder="letters, numbers, _">
+                </label>
+                <label>Email
+                    <input name="email" type="email" required>
+                </label>
+                <label>Best work link
+                    <input name="workLink" type="text" placeholder="https:// or leave blank">
+                </label>
+                <label>Instagram, TikTok, or other (for review only)
+                    <input name="social" placeholder="handle or URL">
+                </label>
+                <div class="wl-nda">
+                    <p class="wl-kicker">Signature</p>
+                    <p>This application is private and confidential. I will not copy, share, or use anything I see here to build a competing service. Any access sent later is personal and not to be shared.</p>
+                    <label>Legal name
+                        <input name="ndaName" required minlength="3">
+                    </label>
+                    <label class="wl-check">
+                        <input type="checkbox" name="ndaAgree" required>
+                        <span>I have read this and I sign it as of today.</span>
+                    </label>
+                </div>
+                <p class="wl-err" id="wl-err" hidden></p>
+                <p class="wl-ok" id="wl-ok" hidden></p>
+                <button type="submit" id="wl-go">Join and sign</button>
+            </form>
+        </section>
 
         <a class="skool-cta" href="https://www.skool.com/light-works-universe-5888/about" target="_blank" rel="noopener">
             <span class="skool-cta-icon"><i class="fa-solid fa-users"></i></span>
@@ -105,7 +131,7 @@
         </section>
 
         <nav class="bio-jump" aria-label="On this page">
-            <a href="https://promoted-scores-married-auctions.trycloudflare.com/suno-vault.html" target="_blank" rel="noopener">Suno Vault</a>
+            <a href="#waitlist">Waitlist</a>
             <a href="https://www.skool.com/light-works-universe-5888/about" target="_blank" rel="noopener">Skool</a>
             <a href="#affiliate-section">Affiliates</a>
             <a href="#highlight-business">Business</a>
@@ -190,29 +216,10 @@
         <img src="assets/images/across-the-stars-price-sheet.jpg" alt="Across the Stars Full Price List">
     </div>
 
-    <div class="nda-overlay" id="nda-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="nda-title">
-        <div class="nda-modal" role="document">
-            <div class="nda-icon"><i class="fa-solid fa-file-signature"></i></div>
-            <p class="nda-kicker">Confidential · Invite only</p>
-            <h3 class="nda-title serif" id="nda-title">NDA required. Do not copy this house.</h3>
-            <p class="nda-lead">This is a private creator ecosystem. It is not a template, not open source, and not yours to rebuild. If you continue, you are asking to join as a creator — not to take the blueprint.</p>
-            <ul class="nda-list">
-                <li>You will not copy, clone, or recreate this platform or its features.</li>
-                <li>You will not share how it works, how it looks, or how it is priced so someone else can duplicate it.</li>
-                <li>You will not use this access to start a competing house.</li>
-            </ul>
-            <label class="nda-check">
-                <input id="nda-agree" type="checkbox" onchange="syncEcosystemNda()">
-                <span>I understand. I will not copy, clone, or help anyone duplicate this house.</span>
-            </label>
-            <button type="button" class="nda-continue" id="nda-continue" disabled onclick="continueEcosystemJoin()">I agree — request to join</button>
-            <button type="button" class="nda-back" onclick="closeEcosystemNda()">Not for me</button>
-        </div>
-    </div>
-
     <div class="toast" id="toast"></div>
 
     <script src="js/payments.js"></script>
-    <script src="js/briunka-link.js?v=fh2"></script>
+    <script src="js/waitlist.js?v=fh8"></script>
+    <script src="js/briunka-link.js?v=fh8"></script>
 </body>
 </html>
