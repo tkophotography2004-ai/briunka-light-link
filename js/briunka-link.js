@@ -1815,6 +1815,9 @@ function applyPublicLaunch() {
     if (review) review.style.display = 'none';
     const shop = document.getElementById('shop-section');
     if (shop) shop.style.display = 'none';
+    document.querySelectorAll('.bio-waitlist, .nda-overlay, #nda-overlay').forEach(el => el.remove());
+    const featured = document.getElementById('featured-section');
+    if (featured) featured.style.display = 'none';
 
     if (!isPublicHost()) return;
     document.querySelector('.studio-fab')?.remove();
