@@ -462,8 +462,8 @@ function mergeLinks(saved) {
         vault.subtitle = vaultDefault.subtitle;
         vault.url = vaultDefault.url;
         vault.icon = vaultDefault.icon;
-        vault.visible = true;
-        vault.featured = true;
+        vault.visible = false;
+        vault.featured = false;
         vault.group = 'experiences';
     }
     return links;
