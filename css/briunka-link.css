@@ -1529,7 +1529,8 @@ body {
     letter-spacing: 0.15em;
 }
 
-.bio-waitlist {
+body.bio-home .bio-waitlist,
+body.bio-home .join-overlay {
     display: none !important;
 }
 .join-overlay {
