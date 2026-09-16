@@ -7,6 +7,9 @@
     { "source": "/nda", "destination": "/join-ecosystem.html" },
     { "source": "/framehouse", "destination": "/framehouse.html" },
     { "source": "/suno-vault", "destination": "/suno-vault.html" },
+    { "source": "/mashdrop", "destination": "/mashdrop.html" },
+    { "source": "/viral-60", "destination": "/viral-60.html" },
+    { "source": "/callboard", "destination": "/index.html" },
     { "source": "/private/(.*)", "destination": "/api" },
     { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/media/(.*)", "destination": "/api" }

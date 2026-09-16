@@ -209,14 +209,35 @@ const DEFAULT_CONFIG = {
             group: 'experiences'
         },
         {
+            id: 'mashdrop',
+            title: 'MashDrop — white-label mashup studio',
+            subtitle: 'Mash two songs, remix one, resell the app — $47 / $97',
+            url: 'mashdrop.html',
+            icon: 'fa-blender',
+            featured: false,
+            visible: false,
+            group: 'experiences'
+        },
+        {
             id: 'suno-vault',
             title: 'Suno Vault — Briunka Light Source approved',
             subtitle: 'Save your Suno catalog as WAV masters before Sept 3 — $20',
             url: 'suno-vault.html',
             icon: 'fa-compact-disc',
+            featured: false,
+            visible: false,
+            group: 'experiences'
+        },
+        {
+            id: 'callboard',
+            title: 'Scroll Call®',
+            subtitle: 'Names off. Keep or Pass. Cash on Cash App.',
+            url: 'http://localhost:3200',
+            icon: 'fa-sack-dollar',
             featured: true,
             visible: true,
-            group: 'experiences'
+            group: 'featured',
+            style: 'cash'
         },
         {
             id: 'vault',
@@ -312,6 +333,16 @@ const DEFAULT_CONFIG = {
     ],
     products: [
         {
+            id: 'mashdrop',
+            name: 'MashDrop White-Label',
+            price: 97,
+            type: 'digital',
+            url: 'mashdrop.html',
+            image: 'assets/images/mashdrop.jpg',
+            description: 'Local mashup + viral remix studio. Rebrand it, resell it, keep 100%. Studio-only $47.',
+            visible: false
+        },
+        {
             id: 'suno-vault',
             name: 'Suno Vault — Briunka Light Source approved',
             price: 20,
@@ -319,7 +350,17 @@ const DEFAULT_CONFIG = {
             url: 'suno-vault.html',
             image: 'assets/images/suno-vault-hero.jpg',
             description: 'Local WAV archive for your Suno catalog — genre, categorized tags, date, vocals vs instrumentals. Before the September 3 download cap.',
-            visible: true
+            visible: false
+        },
+        {
+            id: 'viral-60',
+            name: 'Viral 60',
+            price: 5,
+            type: 'digital',
+            url: 'viral-60.html',
+            image: '',
+            description: 'Find the most viral 60 seconds of a song and clean DistroKid lyrics. Runs on your computer — no monthly credits.',
+            visible: false
         },
         {
             id: 'prod-drop-1',
@@ -371,6 +412,7 @@ const DEFAULT_CONFIG = {
 };
 
 const GROUP_LABELS = {
+    cash: 'Promote Your Content For Cash',
     experiences: 'Experiences',
     tools: 'Creator Tools'
 };
@@ -452,9 +494,18 @@ function mergeLinks(saved) {
         skool.visible = false;
         skool.style = 'skool';
     }
+    const mashLink = DEFAULT_CONFIG.links.find(l => l.id === 'mashdrop');
+    if (mashLink && !links.some(l => l.id === 'mashdrop')) {
+        links.push({ ...mashLink });
+    }
+    const mash = links.find(l => l.id === 'mashdrop');
+    if (mash && mashLink) {
+        mash.visible = false;
+        mash.featured = false;
+    }
     const vaultDefault = DEFAULT_CONFIG.links.find(l => l.id === 'suno-vault');
     if (vaultDefault && !links.some(l => l.id === 'suno-vault')) {
-        links.unshift({ ...vaultDefault });
+        links.push({ ...vaultDefault });
     }
     const vault = links.find(l => l.id === 'suno-vault');
     if (vault && vaultDefault) {
@@ -465,6 +516,26 @@ function mergeLinks(saved) {
         vault.visible = false;
         vault.featured = false;
         vault.group = 'experiences';
+    }
+    const callboardDefault = DEFAULT_CONFIG.links.find(l => l.id === 'callboard');
+    if (callboardDefault && !links.some(l => l.id === 'callboard')) {
+        links.unshift({ ...callboardDefault });
+    }
+    const callboard = links.find(l => l.id === 'callboard');
+    if (callboard && callboardDefault) {
+        callboard.title = callboardDefault.title;
+        callboard.subtitle = callboardDefault.subtitle;
+        callboard.url = callboardDefault.url;
+        callboard.icon = callboardDefault.icon;
+        callboard.visible = true;
+        callboard.featured = true;
+        callboard.group = 'featured';
+        callboard.style = 'cash';
+        const idx = links.indexOf(callboard);
+        if (idx > 0) {
+            links.splice(idx, 1);
+            links.unshift(callboard);
+        }
     }
     return links;
 }
@@ -478,7 +549,20 @@ function mergeProducts(saved) {
     const vault = products.find(p => p.id === 'suno-vault');
     if (vault && vaultDefault) {
         Object.assign(vault, vaultDefault);
+        vault.visible = false;
     }
+    const viralDefault = DEFAULT_CONFIG.products.find(p => p.id === 'viral-60');
+    if (viralDefault && !products.some(p => p.id === 'viral-60')) {
+        products.push({ ...viralDefault });
+    }
+    const viral = products.find(p => p.id === 'viral-60');
+    if (viral) viral.visible = false;
+    const mashDefault = DEFAULT_CONFIG.products.find(p => p.id === 'mashdrop');
+    if (mashDefault && !products.some(p => p.id === 'mashdrop')) {
+        products.push({ ...mashDefault });
+    }
+    const mashProd = products.find(p => p.id === 'mashdrop');
+    if (mashProd) mashProd.visible = false;
     return products;
 }
 
@@ -821,7 +905,7 @@ function renderLinks() {
     featuredEl.innerHTML = featured
         ? buildLinkCard(featured, true, 2) : '';
 
-    const groups = ['experiences', 'tools'];
+    const groups = ['cash', 'experiences', 'tools'];
     container.innerHTML = '';
 
     groups.forEach((group, gi) => {
@@ -853,7 +937,8 @@ function buildLinkCard(link, isFeatured, delay) {
         ? ' ecosystem'
         : link.id === 'nda' || link.style === 'nda'
             ? ' nda'
-            : link.id === 'framehouse' ? ' house' : '';
+            : link.id === 'framehouse' ? ' house'
+            : link.id === 'callboard' || link.style === 'cash' ? ' cash-cta' : '';
     const cls = isFeatured
         ? 'link-card featured' + skoolCls + ecoCls + ' delay-' + delay
         : 'link-card' + ecoCls + ' delay-' + delay;

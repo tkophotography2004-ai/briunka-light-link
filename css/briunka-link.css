@@ -351,6 +351,26 @@ body {
     box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.55), 0 0 28px rgba(196, 122, 74, 0.2);
 }
 
+.cash-cta {
+    border-color: rgba(212, 175, 55, 0.6);
+    background: linear-gradient(135deg, rgba(28, 36, 14, 0.96), rgba(11, 11, 13, 0.97));
+    box-shadow: 0 0 36px rgba(180, 200, 80, 0.14);
+    margin-top: 0.35rem;
+}
+.cash-cta .skool-cta-icon {
+    background: rgba(180, 200, 80, 0.16);
+    border-color: rgba(212, 175, 55, 0.45);
+    color: #e4d48a;
+}
+.cash-cta .skool-cta-kicker,
+.cash-cta .skool-cta-arrow {
+    color: #e4d48a;
+}
+.cash-cta:hover {
+    border-color: rgba(212, 175, 55, 0.9);
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.55), 0 0 28px rgba(180, 200, 80, 0.2);
+}
+
 .gold-divider {
     height: 1px;
     margin: 2rem 0;
