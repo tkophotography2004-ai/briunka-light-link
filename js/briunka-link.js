@@ -232,7 +232,7 @@ const DEFAULT_CONFIG = {
             id: 'callboard',
             title: 'Scroll Call®',
             subtitle: 'Names off. Keep or Pass. Cash on Cash App.',
-            url: 'https://near-daisy-fin-refurbished.trycloudflare.com',
+            url: 'https://application-seem-running-bronze.trycloudflare.com',
             icon: 'fa-sack-dollar',
             featured: true,
             visible: true,
