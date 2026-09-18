@@ -232,7 +232,7 @@ const DEFAULT_CONFIG = {
             id: 'callboard',
             title: 'Scroll Call®',
             subtitle: 'Names off. Keep or Pass. Cash on Cash App.',
-            url: 'https://occasional-citizenship-clearance-bags.trycloudflare.com',
+            url: 'https://www.briunkalight.com/scroll-call',
             icon: 'fa-sack-dollar',
             featured: true,
             visible: true,
