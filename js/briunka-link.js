@@ -232,7 +232,7 @@ const DEFAULT_CONFIG = {
             id: 'callboard',
             title: 'Scroll Call®',
             subtitle: 'Names off. Keep or Pass. Cash on Cash App.',
-            url: 'https://appear-robbie-earth-figure.trycloudflare.com',
+            url: 'https://occasional-citizenship-clearance-bags.trycloudflare.com',
             icon: 'fa-sack-dollar',
             featured: true,
             visible: true,
