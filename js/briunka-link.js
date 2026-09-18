@@ -232,7 +232,7 @@ const DEFAULT_CONFIG = {
             id: 'callboard',
             title: 'Scroll Call®',
             subtitle: 'Names off. Keep or Pass. Cash on Cash App.',
-            url: 'https://analysis-musical-terms-toolkit.trycloudflare.com',
+            url: 'https://effectiveness-shopzilla-fairly-citation.trycloudflare.com',
             icon: 'fa-sack-dollar',
             featured: true,
             visible: true,
