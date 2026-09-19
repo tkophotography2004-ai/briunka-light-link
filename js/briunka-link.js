@@ -234,8 +234,8 @@ const DEFAULT_CONFIG = {
             subtitle: 'Names off. Keep or Pass. Cash on Cash App.',
             url: 'https://scroll-call-rho.vercel.app/scroll-call',
             icon: 'fa-sack-dollar',
-            featured: true,
-            visible: true,
+            featured: false,
+            visible: false,
             group: 'featured',
             style: 'cash'
         },
@@ -519,23 +519,12 @@ function mergeLinks(saved) {
     }
     const callboardDefault = DEFAULT_CONFIG.links.find(l => l.id === 'callboard');
     if (callboardDefault && !links.some(l => l.id === 'callboard')) {
-        links.unshift({ ...callboardDefault });
+        links.push({ ...callboardDefault });
     }
     const callboard = links.find(l => l.id === 'callboard');
     if (callboard && callboardDefault) {
-        callboard.title = callboardDefault.title;
-        callboard.subtitle = callboardDefault.subtitle;
-        callboard.url = callboardDefault.url;
-        callboard.icon = callboardDefault.icon;
-        callboard.visible = true;
-        callboard.featured = true;
-        callboard.group = 'featured';
-        callboard.style = 'cash';
-        const idx = links.indexOf(callboard);
-        if (idx > 0) {
-            links.splice(idx, 1);
-            links.unshift(callboard);
-        }
+        callboard.visible = false;
+        callboard.featured = false;
     }
     return links;
 }
