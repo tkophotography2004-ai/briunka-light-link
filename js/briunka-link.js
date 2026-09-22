@@ -232,10 +232,10 @@ const DEFAULT_CONFIG = {
             id: 'callboard',
             title: 'Scroll Call®',
             subtitle: 'Names off. Keep or Pass. Cash on Cash App.',
-            url: 'https://scroll-call-rho.vercel.app/scroll-call',
+            url: 'https://scrollcalllive.com',
             icon: 'fa-sack-dollar',
-            featured: false,
-            visible: false,
+            featured: true,
+            visible: true,
             group: 'featured',
             style: 'cash'
         },
@@ -519,12 +519,13 @@ function mergeLinks(saved) {
     }
     const callboardDefault = DEFAULT_CONFIG.links.find(l => l.id === 'callboard');
     if (callboardDefault && !links.some(l => l.id === 'callboard')) {
-        links.push({ ...callboardDefault });
+        links.unshift({ ...callboardDefault });
     }
     const callboard = links.find(l => l.id === 'callboard');
     if (callboard && callboardDefault) {
-        callboard.visible = false;
-        callboard.featured = false;
+        callboard.visible = true;
+        callboard.featured = true;
+        callboard.url = callboardDefault.url;
     }
     return links;
 }
