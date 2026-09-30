@@ -25,6 +25,18 @@
         .shop-app-card { align-items: center; }
         .shop-app-price { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; font-weight: 600; color: var(--gold); white-space: nowrap; }
         .shop-app-buy { display: inline-block; margin-top: 0.4rem; align-self: flex-start; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: #0b0b0d; background: var(--gold); padding: 0.32rem 0.6rem; border-radius: 999px; font-weight: 700; }
+        .album-feature { position: relative; margin: 1.35rem 0 0.4rem; padding: 0.9rem; border-radius: 1.25rem; border: 1px solid rgba(212, 175, 55, 0.65); background: linear-gradient(160deg, rgba(58, 46, 18, 0.97), rgba(20, 17, 10, 0.97) 55%, rgba(11, 11, 13, 0.98)); box-shadow: 0 0 44px rgba(212, 175, 55, 0.2); animation: fadeUp 0.6s ease 0.04s forwards; opacity: 0; scroll-margin-top: 1rem; }
+        .album-feature-row { display: flex; gap: 0.9rem; align-items: stretch; }
+        .album-feature-art { flex: 0 0 38%; aspect-ratio: 4 / 5; border-radius: 0.85rem; overflow: hidden; border: 1px solid rgba(232, 213, 176, 0.45); background: #0b0b0d; }
+        .album-feature-art img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 8%; }
+        .album-feature-text { display: flex; flex-direction: column; justify-content: center; gap: 0.3rem; min-width: 0; }
+        .album-feature-kicker { font-family: 'IBM Plex Mono', monospace; font-size: 0.625rem; letter-spacing: 0.16em; text-transform: uppercase; color: #e8d5b0; }
+        .album-feature-title { font-size: 1.55rem; font-weight: 600; line-height: 1.08; color: var(--ivory); }
+        .album-feature-artist { font-size: 0.78rem; color: var(--gold-light); letter-spacing: 0.04em; }
+        .album-feature-date { display: inline-block; align-self: flex-start; margin-top: 0.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #ffd24a; border: 1px solid rgba(255, 210, 74, 0.45); border-radius: 999px; padding: 0.22rem 0.6rem; }
+        .presave-btn { display: flex; align-items: center; justify-content: center; gap: 0.55rem; margin-top: 0.85rem; min-height: 3.1rem; padding: 0.8rem 1rem; border-radius: 999px; text-decoration: none; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #0b0b0d; background: linear-gradient(135deg, #f3e2b3, #d4af37 55%, #bfa15a); box-shadow: 0 10px 26px -10px rgba(212, 175, 55, 0.7); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .presave-btn:hover, .presave-btn:focus-visible { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(212, 175, 55, 0.85); }
+        .bio-jump a.bio-jump-feature { color: #0b0b0d; background: var(--gold); border-color: var(--gold); font-weight: 700; }
     </style>
 </head>
 <body class="bio-home"><!-- sc-live-20260918b -->
@@ -46,15 +58,30 @@
             </div>
             <h1 class="brand-name serif">Briunka Light</h1>
             <p class="brand-tagline">Light Works Entertainment</p>
-            <p class="brand-bio">Creative Director • Hitmaker • AI Films &amp; cinematic sound. Pay to be part of the universe. Be light.</p>
+            <p class="brand-bio">Creative Director • Hitmaker • AI Films & cinematic sound. Pay to be part of the universe. Be light.</p>
         </header>
+
+        <section class="album-feature" id="presave" aria-labelledby="album-feature-title">
+            <div class="album-feature-row">
+                <div class="album-feature-art">
+                    <img src="assets/images/looks/ivory.jpg?v=2" alt="Briunka Light in ivory and gold" width="768" height="1360">
+                </div>
+                <div class="album-feature-text">
+                    <span class="album-feature-kicker">New album</span>
+                    <h2 class="album-feature-title serif" id="album-feature-title">The Sun Still Knows My Name</h2>
+                    <span class="album-feature-artist">Briunka Light</span>
+                    <span class="album-feature-date">Out October 9</span>
+                </div>
+            </div>
+            <a class="presave-btn" href="https://share.amuse.io/album/briunka-light-the-sun-still-knows-my-name" target="_blank" rel="noopener">Presave now <i class="fa-solid fa-arrow-right"></i></a>
+        </section>
 
                 <a class="skool-cta cash-cta" href="https://scrollcalllive.com/enter" target="_blank" rel="noopener">
             <span class="skool-cta-icon"><i class="fa-solid fa-clapperboard"></i></span>
             <span class="skool-cta-text">
                 <span class="skool-cta-kicker">Open now · free through September 30</span>
                 <span class="skool-cta-title serif">Scroll Call®</span>
-                <span class="skool-cta-sub">Track, Film, Music Video &amp; Creator free. Blind stays $30. Paste your link — Keep or Pass ranks the work.</span>
+                <span class="skool-cta-sub">Track, Film, Music Video & Creator free. Blind stays $30. Paste your link — Keep or Pass ranks the work.</span>
             </span>
             <span class="skool-cta-arrow">ENTER <i class="fa-solid fa-arrow-right"></i></span>
         </a>
@@ -84,7 +111,7 @@
             <span class="skool-cta-text">
                 <span class="skool-cta-kicker">Join the community</span>
                 <span class="skool-cta-title serif">Light Works Universe on Skool</span>
-                <span class="skool-cta-sub">Casting, lives &amp; exclusive access</span>
+                <span class="skool-cta-sub">Casting, lives & exclusive access</span>
             </span>
             <span class="skool-cta-arrow">JOIN <i class="fa-solid fa-arrow-right"></i></span>
         </a>
@@ -137,7 +164,7 @@
                     <span class="affiliate-icon"><i class="fa-brands fa-amazon"></i></span>
                     <span class="affiliate-text">
                         <span class="affiliate-title">Amazon Shop</span>
-                        <span class="affiliate-sub">TKO Talks storefront — gear, books &amp; picks</span>
+                        <span class="affiliate-sub">TKO Talks storefront — gear, books & picks</span>
                     </span>
                 </a>
             </div>
@@ -171,6 +198,7 @@
         </section>
 
         <nav class="bio-jump" aria-label="On this page">
+            <a class="bio-jump-feature" href="https://share.amuse.io/album/briunka-light-the-sun-still-knows-my-name" target="_blank" rel="noopener">Presave</a>
             <a href="https://scrollcalllive.com/enter" target="_blank" rel="noopener">Scroll Call®</a>
             <a href="https://www.skool.com/light-works-universe-5888/about" target="_blank" rel="noopener">Skool</a>
             <a href="#shop-apps">Shop my apps</a>
@@ -181,8 +209,8 @@
 
         <a class="prices-jump" href="prices.html">
             <span class="prices-jump-kicker">Across the Stars</span>
-            <span class="prices-jump-title serif">Full prices &amp; packages</span>
-            <span class="prices-jump-sub">Casting, ads, books, music &amp; business — open the rate sheet</span>
+            <span class="prices-jump-title serif">Full prices & packages</span>
+            <span class="prices-jump-sub">Casting, ads, books, music & business — open the rate sheet</span>
             <i class="fa-solid fa-arrow-right"></i>
         </a>
 
