@@ -24,6 +24,8 @@
         .shop-apps .affiliate-list { margin-top: 0.6rem; }
         .shop-app-card { align-items: center; }
         .shop-app-price { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; font-weight: 600; color: var(--gold); white-space: nowrap; }
+        .shop-app-price s { opacity: 0.55; font-weight: 400; margin-right: 0.2rem; }
+        .shop-app-sale { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.04em; color: var(--gold); margin-top: 0.2rem; }
         .shop-app-buy { display: inline-block; margin-top: 0.4rem; align-self: flex-start; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: #0b0b0d; background: var(--gold); padding: 0.32rem 0.6rem; border-radius: 999px; font-weight: 700; }
         .album-feature { position: relative; margin: 1.35rem 0 0.4rem; padding: 0.9rem; border-radius: 1.25rem; border: 1px solid rgba(212, 175, 55, 0.65); background: linear-gradient(160deg, rgba(58, 46, 18, 0.97), rgba(20, 17, 10, 0.97) 55%, rgba(11, 11, 13, 0.98)); box-shadow: 0 0 44px rgba(212, 175, 55, 0.2); animation: fadeUp 0.6s ease 0.04s forwards; opacity: 0; scroll-margin-top: 1rem; }
         .album-feature-row { display: flex; gap: 0.9rem; align-items: stretch; }
@@ -119,14 +121,15 @@
         <section class="shop-apps" id="shop-apps" aria-labelledby="shop-apps-title">
             <p class="section-label" id="shop-apps-title">Shop my apps</p>
             <div class="affiliate-list">
-                <a class="affiliate-card shop-app-card" data-product="viral-60" href="https://tkophoto.gumroad.com/l/viral-60" target="_blank" rel="noopener">
+                <a class="affiliate-card shop-app-card" data-product="viral-60" href="https://tkophoto.gumroad.com/l/viral-60/HALF50" target="_blank" rel="noopener">
                     <span class="affiliate-icon"><i class="fa-solid fa-fire"></i></span>
                     <span class="affiliate-text">
                         <span class="affiliate-title">Viral 60</span>
                         <span class="affiliate-sub">Find the most viral 60 seconds of a song and clean, distributor-ready lyrics.</span>
+                        <span class="shop-app-sale">50% off with code HALF50</span>
                         <span class="shop-app-buy">Buy on Gumroad <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                     </span>
-                    <span class="shop-app-price">$65</span>
+                    <span class="shop-app-price"><s>$65</s> $32.50</span>
                 </a>
                 <a class="affiliate-card shop-app-card" data-product="song-clipper" href="https://tkophoto.gumroad.com/l/song-clipper" target="_blank" rel="noopener">
                     <span class="affiliate-icon"><i class="fa-solid fa-scissors"></i></span>
