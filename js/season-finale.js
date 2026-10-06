@@ -82,10 +82,25 @@
         if (anchor) anchor.before(panel);
     }
 
+    const SUPPORT_URL = 'https://donate.stripe.com/7sY3cvbwJfK54CN1Gq8og0v';
+    function addSupportBlock() {
+        const cat = document.getElementById('offer-finale');
+        if (!cat || document.getElementById('support-series')) return;
+        const block = document.createElement('div');
+        block.className = 'casting-category';
+        block.id = 'support-series';
+        block.innerHTML = `<p class="section-label">Support the Series</p>
+            <p class="casting-intro">Love Across the Stars? Chip in any amount to help us make more episodes.</p>
+            <a class="buy-btn casting-btn" style="display:block;text-align:center;text-decoration:none" href="${esc(SUPPORT_URL)}" target="_blank" rel="noopener">Donate any amount</a>
+            <p class="casting-intro" style="margin-top:0.6rem;text-align:center">Give over $25 and your name will be listed in the credits as a sponsor of the next episode.</p>`;
+        cat.after(block);
+    }
+
     const baseRender = render;
     render = function () {
         baseRender.apply(this, arguments);
         addSectionNotes();
+        addSupportBlock();
         renderThanks();
     };
 

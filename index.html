@@ -158,6 +158,17 @@
             <a class="presave-btn" href="mailto:acrossthestars2026@gmail.com?subject=Season%20Finale%20photos&amp;body=Order%20reference%3A%0AName%3A%0APlatform%20the%20photos%20came%20from%3A%0ATier%20purchased%3A%0A%28attach%203%E2%80%935%20photos%29">Send my photos <i class="fa-solid fa-envelope"></i></a>
         </section>
 
+        <section class="season-finale" id="support-series" aria-labelledby="support-series-title">
+            <p class="section-label" id="support-series-title">Support the Series</p>
+            <p class="casting-intro">Love Across the Stars? Chip in any amount to help us make more episodes.</p>
+            <p class="shop-app-sale" id="support-thanks" style="display:none">Thank you for supporting Across the Stars! Your gift helps us make more episodes. Be light.</p>
+            <a class="presave-btn" data-product="ats-support" href="https://donate.stripe.com/7sY3cvbwJfK54CN1Gq8og0v" target="_blank" rel="noopener">Donate any amount <i class="fa-solid fa-heart"></i></a>
+            <p class="promo-video-caption" style="margin-top:0.6rem;text-align:center">Give over $25 and your name will be listed in the credits as a sponsor of the next episode.</p>
+        </section>
+        <script>
+            if (new URLSearchParams(location.search).get('support') === 'thanks') document.getElementById('support-thanks').style.display = 'block';
+        </script>
+
         <section class="shop-apps" id="shop-apps" aria-labelledby="shop-apps-title">
             <p class="section-label" id="shop-apps-title">Shop my apps</p>
             <div class="affiliate-list">

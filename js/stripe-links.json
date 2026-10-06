@@ -238,5 +238,14 @@
     "price": "price_1UNNxyHuGENKoTvw4sJAANBE",
     "amount": 5000,
     "recurring": false
+  },
+  "ats-support": {
+    "name": "Support Across the Stars",
+    "url": "https://donate.stripe.com/7sY3cvbwJfK54CN1Gq8og0v",
+    "product": "prod_VOAgDOOXQMuLS2",
+    "price": "price_1UNOLHHuGENKoTvw3UpuKZhM",
+    "amount": null,
+    "customAmount": { "minimum": 100, "preset": 1000, "maximum": 100000 },
+    "recurring": false
   }
 }
