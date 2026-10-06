@@ -214,5 +214,29 @@
     "price": "price_1U6G9fHuGENKoTvwnQY9AzCK",
     "amount": 75000,
     "recurring": false
+  },
+  "ats-finale-red-carpet": {
+    "name": "Red Carpet Arrival",
+    "url": "https://buy.stripe.com/bJe00jcAN69vednacW8og0s",
+    "product": "prod_VOAIM9gDhh6opQ",
+    "price": "price_1UNNxyHuGENKoTvw08qitGA8",
+    "amount": 3500,
+    "recurring": false
+  },
+  "ats-finale-cast-photos": {
+    "name": "Photos with the Cast",
+    "url": "https://buy.stripe.com/14A8wP7gt41n0mx2Ku8og0t",
+    "product": "prod_VOAI0aHyDgW35T",
+    "price": "price_1UNNxyHuGENKoTvw45uNNzQ1",
+    "amount": 4000,
+    "recurring": false
+  },
+  "ats-finale-appearance": {
+    "name": "Finale Cameo",
+    "url": "https://buy.stripe.com/6oU28r44h2Xj6KV5WG8og0u",
+    "product": "prod_VOAIkHDzHnk2gs",
+    "price": "price_1UNNxyHuGENKoTvw4sJAANBE",
+    "amount": 5000,
+    "recurring": false
   }
 }
