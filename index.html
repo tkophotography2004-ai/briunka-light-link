@@ -120,6 +120,47 @@
             <span class="skool-cta-arrow">JOIN <i class="fa-solid fa-arrow-right"></i></span>
         </a>
 
+        <section class="season-finale" id="finale-ticket" aria-labelledby="finale-ticket-title">
+            <p class="section-label" id="finale-ticket-title">Finale Tickets · Across the Stars: The Light Realm</p>
+            <p class="casting-intro">Get your ticket to watch the Season 1 Finale. <span id="finale-ticket-price-note">Pre-sale price is $5. The day before the finale, the price goes up to $8.</span></p>
+            <p class="shop-app-sale" id="finale-ticket-thanks" style="display:none">You're in! Your finale ticket is confirmed. Check your email for your receipt. Be light.</p>
+            <div class="affiliate-list">
+                <a class="affiliate-card shop-app-card" id="finale-ticket-card" data-product="ats-finale-ticket-presale" href="https://buy.stripe.com/5kQ6oHfMZ1Tf1qB3Oy8og0x" target="_blank" rel="noopener">
+                    <span class="affiliate-icon"><i class="fa-solid fa-ticket"></i></span>
+                    <span class="affiliate-text">
+                        <span class="affiliate-title" id="finale-ticket-title-text">Season Finale Pre-Sale Ticket</span>
+                        <span class="affiliate-sub" id="finale-ticket-sub">Pre-sale price</span>
+                        <span class="shop-app-buy">Get my ticket <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </span>
+                    <span class="shop-app-price" id="finale-ticket-price">$5</span>
+                </a>
+            </div>
+            <p class="shop-app-sale" style="margin-top:0.6rem">Free ticket with any finale package: buy Red Carpet Arrival, Photos with the Cast, or the Finale Cameo and your finale ticket is included. No need to buy one separately.</p>
+        </section>
+        <script>
+            // FINALE_DATE: set to the Season 1 Finale date as 'YYYY-MM-DD' (America/Chicago), e.g. '2026-10-31'.
+            // From the day before that date (Chicago time) the ticket switches to the $8 last-minute price.
+            // Leave empty ('') to always show the $5 pre-sale ticket.
+            const FINALE_DATE = '';
+            (function () {
+                if (new URLSearchParams(location.search).get('ticket') === 'thanks') document.getElementById('finale-ticket-thanks').style.display = 'block';
+                if (!/^\d{4}-\d{2}-\d{2}$/.test(FINALE_DATE)) return;
+                var today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+                var d = new Date(FINALE_DATE + 'T00:00:00Z');
+                d.setUTCDate(d.getUTCDate() - 1);
+                var dayBefore = d.toISOString().slice(0, 10);
+                if (today >= dayBefore) {
+                    var card = document.getElementById('finale-ticket-card');
+                    card.href = 'https://buy.stripe.com/cNi3cv58l41n8T398S8og0w';
+                    card.setAttribute('data-product', 'ats-finale-ticket');
+                    document.getElementById('finale-ticket-title-text').textContent = 'Season Finale Ticket';
+                    document.getElementById('finale-ticket-sub').textContent = 'Last-minute price';
+                    document.getElementById('finale-ticket-price').textContent = '$8';
+                    document.getElementById('finale-ticket-price-note').textContent = 'Pre-sale has ended. Tickets are now $8.';
+                }
+            })();
+        </script>
+
         <section class="season-finale" id="season-finale" aria-labelledby="season-finale-title">
             <p class="section-label" id="season-finale-title">Season Finale · Across the Stars: The Light Realm</p>
             <p class="casting-intro">Be in the last episodes of Season 1. Send us your photos and we craft your AI likeness into the finale.</p>
@@ -155,6 +196,7 @@
             </div>
             <p class="promo-video-caption">If you purchase the $50 Finale Cameo, Photos with the Cast is included. Red Carpet Arrival and Photos with the Cast can also be bought on their own.</p>
             <p class="promo-video-caption">After checkout: email 3–5 clear photos of your face to acrossthestars2026@gmail.com with your name, the platform the photos came from, and the tier you bought. Include the order reference from your thank-you page or Stripe receipt.</p>
+            <p class="promo-video-caption">Every finale package includes one free finale ticket.</p>
             <a class="presave-btn" href="mailto:acrossthestars2026@gmail.com?subject=Season%20Finale%20photos&amp;body=Order%20reference%3A%0AName%3A%0APlatform%20the%20photos%20came%20from%3A%0ATier%20purchased%3A%0A%28attach%203%E2%80%935%20photos%29">Send my photos <i class="fa-solid fa-envelope"></i></a>
         </section>
 
@@ -256,6 +298,7 @@
             <a href="https://scrollcalllive.com/enter" target="_blank" rel="noopener">Scroll Call®</a>
             <a href="https://www.skool.com/light-works-universe-5888/about" target="_blank" rel="noopener">Skool</a>
             <a href="#season-finale">Season Finale</a>
+            <a href="#finale-ticket">Finale Tickets</a>
             <a href="#shop-apps">Shop my apps</a>
             <a href="prices.html">Prices</a>
         </nav>
