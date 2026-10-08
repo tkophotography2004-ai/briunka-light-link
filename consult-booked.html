@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment received — 1-on-1 with Bri</title>
+    <meta name="theme-color" content="#0b0b0d">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/briunka-link.css?v=sc48free">
+    <style>
+        .booked-card { margin: 1.5rem 0 1.5rem; padding: 1.3rem 1.1rem; border-radius: 1.25rem; border: 1px solid rgba(212, 175, 55, 0.6); background: linear-gradient(160deg, rgba(58, 46, 18, 0.95), rgba(20, 17, 10, 0.96) 55%, rgba(11, 11, 13, 0.98)); box-shadow: 0 0 44px rgba(212, 175, 55, 0.18); text-align: center; animation: fadeUp 0.6s ease 0.05s forwards; opacity: 0; }
+        .booked-icon { font-size: 2rem; color: #ffd24a; margin-bottom: 0.6rem; }
+        .booked-title { font-size: 1.9rem; font-weight: 600; line-height: 1.1; color: var(--ivory); margin: 0 0 0.7rem; }
+        .booked-msg { font-size: 0.92rem; line-height: 1.6; color: var(--ivory); margin: 0 0 0.8rem; }
+        .booked-sub { font-size: 0.78rem; line-height: 1.5; color: var(--muted); margin: 0; }
+        .booked-ref { margin-top: 0.8rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.06em; color: var(--gold-light); }
+        .consult-home { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 0 0 1.5rem; padding: 0.8rem 1rem; border-radius: 999px; border: 1px solid rgba(212, 175, 55, 0.5); color: var(--gold-light); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; }
+        .consult-home:hover, .consult-home:focus-visible { border-color: var(--gold); color: var(--ivory); }
+    </style>
+</head>
+<body class="bio-home consult-page">
+
+    <div class="art-hero" style="background:url('assets/images/looks/burgundy.jpg?v=2') center top / cover no-repeat"></div>
+    <div class="hero-vignette"></div>
+    <div class="cosmic-glow"></div>
+    <div class="grain"></div>
+
+    <div class="page">
+        <header class="profile-header">
+            <div class="avatar-orbit">
+                <div class="avatar-ring">
+                    <div class="avatar-inner">
+                        <img src="assets/images/looks/burgundy.jpg?v=2" alt="Bri">
+                    </div>
+                </div>
+            </div>
+            <p class="brand-tagline" style="margin-top:1rem">1-on-1 Consultations for AI Music Artists · Guided By Bri</p>
+        </header>
+
+        <section class="booked-card" aria-labelledby="booked-title">
+            <div class="booked-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h1 class="booked-title serif" id="booked-title">Payment received — thank you!</h1>
+            <p class="booked-msg">I'll personally reach out within 24 hours to confirm your time, using the email or username you gave.</p>
+            <p class="booked-sub">Your 30-minute 1-on-1 — $50. Your Stripe receipt is on its way to your email.</p>
+            <p class="booked-ref" id="booked-ref" style="display:none"></p>
+        </section>
+
+        <a class="consult-home" href="index.html"><i class="fa-solid fa-house"></i> Back to the main bio page</a>
+
+        <footer class="footer">
+            <p class="footer-copy">© Briunka Light · Guided By Bri</p>
+        </footer>
+    </div>
+    <script>
+        // If the Stripe Payment Link redirect uses ...consult-booked.html?session_id={CHECKOUT_SESSION_ID}, show a short order reference.
+        (function () {
+            var sid = new URLSearchParams(location.search).get('session_id');
+            if (sid && /^cs_[A-Za-z0-9_]+$/.test(sid)) {
+                var el = document.getElementById('booked-ref');
+                el.textContent = 'Order reference: ' + sid.slice(-8).toUpperCase();
+                el.style.display = 'block';
+            }
+        })();
+    </script>
+    <script src="js/no-download.js"></script>
+</body>
+</html>
