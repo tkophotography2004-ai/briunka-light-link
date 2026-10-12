@@ -38,7 +38,7 @@ const TT_FILM = 'https://www.tiktok.com/@lightworksunivers';
 
 const AFFILIATES = [
     { id: 'openart', title: 'OpenArt', subtitle: 'AI image studio I use for looks and stills. Use code BRIUNKA for 15% off', url: 'https://openart.ai/home?utm_source=youtube&utm_medium=influencer&utm_campaign=infl-youtube--na-acq-web&ref=briunka', icon: 'fa-wand-magic-sparkles', code: 'BRIUNKA' },
-    { id: 'runway', title: 'Runway ML', subtitle: 'AI video. Use code CREATE15 at checkout', url: 'https://runwayml.com', icon: 'fa-film', code: 'CREATE15' },
+    { id: 'runway', title: 'Runway ML', subtitle: 'AI video I use for my films. Sign up with my link', url: 'https://app.runwayml.com/signup?referral_code=briunka25', icon: 'fa-film' },
     { id: 'syllaby', title: 'Syllaby', subtitle: 'Scripts and content systems', url: 'https://syllaby.io/?via=ashley16', icon: 'fa-comments' },
     { id: 'amazon', title: 'Amazon Shop', subtitle: 'TKO Talks storefront — gear, books & picks', url: 'https://www.amazon.com/shop/tkotalks', icon: 'fa-amazon', brand: true }
 ];
